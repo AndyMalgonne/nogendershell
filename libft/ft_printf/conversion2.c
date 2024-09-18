@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 14:10:58 by amalgonn          #+#    #+#             */
-/*   Updated: 2024/06/06 10:15:25 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/09/18 14:25:23 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	putnbr_base(int fd, unsigned long nbr, char *base)
 
 	size_base = 0;
 	i = 1;
+	if (*base == 0)
+		return (0);
 	while (base[size_base])
 		size_base++;
 	if (nbr / size_base)

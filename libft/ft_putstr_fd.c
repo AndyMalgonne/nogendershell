@@ -1,15 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/09/18 13:03:33 by andymalgonn      ###   ########.fr       */
+/*   Created: 2023/11/13 14:54:08 by amalgonn          #+#    #+#             */
+/*   Updated: 2023/11/13 15:19:49 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	main(void)
+#include "libft.h"
+// #include <fcntl.h>
+
+void	ft_putstr_fd(char *s, int fd)
 {
+	write (fd, s, ft_strlen(s));
 }
+
+// int main()
+// {
+// 	char *s = "coucou";
+// 	int test = open("cc.txt", O_RDWR);
+// 	ft_putstr_fd(s, test);
+// }

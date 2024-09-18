@@ -1,0 +1,7 @@
+*.d
+*.o
+*.a
+objs/
+.dist/
+.DS_Store
+minishell

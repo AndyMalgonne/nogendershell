@@ -111,5 +111,4 @@ relib:
 ### NORM ###
 .PHONY: norm
 norm: ; @make -C ${LIBFT_DIR} norm ${MAKE_FLAG}
-	@norminette ${SRC_DIR} ${INCLD_DIR} | awk '/Error/ {print; found=1} END \
-	{if {!found} {print "${PURPLE}[${NAME}] ${DEFAULT}Norm: ${BWHITE}OK${DEFAULT}"; exit 0 }; exit 1 }'
+	@norminette ${SRC_DIR} ${INCLD_DIR}

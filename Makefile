@@ -4,6 +4,7 @@ NAME		:= minishell
 ### UTILS ###
 CC 			:= clang
 CFLAGS 		:= -Wall -Wextra -Werror -g3
+LDFLAGS 	:= -lreadline
 DEP_FLAGS	:= -MMD -MP
 MAKE_FLAG 	:= --no-print-directory --silent
 RM 			:= rm -rf
@@ -43,7 +44,7 @@ LIB 		:= ${strip ${LIB}}
 
 SRC := main.c
 
-SRC_BONUS := 
+SRC_BONUS :=
 
 SRC 		:= ${strip ${SRC}}
 SRC_BONUS 	:= ${strip ${SRC_BONUS}}
@@ -57,35 +58,35 @@ DEPS		:= ${patsubst %.c,${OBJS_DIR}/%.d,${SRC}}
 all: ${NAME}
 
 ${NAME}: ${LIB} ${OBJS}
-	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Building:${DEFAULT}${BWHITE} $@${DEFAULT}"
-	@${CC} ${CFLAGS} ${OBJS} ${LIB} ${INCLD_FLAG} -o $@
+	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT}${BWHITE} $@${DEFAULT}"
+	@${CC} ${CFLAGS} ${OBJS} ${LIB} ${INCLD_FLAG} -o $@ ${LDFLAGS}
 	@printf "\n"
 
 -include ${DEPS}
 ${OBJS_DIR}/%.o: ${SRC_DIR}/%.c
-	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Building:${DEFAULT} $<"
+	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT} $<"
 	@mkdir -p ${OBJS_DIR}
 	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
 
 .PHONY: bonus
 bonus: ${LIB} ${OBJS_BONUS}
-	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Building:${DEFAULT}${BWHITE} $@${DEFAULT}"
+	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT}${BWHITE} $@${DEFAULT}"
 	@${CC} ${CFLAGS} ${OBJS_BONUS} ${LIB} ${INCLD_FLAG} -o ${NAME}
 	@printf "\n"
 
 ${OBJS_BONUS_DIR}/%.o: ${SRC_BONUS_DIR}/%.c
-	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Building:${DEFAULT} $<"
+	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT} $<"
 	@mkdir -p ${OBJS_BONUS_DIR}
 	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
 
 .PHONY: clean
-clean: 
-	@printf "${PURPLE}[${NAME}] ${RED}Obliterating ${DEFAULT}${OBJS_DIR} files\n"
+clean:
+	@printf "${PURPLE}[${NAME}] ${RED}Cleaning ${DEFAULT}${OBJS_DIR} files.\n"
 	@${RM} ${OBJS_DIR} ${OBJS_BONUS_DIR}
 
 .PHONY: fclean
-fclean: clean 
-	@printf "${PURPLE}[${NAME}] ${RED}Obliterating ${DEFAULT}${NAME}\n"
+fclean: clean
+	@printf "${PURPLE}[${NAME}] ${RED}Cleaning ${DEFAULT}${NAME}.\n"
 	@${RM} ${NAME}
 
 .PHONY: re
@@ -96,13 +97,13 @@ ${LIBFT}:
 	@make -C ${LIBFT_DIR} ${MAKE_FLAG}
 
 .PHONY: cleanlib
-cleanlib: 
+cleanlib:
 	@make -C ${LIBFT_DIR} clean ${MAKE_FLAG}
 
 .PHONY: fcleanlib
-fcleanlib: 
+fcleanlib:
 	@make -C ${LIBFT_DIR} fclean ${MAKE_FLAG}
-	@printf "${DRED}[${LIBFT_DIR}] Lib obliterated\n"
+	@printf "${DRED}[${LIBFT_DIR}] Library cleaned.\n"
 
 .PHONY: relib
 relib:

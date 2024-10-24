@@ -1,0 +1,20 @@
+How to Git ( or what i understood ) :
+
+git checkout <nom-de-la-branche> : Aller sur la branche en question 
+
+git checkout -b <nom-de-la-branche> : Creer et directement swap sur la branche en question
+
+git merge <nom-de-la-branche> : tu merges une branche sur la branche actuel (exemple : git merge <branche 1>, tu merges la branche 1 sur la branche actuel)
+a eviter et utiliser les pullrequest/merge de l'interface graphique de git pour le moment
+
+git reset HEAD~1 : annuler COMPLETEMENT le dernier commit pour retourner sur le commit d'avant
+
+git add -i : interface graphique sacrement pratique
+1 ou s : git status pour suivre tes fichiers untracked etc..
+2 ou u : permet de commit tes changements 
+4 ou a : pour add les fichers pas rajouté auparavent
+5 ou p : changer des trucs precis ( mais pas compris)
+
+git push origin <nom-de-la-branche> : pour push la branche !
+
+Toujours finir ses fichiers par un \n sinon chiant pour git.

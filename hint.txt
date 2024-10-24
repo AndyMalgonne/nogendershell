@@ -8,3 +8,9 @@ git merge <nom-de-la-branche> : tu merges une branche sur la branche actuel (exe
 a eviter et utiliser les pullrequest/merge de l'interface graphique de git pour le moment
 
 git reset HEAD~1 : annuler COMPLETEMENT le dernier commit pour retourner sur le commit d'avant
+
+git add -i : interface graphique sacrement pratique 
+
+git push origin <nom-de-la-branche> : pour push la branche !
+
+Rajouter ça sur le wiki de github !

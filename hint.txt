@@ -1,0 +1,10 @@
+How to Git ( or what i understood ) :
+
+git checkout <nom-de-la-branche> : Aller sur la branche en question 
+
+git checkout -b <nom-de-la-branche> : Creer et directement swap sur la branche en question
+
+git merge <nom-de-la-branche> : tu merges une branche sur la branche actuel (exemple : git merge <branche 1>, tu merges la branche 1 sur la branche actuel)
+a eviter et utiliser les pullrequest/merge de l'interface graphique de git pour le moment
+
+git reset HEAD~1 : annuler COMPLETEMENT le dernier commit pour retourner sur le commit d'avant

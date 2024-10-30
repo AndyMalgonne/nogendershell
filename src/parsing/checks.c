@@ -6,13 +6,13 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:00:00 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/10/30 15:10:52 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/10/30 19:24:34 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_quotes(char *rl)
+int	check_quotes(const char *rl)
 {
 	int	i;
 	int	double_quote;

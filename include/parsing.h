@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/10/24 16:32:21 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/10/30 19:25:04 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ typedef struct s_token
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
+
+int	check_quotes(const char *rl);
 
 #endif

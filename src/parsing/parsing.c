@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:15:01 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/10/30 15:17:34 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/10/30 19:24:25 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,4 +16,5 @@ int	parsing(char *rl)
 {
 	if (check_quotes(rl) == 1)
 		return (1);
+	return (0);
 }

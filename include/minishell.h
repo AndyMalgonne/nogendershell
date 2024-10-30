@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/10/30 18:26:41 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/10/30 19:37:45 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 # include <signal.h>
 # include "libft.h"
 # include "parsing.h"
+# include "tokens.h"
 
 #endif

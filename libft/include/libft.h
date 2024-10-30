@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:31:23 by amalgonn          #+#    #+#             */
-/*   Updated: 2024/10/24 12:36:59 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/10/24 16:44:05 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ size_t	ft_strlen(const char *str);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 char	*ft_strdup(const char *s);
 int		ft_atoi(const char *str);
 void	*ft_memset(void *s, int c, size_t n);

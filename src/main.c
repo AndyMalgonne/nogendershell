@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/10/30 19:21:28 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/10/30 19:28:20 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	base_features(char *rl)
 	}
 	else
 	{
-		ft_printf("\033[0;35mnogender\033[0;36mshell:\033[0m \
-command not found: %s\n", rl);
+		ft_printf("\033[0;35mnogender\033[0;36mshell:\033[0m");
+		ft_printf("command not found: %s\n", rl);
 		return (free(rl), 2);
 	}
 }
@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 	{
 		rl = readline("\033[0;36mnogender\033[0;35mshell > \033[0m");
 		if (!rl)
-			break ;
+			return (1);
 		if (rl && *rl)
 			add_history(rl);
 		if (base_features(rl) == 1)

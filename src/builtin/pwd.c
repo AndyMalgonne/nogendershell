@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/10/31 09:16:55 by andymalgonn      ###   ########.fr       */
+/*   Created: 2024/10/31 08:30:59 by andymalgonn       #+#    #+#             */
+/*   Updated: 2024/10/31 10:37:21 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <curses.h>
-# include <termios.h>
-# include <sys/ioctl.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <dirent.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include <errno.h>
-# include <limits.h>
-# include "libft.h"
-# include "parsing.h"
-# include "tokens.h"
-# include "builtin.h"
+int	bi_pwd(void)
+{
+	char	cwd[PATH_MAX];
 
-#endif
+	if (getcwd(cwd, PATH_MAX))
+		return (ft_putendl_fd(cwd, 1), 0);
+	else
+		return (ft_putendl_fd(strerror(errno), 2), 1);
+}

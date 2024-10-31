@@ -1,5 +1,6 @@
 ### PROGRAM NAME ###
 NAME		:= minishell
+UWU 		:= 🏳️‍🌈
 
 ### UTILS ###
 CC 			:= clang
@@ -24,32 +25,35 @@ BWHITE    	:= \033[1;37m
 NEW			:= \r\033[K
 
 ### DIRECTORIES ###
+LIBFT_DIR 	:= libft
 SRC_DIR 	:= src
-SRC_BONUS_DIR 	:= src_bonus
 INCLD_DIR 	:= include
 OBJS_DIR 	:= objs
-OBJS_BONUS_DIR := objs_bonus
-LIBFT_DIR 	:= libft
+BUILTIN_DIR	:= builtin
 
 ### FILES ###
-INCLUDES	:= ${INCLD_DIR}/ \
-	${LIBFT_DIR}/${INCLD_DIR}/ \
-INCLUDES 	:= ${strip ${INCLUDES}}
-
+define INCLUDES	:=
+	$(INCLD_DIR)/
+	$(LIBFT_DIR)/$(INCLD_DIR)/
+endef
 INCLD_FLAG 	:= ${addprefix -I , ${INCLUDES}}
-LIBFT		:= ${LIBFT_DIR}/libft.a
 
+### LIB ###
+LIBFT		:= ${LIBFT_DIR}/libft.a
 LIB 		:= ${LIBFT}
 LIB 		:= ${strip ${LIB}}
 
-SRC := main.c
+### SRCS ###
+define SRC 	:=
+	$(addprefix $(BUILTIN_DIR)/, \
+		pwd.c \
 
-SRC_BONUS :=
+	)
+	main.c 
+endef
 
 SRC 		:= ${strip ${SRC}}
-SRC_BONUS 	:= ${strip ${SRC_BONUS}}
 OBJS 		:= ${patsubst %.c,${OBJS_DIR}/%.o,${SRC}}
-OBJS_BONUS 	:= ${patsubst %.c,${OBJS_BONUS_DIR}/%.o,${SRC_BONUS}}
 DEPS		:= ${patsubst %.c,${OBJS_DIR}/%.d,${SRC}}
 
 ### PROJECT ###
@@ -58,7 +62,7 @@ DEPS		:= ${patsubst %.c,${OBJS_DIR}/%.d,${SRC}}
 all: ${NAME}
 
 ${NAME}: ${LIB} ${OBJS}
-	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT}${BWHITE} $@${DEFAULT}"
+	@printf "${NEW}${PURPLE}[${UWU}] ${UGREEN}Compiling :${DEFAULT}${BWHITE} $@${DEFAULT}"
 	@${CC} ${CFLAGS} ${OBJS} ${LIB} ${INCLD_FLAG} -o $@ ${LDFLAGS}
 	@printf "\n"
 
@@ -66,17 +70,7 @@ ${NAME}: ${LIB} ${OBJS}
 ${OBJS_DIR}/%.o: ${SRC_DIR}/%.c
 	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT} $<"
 	@mkdir -p ${OBJS_DIR}
-	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
-
-.PHONY: bonus
-bonus: ${LIB} ${OBJS_BONUS}
-	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT}${BWHITE} $@${DEFAULT}"
-	@${CC} ${CFLAGS} ${OBJS_BONUS} ${LIB} ${INCLD_FLAG} -o ${NAME}
-	@printf "\n"
-
-${OBJS_BONUS_DIR}/%.o: ${SRC_BONUS_DIR}/%.c
-	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT} $<"
-	@mkdir -p ${OBJS_BONUS_DIR}
+	@mkdir -p ${OBJS_DIR}/$(BUILTIN_DIR)
 	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
 
 .PHONY: clean

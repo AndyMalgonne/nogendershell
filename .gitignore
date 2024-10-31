@@ -5,3 +5,4 @@ objs/
 .dist/
 .DS_Store
 minishell
+.vscode/settings.json

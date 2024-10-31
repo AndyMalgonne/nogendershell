@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/10/31 09:16:55 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/10/31 20:05:16 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <errno.h>
 # include <limits.h>
 # include "libft.h"
-# include "parsing.h"
 # include "tokens.h"
+# include "parsing.h"
 # include "builtin.h"
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:33:45 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/10/31 19:21:54 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:12:53 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	tokenize_single_quote(char **rl, t_token **head)
 
 int	tokenize_double_quote(char **rl, t_token **head)
 {
-	t_token	*n_token;
-	char	*start;
+	t_token		*n_token;
+	const char	*start;
 
 	(*rl)++;
 	start = *rl;

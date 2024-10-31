@@ -6,13 +6,13 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/10/31 18:19:45 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:10:40 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*new_token(t_token_type type, char *value)
+t_token	*new_token(t_token_type type, const char *value)
 {
 	t_token	*token;
 

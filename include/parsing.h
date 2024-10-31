@@ -1,29 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/10/30 19:37:45 by gmoulin          ###   ########.fr       */
+/*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
+/*   Updated: 2024/10/30 19:25:04 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PARSING_H
+# define PARSING_H
 
-# include <curses.h>
-# include <termios.h>
-# include <sys/ioctl.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <dirent.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include "libft.h"
-# include "parsing.h"
-# include "tokens.h"
+# include "minishell.h"
+
+typedef enum s_token_type
+{
+	WORD,
+	AND,
+	OR,
+	PIPE,
+	SEMICOLON,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	O_BRACKET,
+	C_BRACKET,
+	N_LINE,
+	END,
+}	t_token_type;
+
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*value;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_token;
+
+int	check_quotes(const char *rl);
 
 #endif

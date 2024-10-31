@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/10/30 19:37:45 by gmoulin          ###   ########.fr       */
+/*   Created: 2024/10/30 15:00:00 by gmoulin           #+#    #+#             */
+/*   Updated: 2024/10/30 19:24:34 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "minishell.h"
 
-# include <curses.h>
-# include <termios.h>
-# include <sys/ioctl.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <dirent.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include <signal.h>
-# include "libft.h"
-# include "parsing.h"
-# include "tokens.h"
+int	check_quotes(const char *rl)
+{
+	int	i;
+	int	double_quote;
+	int	single_quote;
 
-#endif
+	i = 0;
+	double_quote = 0;
+	single_quote = 0;
+	while (rl[i])
+	{
+		if (rl[i] == '\"')
+			double_quote++;
+		if (rl[i] == '\'')
+			single_quote++;
+		i++;
+	}
+	if (double_quote % 2 != 0 || single_quote % 2 != 0)
+	{
+		ft_printf("nogendershell: syntax error: open quotes.\n");
+		return (1);
+	}
+	return (0);
+}

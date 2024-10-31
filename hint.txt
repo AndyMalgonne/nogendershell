@@ -18,3 +18,8 @@ git add -i : interface graphique sacrement pratique
 git push origin <nom-de-la-branche> : pour push la branche !
 
 Toujours finir ses fichiers par un \n sinon chiant pour git.
+
+W T F Ca ne compile pas ?? 
+Probablement probleme de MAKEFILE :
+Ajout d'un nouveau directory : Ligne 26 ET Rajouter son mkdir ligne 73 
+Rajouter sa source ! : Suivre le patern que j'ai "établi"

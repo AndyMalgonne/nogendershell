@@ -24,27 +24,34 @@ BWHITE    	:= \033[1;37m
 NEW			:= \r\033[K
 
 ### DIRECTORIES ###
+LIBFT_DIR 	:= libft
 SRC_DIR 	:= src
-SRC_BONUS_DIR 	:= src_bonus
 INCLD_DIR 	:= include
 OBJS_DIR 	:= objs
-OBJS_BONUS_DIR := objs_bonus
-LIBFT_DIR 	:= libft
+BUILTIN_DIR	:= builtin
 
 ### FILES ###
-INCLUDES	:= ${INCLD_DIR}/ \
-	${LIBFT_DIR}/${INCLD_DIR}/ \
-INCLUDES 	:= ${strip ${INCLUDES}}
-
+define INCLUDES	:=
+	$(INCLD_DIR)/
+	$(LIBFT_DIR)/$(INCLD_DIR)/
+endef
 INCLD_FLAG 	:= ${addprefix -I , ${INCLUDES}}
-LIBFT		:= ${LIBFT_DIR}/libft.a
 
+### LIB ###
+LIBFT		:= ${LIBFT_DIR}/libft.a
 LIB 		:= ${LIBFT}
 LIB 		:= ${strip ${LIB}}
 
-SRC := main.c
+### SRCS ###
+define SRC 	:=
+	$(addprefix $(BUILTIN_DIR)/, \
+		pwd.c \
 
-SRC_BONUS :=
+	)
+	$(addprefix $(EXEC_DIR)/, \
+		builtin.c \
+	)
+endef
 
 SRC 		:= ${strip ${SRC}}
 SRC_BONUS 	:= ${strip ${SRC_BONUS}}
@@ -66,6 +73,7 @@ ${NAME}: ${LIB} ${OBJS}
 ${OBJS_DIR}/%.o: ${SRC_DIR}/%.c
 	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT} $<"
 	@mkdir -p ${OBJS_DIR}
+	@mkdir -p $(OBJS_DIR)/$(BUILTIN_DIR)
 	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
 
 .PHONY: bonus

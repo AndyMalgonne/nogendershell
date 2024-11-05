@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/10/31 20:10:25 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/05 16:32:33 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,17 @@
 
 typedef enum s_token_type
 {
-	WORD,
-	AND,
-	OR,
+	CMD,
+	ARG,
 	PIPE,
-	SEMICOLON,
 	REDIR_IN,
 	REDIR_OUT,
 	REDIR_APPEND,
+	REDIR_HEREDOC,
 	O_BRACKET,
 	C_BRACKET,
 	SQ_STRING,
 	DQ_STRING,
-	N_LINE,
 	END,
 }	t_token_type;
 

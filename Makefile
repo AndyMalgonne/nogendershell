@@ -47,7 +47,7 @@ LIB 		:= ${strip ${LIB}}
 define SRC 	:=
 	$(addprefix $(BUILTIN_DIR)/, \
 		pwd.c \
-
+		echo.c 
 	)
 	main.c 
 endef

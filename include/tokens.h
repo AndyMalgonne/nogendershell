@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/10/24 16:19:08 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/10/31 20:10:25 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,34 @@
 
 # include "minishell.h"
 
-t_token	*new_token(t_token_type type, char *value);
+typedef enum s_token_type
+{
+	WORD,
+	AND,
+	OR,
+	PIPE,
+	SEMICOLON,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	O_BRACKET,
+	C_BRACKET,
+	SQ_STRING,
+	DQ_STRING,
+	N_LINE,
+	END,
+}	t_token_type;
+
+typedef struct s_token
+{
+	t_token_type	type;
+	char			*value;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_token;
+
+//token_utils.c
+t_token	*new_token(t_token_type type, const char *value);
 void	append_token(t_token **head, t_token *new_token);
 
 #endif

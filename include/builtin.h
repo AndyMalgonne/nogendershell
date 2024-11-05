@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/05 13:05:19 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/05 13:24:34 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,5 @@
 
 int	bi_pwd(void);
 int	bi_echo(char **args);
-int bi_env(char **args);
 
 #endif

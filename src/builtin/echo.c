@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:17:34 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/05 09:25:51 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/05 09:46:19 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	nb_args(char **args)
 	return (i);
 }
 
-int	ft_echo(char **args)
+int	bi_echo(char **args)
 {
 	int	i;
 	int	flag;

@@ -6,10 +6,10 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:17:34 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/05 13:04:24 by andymalgonn      ###   ########.fr       */
-/*   Updated: 2024/11/05 09:46:19 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/05 13:25:53 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -70,7 +70,7 @@ int	bi_echo(char **args)
 	check_and_flag(args, &i, &flag);
 	while (args[i])
 	{
-		write_ret = write(STDOUT_FILENO, args[i], strlen(args[i]));
+		write_ret = write(STDOUT_FILENO, args[i], ft_strlen(args[i]));
 		if (write_ret == -1)
 			return (handle_write_error());
 		if (args[i + 1])

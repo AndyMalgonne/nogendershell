@@ -6,10 +6,9 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:17:34 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/05 13:25:53 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/05 13:27:44 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 

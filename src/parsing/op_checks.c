@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:20:13 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/05 16:26:28 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/06 14:56:24 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,14 @@ int	is_rdout(char c)
 int	is_pipe(char c)
 {
 	return (c == '|');
+}
+
+int	is_scln(char c)
+{
+	return (c == ';');
+}
+
+int	is_and(char c)
+{
+	return (c == '&');
 }

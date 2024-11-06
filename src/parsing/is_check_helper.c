@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.c                                            :+:      :+:    :+:   */
+/*   is_check_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 16:54:11 by gmoulin          ###   ########.fr       */
+/*   Created: 2024/11/06 15:13:24 by gmoulin           #+#    #+#             */
+/*   Updated: 2024/11/06 20:01:57 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*int	get_next_token(const char *rl, const t_token *token)
+static int	is_builtin1(const char *rl)
 {
-	char	buffer[4096]_
+	return (is_bi_echo(rl) || is_bi_cd(rl) || is_bi_pwd(rl));
+}
 
-	while (*rl && is_space_tab(*rl))
-		rl++_
-	if (!*rl)
-	{
-		token = new_token(END, NULL)_
-		return (0)_
-	}
-}*/
-// replace underscores with semicolons
-// WIP function, not sure if even useful yet^
+static int	is_builtin2(const char *rl)
+{
+	return (is_bi_export(rl) || is_bi_unset(rl) || is_bi_env(rl));
+}
+
+static int	is_builtin3(const char *rl)
+{
+	return (is_bi_exit(rl));
+}

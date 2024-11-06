@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/10/31 20:10:40 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/06 16:35:37 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,25 @@ void	append_token(t_token **head, t_token *new_token)
 
 void	free_token(t_token *token)
 {
-	if (token->value)
-		free(token->value);
-	free(token);
+	if (token)
+	{
+		if (token->value)
+			free(token->value);
+		free(token);
+	}
+}
+
+void	free_token_list(t_token **head)
+{
+	t_token	*current;
+	t_token	*next;
+
+	current = *head;
+	while (current)
+	{
+		next = current->next;
+		free_token(current);
+		current = next;
+	}
+	*head = NULL;
 }

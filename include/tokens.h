@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 15:48:41 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/06 16:36:22 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ typedef struct s_token
 //token_utils.c
 t_token	*new_token(t_token_type type, const char *value);
 void	append_token(t_token **head, t_token *new_token);
+void	free_token(t_token *token);
+void	free_token_list(t_token **head);
 
 //token.c
 

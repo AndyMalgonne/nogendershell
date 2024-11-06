@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 15:49:27 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/06 16:55:23 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,20 @@ int		is_cmd(char *rl);
 //is_check_helper.c
 int		is_builtin1(char *rl);
 int		is_builtin2(char *rl);
+int		is_builtin3(char *rl);
 
 //parsing.c
 char	*parsing(char *rl, t_token **head);
 
 //cmd_checks.c
-int		is_bi_echo(char *rl);
-int		is_bi_cd(char *rl);
-int		is_bi_pwd(char *rl);
-int		is_bi_export(char *rl);
-int		is_bi_unset(char *rl);
+int		is_bi_echo(const char *rl);
+int		is_bi_cd(const char *rl);
+int		is_bi_pwd(const char *rl);
+int		is_bi_export(const char *rl);
+int		is_bi_unset(const char *rl);
 
 //cmd_checks2.c
-int		is_bi_env(char *rl);
-int		is_bi_exit(char *rl);
+int		is_bi_env(const char *rl);
+int		is_bi_exit(const char *rl);
 
 #endif

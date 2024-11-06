@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/05 16:32:33 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/06 15:48:41 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ typedef enum s_token_type
 {
 	CMD,
 	ARG,
+	BACKGROUND,
+	AND,
+	OR,
+	SEMICOLON,
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
@@ -28,7 +32,6 @@ typedef enum s_token_type
 	C_BRACKET,
 	SQ_STRING,
 	DQ_STRING,
-	END,
 }	t_token_type;
 
 typedef struct s_token
@@ -42,5 +45,25 @@ typedef struct s_token
 //token_utils.c
 t_token	*new_token(t_token_type type, const char *value);
 void	append_token(t_token **head, t_token *new_token);
+
+//token.c
+
+//cmd_tokenizing.c
+int		cmd_tokenizing(char **rl, t_token **head);
+
+//op_tokenizing.c
+int		op_tokenizing(char **rl, t_token **head);
+
+//op_tokenizing_helper.c
+t_token	*tokenize_rdin(char **rl);
+t_token	*tokenize_rdout(char **rl);
+t_token	*tokenize_pipe(char **rl);
+t_token	*tokenize_and(char **rl);
+t_token	*tokenize_scln(char **rl);
+
+//string_tokenizing.c
+int		tokenize_s_quote(char **rl, t_token **head);
+int		tokenize_d_quote(char **rl, t_token **head);
+int		string_tokenizing(char **rl, t_token **head);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:00:00 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/10/31 18:31:51 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/06 15:31:01 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	check_open_quotes(const char *rl)
 	single_quote = 0;
 	while (rl[i])
 	{
-		if (is_dquote(rl[i]))
+		if (is_d_quote(rl[i]))
 			double_quote++;
-		if (is_squote(rl[i]))
+		if (is_s_quote(rl[i]))
 			single_quote++;
 		i++;
 	}
@@ -48,9 +48,9 @@ int	check_open_brackets(const char *rl)
 	close_bracket = 0;
 	while (rl[i])
 	{
-		if (is_obracket(rl[i]))
+		if (is_o_bracket(rl[i]))
 			open_bracket++;
-		if (is_cbracket(rl[i]))
+		if (is_c_bracket(rl[i]))
 			close_bracket++;
 		i++;
 	}

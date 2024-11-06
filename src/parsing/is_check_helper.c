@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_checks.c                                        :+:      :+:    :+:   */
+/*   is_check_helper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 17:00:45 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 15:47:58 by gmoulin          ###   ########.fr       */
+/*   Created: 2024/11/06 15:13:24 by gmoulin           #+#    #+#             */
+/*   Updated: 2024/11/06 15:47:11 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_operator(char c)
+static int	is_builtin1(char *rl)
 {
-	return (is_rdin(c) || is_rdout(c) || is_pipe(c) || is_scln(c) || is_and(c));
+	return (is_bi_echo(rl) || is_bi_cd(rl) || is_bi_pwd(rl));
 }
 
-int	is_space_tab(char c)
+static int	is_builtin2(char *rl)
 {
-	return (c == ' ' || c == '\t');
+	return (is_bi_export(rl) || is_bi_unset(rl) || is_bi_env(rl));
 }
 
-int	is_cmd(char *rl)
+static int	is_builtin3(char *rl)
 {
-	return (is_builtin1(rl) || is_builtin2(rl) || is_builtin3(rl));
+	return (is_bi_exit(rl));
 }

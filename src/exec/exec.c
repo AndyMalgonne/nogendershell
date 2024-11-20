@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/05 10:26:09 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/20 12:56:46 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_builtin(char *cmd)
 {
-	if(!cmd)
+	if (!cmd)
 		return (false);
 	if (!ft_strcmp("echo", cmd) || !ft_strcmp("cd", cmd) \
 	|| !ft_strcmp("pwd", cmd) || !ft_strcmp("export", cmd) \
@@ -24,7 +24,7 @@ bool	is_builtin(char *cmd)
 	return (false);
 }
 
-int		exec_builtin(char **args)
+int	exec_builtin(char **args)
 {
 	if (!ft_strcmp("echo", args[0]))
 		return (ft_echo(args));

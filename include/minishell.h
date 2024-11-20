@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/10/31 20:05:16 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/20 08:52:08 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,12 @@
 # include "tokens.h"
 # include "parsing.h"
 # include "builtin.h"
+
+typedef struct s_env
+{
+	struct s_env	*next;
+	struct s_env	*prev;
+	char			*str;
+}	t_env;
 
 #endif

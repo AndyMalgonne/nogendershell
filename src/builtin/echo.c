@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:17:34 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/20 09:50:37 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/20 12:41:39 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static void	check_and_flag(char **args, int *i, int *flag)
 {
 	int	j;
 
-	if(!args[*i])
-		return (1);
+	if (!args[*i])
+		return ;
 	while (nb_args(args) > 1 && args[*i] && args[*i][0] == '-' && \
 	args[*i][1] == 'n')
 	{

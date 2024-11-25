@@ -52,7 +52,6 @@ define SRC 	:=
 		unset.c
 	)
 	main.c
-	utils.c
 endef
 
 SRC 		:= ${strip ${SRC}}

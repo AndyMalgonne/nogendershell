@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 08:42:18 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/25 10:42:50 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/25 10:47:45 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ static bool	unset(char *str, t_env **env)
 	if (!str || !(*str))
 		return (false);
 	if (!syntax(str))
-		(ft_dprintf(2, "minishell: unset: `%s': not a valid identifier\n", str), true);
+		(ft_dprintf(2, "minishell: unset: `%s': not a valid identifier\n", str), \
+		true);
 	exist = already_exist(str, *env);
 	if (exist == -1)
 		return (false);

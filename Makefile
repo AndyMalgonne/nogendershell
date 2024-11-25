@@ -47,9 +47,12 @@ LIB 		:= ${strip ${LIB}}
 define SRC 	:=
 	$(addprefix $(BUILTIN_DIR)/, \
 		pwd.c \
-		echo.c 
+		echo.c \
+		env.c \
+		unset.c
 	)
-	main.c 
+	main.c
+	utils.c
 endef
 
 SRC 		:= ${strip ${SRC}}

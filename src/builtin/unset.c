@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 08:42:18 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/25 10:29:48 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/25 10:30:58 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static bool	unset(char *str, t_env **env)
 	tmp = *env;
 	while (i++ < exist)
 		tmp = tmp->next;
-	if(!tmp)
+	if (!tmp)
 		return (false);
 	tmp->prev->next = tmp->next;
 	tmp->next->prev = tmp->prev;

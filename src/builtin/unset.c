@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 08:42:18 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/25 10:10:02 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/25 10:29:48 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static bool	unset(char *str, t_env **env)
 	return (false);
 }
 
-int	bi_unset(char **str, t_list **env)
+int	bi_unset(char **str, t_env **env)
 {
 	int	exit_code;
 	int	i;

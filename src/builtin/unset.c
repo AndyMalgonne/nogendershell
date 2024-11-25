@@ -6,14 +6,14 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 08:42:18 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/25 10:30:58 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/25 10:42:50 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //parsing
-static bool	syntax(char *str)
+static bool	syntax(const char *str)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ static bool	syntax(char *str)
 	return (true);
 }
 
-static int	already_exist(char *str, t_env *env)
+static int	already_exist(const char *str, t_env *env)
 {
 	t_env	*tmp;
 	int		i;
@@ -57,7 +57,7 @@ static int	already_exist(char *str, t_env *env)
 	return (-1);
 }
 
-static void	check_env(t_env *tmp, t_env **env)
+static void	check_env(const t_env *tmp, t_env **env)
 {
 	if (tmp == *env)
 		*env = (*env)->next;
@@ -75,15 +75,15 @@ static bool	unset(char *str, t_env **env)
 	if (!str || !(*str))
 		return (false);
 	if (!syntax(str))
-		return (error("unset: invalid identifier\n"), true);
+		(ft_dprintf(2, "minishell: unset: `%s': not a valid identifier\n", str), true);
 	exist = already_exist(str, *env);
 	if (exist == -1)
 		return (false);
 	tmp = *env;
-	while (i++ < exist)
-		tmp = tmp->next;
 	if (!tmp)
 		return (false);
+	while (i++ < exist)
+		tmp = tmp->next;
 	tmp->prev->next = tmp->next;
 	tmp->next->prev = tmp->prev;
 	(free(tmp->str), check_env(tmp, env), free(tmp), tmp = NULL);

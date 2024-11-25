@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 08:42:18 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/25 09:58:29 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/25 10:03:08 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	already_exist(char *str, t_env *env)
 {
 	t_env	*tmp;
 	int		i;
-	int 	j;
+	int		j;
 
 	if (!env)
 		return (-1);
@@ -72,15 +72,15 @@ static bool	unset(char *str, t_env **env)
 	int		exist;
 
 	i = 0;
-	if(!str || !(*str))
+	if (!str || !(*str))
 		return (false);
-	if(!syntax(str))
+	if (!syntax(str))
 		return (error("unset: invalid identifier\n"), true);
 	exist = already_exist(str, *env);
 	if (exist == -1)
 		return (false);
 	tmp = *env;
-	while(i++ < exist)
+	while (i++ < exist)
 		tmp = tmp->next;
 	tmp->prev->next = tmp->next;
 	tmp->next->prev = tmp->prev;
@@ -88,7 +88,7 @@ static bool	unset(char *str, t_env **env)
 	return (false);
 }
 
-int	ft_unset(char **str, t_list **env)
+int	bi_unset(char **str, t_list **env)
 {
 	int	exit_code;
 	int	i;

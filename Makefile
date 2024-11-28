@@ -30,6 +30,8 @@ SRC_DIR 	:= src
 INCLD_DIR 	:= include
 OBJS_DIR 	:= objs
 BUILTIN_DIR	:= builtin
+PARSING_DIR	:= parsing
+TOKENS_DIR	:= tokens
 
 ### FILES ###
 define INCLUDES	:=
@@ -50,6 +52,24 @@ define SRC 	:=
 		echo.c \
 		env.c \
 		unset.c
+	)
+	$(addprefix $(PARSING_DIR)/, \
+		bracket_checks.c \
+		checks.c \
+		cmd_checks.c \
+		cmd_checks2.c \
+		is_checks.c \
+		op_checks.c \
+		parsing.c \
+		quotes_checks.c \
+	)
+	$(addprefix $(TOKENS_DIR)/, \
+		cmd_tokenizing.c \
+		op_tokenizing_helper.c \
+		op_tokenizing.c \
+		string_tokenizing.c \
+		token_utils.c \
+		token.c \
 	)
 	main.c
 endef
@@ -73,6 +93,8 @@ ${OBJS_DIR}/%.o: ${SRC_DIR}/%.c
 	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT} $<"
 	@mkdir -p ${OBJS_DIR}
 	@mkdir -p ${OBJS_DIR}/$(BUILTIN_DIR)
+	@mkdir -p ${OBJS_DIR}/$(PARSING_DIR)
+	@mkdir -p ${OBJS_DIR}/$(TOKENS_DIR)
 	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
 
 .PHONY: clean

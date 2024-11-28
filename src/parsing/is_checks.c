@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:00:45 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 15:47:58 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/28 15:58:00 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int	is_space_tab(char c)
 
 int	is_cmd(char *rl)
 {
-	return (is_builtin1(rl) || is_builtin2(rl) || is_builtin3(rl));
+	return (is_bi_echo(rl) || is_bi_cd(rl) || is_bi_pwd(rl) \
+	|| is_bi_export(rl) || is_bi_unset(rl) || is_bi_env(rl) \
+	|| is_bi_exit(rl));
 }

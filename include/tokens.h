@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 16:36:22 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/28 17:11:42 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,27 @@
 
 typedef enum s_token_type
 {
-	CMD,
-	ARG,
-	BACKGROUND,
-	AND,
-	OR,
-	SEMICOLON,
-	PIPE,
-	REDIR_IN,
-	REDIR_OUT,
-	REDIR_APPEND,
-	REDIR_HEREDOC,
-	O_BRACKET,
-	C_BRACKET,
-	SQ_STRING,
-	DQ_STRING,
+	BI_ECHO,
+	BI_CD,
+	BI_PWD,
+	BI_EXPORT,
+	BI_UNSET,
+	BI_ENV,
+	BI_EXIT,
+	OP_BACKGROUND,
+	OP_AND,
+	OP_OR,
+	OP_SEMICOLON,
+	OP_PIPE,
+	OP_REDIR_IN,
+	OP_REDIR_OUT,
+	OP_REDIR_APPEND,
+	OP_REDIR_HEREDOC,
+	OP_O_BRACKET,
+	OP_C_BRACKET,
+	STRING_SQ,
+	STRING_DQ,
+	UNKNOWN,
 }	t_token_type;
 
 typedef struct s_token
@@ -47,8 +53,11 @@ t_token	*new_token(t_token_type type, const char *value);
 void	append_token(t_token **head, t_token *new_token);
 void	free_token(t_token *token);
 void	free_token_list(t_token **head);
+const char	*token_type_to_string(t_token_type type);
+void	print_token_list(t_token *head);
 
 //token.c
+t_token *tokenize(char *input);
 
 //cmd_tokenizing.c
 int		cmd_tokenizing(char **rl, t_token **head);

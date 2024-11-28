@@ -3,53 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/10/31 11:04:26 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/11/28 16:57:22 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	base_features(char *rl)
+int	g_global = 0;
+
+void signal_handler(int sig)
 {
-	if (ft_strncmp(rl, "exit", 4) == 0)
-		return (free(rl), 1);
-	if (ft_strncmp(rl, "echo", 4) == 0)
+	if (sig == SIGINT)
 	{
-		ft_printf("%s\n", rl + 5);
-		return (free(rl), 2);
-	}
-	if (ft_strncmp(rl, "clear", 5) == 0)
-	{
-		ft_printf("\033[H\033[J");
-		return (free(rl), 2);
-	}
-	else
-	{
-		ft_printf("\033[0;35mnogender\033[0;36mshell:\033[0m");
-		ft_printf("command not found: %s\n", rl);
-		return (free(rl), 2);
+		ft_printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
-int	main(int ac, char **av)
+int main(int ac, char **av, char **envp)
 {
-	char	*rl;
+	char *input;
+	t_token *tokens;
 
-	(void)av;
-	if (ac != 1)
-		return (0);
+	(void)ac, (void)av, (void)envp;
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
+
 	while (1)
 	{
-		rl = readline("\033[0;36mnogender\033[0;35mshell > \033[0m");
-		if (!rl)
-			return (1);
-		if (rl && *rl)
-			add_history(rl);
-		if (base_features(rl) == 1)
-			break ;
+		input = readline("nogendershell> ");
+		if (!input)
+			break;
+		if (*input)
+			add_history(input);
+		tokens = tokenize(input);
+		print_token_list(tokens);
+		if (ft_strncmp(input, "exit", 4) == 0)
+		{
+			free(input);
+			break;
+		}
+		free_token_list(&tokens);
+		free(input);
 	}
 	return (0);
 }

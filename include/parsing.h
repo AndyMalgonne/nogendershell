@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 16:55:23 by gmoulin          ###   ########.fr       */
+/*   Updated: 2024/11/28 15:59:33 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int		is_space_tab(char c);
 int		is_cmd(char *rl);
 
 //is_check_helper.c
-int		is_builtin1(char *rl);
-int		is_builtin2(char *rl);
-int		is_builtin3(char *rl);
+//int		is_builtin1(char *rl);
+//int		is_builtin2(char *rl);
+//int		is_builtin3(char *rl);
 
 //parsing.c
 char	*parsing(char *rl, t_token **head);

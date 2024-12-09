@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/25 10:51:14 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/12/09 11:11:30 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <signal.h>
 # include <errno.h>
 # include <limits.h>
+# include <fcntl.h>
 # include "libft.h"
 # include "tokens.h"
 # include "parsing.h"

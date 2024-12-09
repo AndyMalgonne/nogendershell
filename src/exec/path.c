@@ -63,7 +63,7 @@ char	*check_file_in_path(char **path, const char *cmd)
 	{
 		i++;
 		if (!path[i])
-			break;
+			break ;
 		file_path = ft_strjoin(path[i], cmd);
 		if (!file_path)
 			return (NULL);

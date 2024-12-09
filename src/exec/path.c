@@ -6,13 +6,13 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/12/09 11:12:58 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/12/09 11:49:49 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_strcut(char *str, char stop)
+char	*ft_strcut(const char *str, const char stop)
 {
 	size_t	i;
 
@@ -53,14 +53,17 @@ char	**find_path(char **envp)
 	return (path);
 }
 
-char	*check_file_in_path(char **path, char *cmd)
+char	*check_file_in_path(char **path, const char *cmd)
 {
 	int		i;
 	char	*file_path;
 
 	i = 0;
-	while (path != NULL && path[++i])
+	while (path != NULL)
 	{
+		i++;
+		if (!path[i])
+			break;
 		file_path = ft_strjoin(path[i], cmd);
 		if (!file_path)
 			return (NULL);

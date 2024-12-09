@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:09:35 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/12/09 11:12:28 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2024/12/09 11:41:49 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*find_heredoc_file(void)
 	return (file);
 }
 
-int	write_to_heredoc(int fd, char *del)
+int	write_to_heredoc(int fd, const char *del)
 {
 	char	*gnl;
 

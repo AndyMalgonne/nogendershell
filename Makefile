@@ -48,7 +48,9 @@ LIB 		:= ${strip ${LIB}}
 define SRC 	:=
 	$(addprefix $(BUILTIN_DIR)/, \
 		pwd.c \
-		echo.c 
+		echo.c \
+		env.c \
+		unset.c
 	)
 	$(addprefix $(EXEC_DIR)/, \
 		builtin.c \
@@ -56,7 +58,7 @@ define SRC 	:=
 		here_doc.c \
 		path.c 
 	)
-	main.c 
+	main.c
 endef
 
 SRC 		:= ${strip ${SRC}}

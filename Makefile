@@ -30,6 +30,7 @@ SRC_DIR 	:= src
 INCLD_DIR 	:= include
 OBJS_DIR 	:= objs
 BUILTIN_DIR	:= builtin
+EXEC_DIR	:= exec
 
 ### FILES ###
 define INCLUDES	:=
@@ -48,6 +49,12 @@ define SRC 	:=
 	$(addprefix $(BUILTIN_DIR)/, \
 		pwd.c \
 		echo.c 
+	)
+	$(addprefix $(EXEC_DIR)/, \
+		builtin.c \
+		exec.c \
+		here_doc.c \
+		path.c 
 	)
 	main.c 
 endef
@@ -71,6 +78,7 @@ ${OBJS_DIR}/%.o: ${SRC_DIR}/%.c
 	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT} $<"
 	@mkdir -p ${OBJS_DIR}
 	@mkdir -p ${OBJS_DIR}/$(BUILTIN_DIR)
+	@mkdir -p ${OBJS_DIR}/$(EXEC_DIR)
 	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
 
 .PHONY: clean

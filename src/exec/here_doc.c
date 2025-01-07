@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:09:35 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/12/09 11:41:49 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/01/07 15:03:44 by andytropmim      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,26 @@
 
 char	*find_heredoc_file(void)
 {
-	char	*file;
-	int		size;
+	char			*file;
+	const char		alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	int				alphanum_size;
+	unsigned char	random_bytes[3];
+	int				size;
 
-	size = 2;
-	file = NULL;
-	file = ft_calloc(size, sizeof(char));
+	alphanum_size = sizeof(alphanum) - 1;
+	size = 5;
+	if (get_random_bytes(random_bytes, 3) < 0)
+		return (NULL);
+	file = r_name(random_bytes, alphanum, alphanum_size, size);
 	if (!file)
 		return (NULL);
-	ft_memset(file, 'a', size - 1);
-	while (access(file, F_OK) != 0 && errno != ENOENT)
+	while (access(file, F_OK) == 0)
 	{
 		free(file);
-		if (++size < 0)
-			return (NULL);
-		file = ft_calloc(size, sizeof(char));
+		increment_random_bytes(random_bytes, alphanum_size);
+		file = r_name(random_bytes, alphanum, alphanum_size, size);
 		if (!file)
 			return (NULL);
-		ft_memset(file, 'a', size - 1);
 	}
 	return (file);
 }

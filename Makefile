@@ -56,6 +56,7 @@ define SRC 	:=
 		builtin.c \
 		exec.c \
 		here_doc.c \
+		here_doc_utils.c \
 		path.c 
 	)
 	main.c

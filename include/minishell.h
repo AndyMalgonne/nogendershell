@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/25 10:51:14 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/01/07 13:42:11 by andytropmim      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@
 # include <signal.h>
 # include <errno.h>
 # include <limits.h>
+# include <fcntl.h>
 # include "libft.h"
+# include "exec.h"
 # include "tokens.h"
 # include "parsing.h"
-# include "builtin.h"
 
 typedef struct s_env
 {

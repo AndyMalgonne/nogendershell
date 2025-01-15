@@ -32,6 +32,8 @@ OBJS_DIR 	:= objs
 BUILTIN_DIR	:= builtin
 PARSING_DIR	:= parsing
 TOKENS_DIR	:= tokens
+EXEC_DIR	:= exec
+
 
 ### FILES ###
 define INCLUDES	:=
@@ -70,6 +72,12 @@ define SRC 	:=
 		string_tokenizing.c \
 		token_utils.c \
 		token.c \
+	$(addprefix $(EXEC_DIR)/, \
+		builtin.c \
+		exec.c \
+		here_doc.c \
+		here_doc_utils.c \
+		path.c
 	)
 	main.c
 endef
@@ -95,6 +103,7 @@ ${OBJS_DIR}/%.o: ${SRC_DIR}/%.c
 	@mkdir -p ${OBJS_DIR}/$(BUILTIN_DIR)
 	@mkdir -p ${OBJS_DIR}/$(PARSING_DIR)
 	@mkdir -p ${OBJS_DIR}/$(TOKENS_DIR)
+	@mkdir -p ${OBJS_DIR}/$(EXEC_DIR)
 	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
 
 .PHONY: clean

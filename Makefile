@@ -63,7 +63,6 @@ define SRC 	:=
 		is_checks.c \
 		op_checks.c \
 		op_checks2.c \
-		parsing.c \
 		quotes_checks.c \
 		token_checks.c \
 	)

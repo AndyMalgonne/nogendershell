@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:00:00 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 15:31:01 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:02:14 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,23 @@
 
 int	check_open_quotes(const char *rl)
 {
-	int	i;
-	int	double_quote;
-	int	single_quote;
+	int		double_quote;
+	int		single_quote;
+	bool	inside_double_quote;
 
-	i = 0;
 	double_quote = 0;
 	single_quote = 0;
-	while (rl[i])
+	inside_double_quote = false;
+	while (*rl)
 	{
-		if (is_d_quote(rl[i]))
+		if (is_d_quote(*rl))
+		{
 			double_quote++;
-		if (is_s_quote(rl[i]))
+			inside_double_quote = !inside_double_quote;
+		}
+		else if (is_s_quote(*rl) && !inside_double_quote)
 			single_quote++;
-		i++;
+		rl++;
 	}
 	if (double_quote % 2 != 0 || single_quote % 2 != 0)
 	{
@@ -39,24 +42,27 @@ int	check_open_quotes(const char *rl)
 
 int	check_open_brackets(const char *rl)
 {
-	int	i;
-	int	open_bracket;
-	int	close_bracket;
+	int		bracket_count;
+	bool	inside_string;
 
-	i = 0;
-	open_bracket = 0;
-	close_bracket = 0;
-	while (rl[i])
+	bracket_count = 0;
+	inside_string = false;
+	while (*rl)
 	{
-		if (is_o_bracket(rl[i]))
-			open_bracket++;
-		if (is_c_bracket(rl[i]))
-			close_bracket++;
-		i++;
+		if (is_d_quote(*rl) || is_s_quote(*rl))
+			inside_string = !inside_string;
+		else if (!inside_string)
+		{
+			if (is_o_bracket(*rl))
+				bracket_count++;
+			else if (is_c_bracket(*rl))
+				bracket_count--;
+		}
+		rl++;
 	}
-	if (open_bracket != close_bracket)
+	if (bracket_count != 0)
 	{
-		ft_printf("nogendershell: syntax error: open brackets.\n");
+		ft_printf("nogendershell: syntax error: unmatched brackets.\n");
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/28 16:57:22 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/21 00:00:20 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int main(int ac, char **av, char **envp)
 			add_history(input);
 		tokens = tokenize(input);
 		print_token_list(tokens);
-		if (ft_strncmp(input, "exit", 4) == 0)
+		handle_token_error(&tokens);
+		if (ft_strncmp(input, "exit", 4) == 0 && (is_space_tab(input[4]) || !input[4]))
 		{
 			free(input);
 			break;
@@ -52,4 +53,13 @@ int main(int ac, char **av, char **envp)
 		free(input);
 	}
 	return (0);
+}
+
+bool	is_bi_token(t_token *token)
+{
+	if (token->type == BI_ECHO || token->type == BI_CD || token->type == BI_PWD
+		|| token->type == BI_EXPORT || token->type == BI_UNSET
+		|| token->type == BI_ENV || token->type == BI_EXIT)
+		return (true);
+	return (false);
 }

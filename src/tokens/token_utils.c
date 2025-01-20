@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/28 17:11:29 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:23:44 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ void	free_token_list(t_token **head)
 	}
 	*head = NULL;
 }
-const char *token_type_to_string(t_token_type type)
+
+const char *tttostr(t_token_type type) //TO FIX, SWITCHCASE NOT ALLOWED
 {
 	switch (type)
 	{
@@ -86,20 +87,22 @@ const char *token_type_to_string(t_token_type type)
 		case OP_REDIR_OUT: return "OP_REDIR_OUT";
 		case OP_REDIR_APPEND: return "OP_REDIR_APPEND";
 		case OP_REDIR_HEREDOC: return "OP_REDIR_HEREDOC";
-		case OP_O_BRACKET: return "OP_O_BRACKET";
-		case OP_C_BRACKET: return "OP_C_BRACKET";
+		case OP_BACKLASH: return "OP_BACKLASH";
 		case STRING_SQ: return "STRING_SQ";
 		case STRING_DQ: return "STRING_DQ";
+		case SUBSHELL: return "SUBSHELL";
 		default: return "UNKNOWN";
 	}
 }
 
-void print_token_list(t_token *head)
+void	print_token_list(t_token *head) //TO COMMENT
 {
-	t_token *current = head;
+	t_token	*current;
+
+	current = head;
 	while (current)
 	{
-		printf("Type: %s, Value: %s\n", token_type_to_string(current->type), current->value);
+		printf("Type: %s, Value: %s\n", tttostr(current->type), current->value);
 		current = current->next;
 	}
 }

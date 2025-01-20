@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:00:45 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/28 15:58:00 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:58:20 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	is_operator(char c)
 {
-	return (is_rdin(c) || is_rdout(c) || is_pipe(c) || is_scln(c) || is_and(c));
+	return (is_rdin(c) || is_rdout(c) || is_pipe(c) || is_scln(c) || is_and(c) \
+	|| is_backlash(c));
 }
 
 int	is_space_tab(char c)

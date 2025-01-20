@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/28 17:12:09 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:10:34 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,29 @@ int	tokenize_else(char **rl, t_token **head)
 	return (2);
 }
 
-t_token *tokenize(char *input)
+t_token	*tokenize(char *input)
 {
-	t_token *head = NULL;
-	char *rl = input;
+	t_token	*head;
+	char	*rl;
 
+	head = NULL;
+	rl = input;
+	if (check_open_quotes(rl) == 1 || check_open_brackets(rl) == 1)
+		return (NULL);
 	while (*rl)
 	{
-		if (is_space_tab(*rl))
-		{
+		while (is_space_tab(*rl))
 			rl++;
-			continue;
-		}
 		if (is_operator(*rl))
-		{
 			op_tokenizing(&rl, &head);
-			while (is_space_tab(*rl))
-				rl++;
-			continue;
-		}
-		if (is_quotes(*rl))
-		{
+		else if (is_quotes(*rl))
 			string_tokenizing(&rl, &head);
-			while (is_space_tab(*rl))
-				rl++;
-			continue;
-		}
-		cmd_tokenizing(&rl, &head);
-		if (*rl && !is_space_tab(*rl))
+		else if (is_cmd(rl))
+			cmd_tokenizing(&rl, &head);
+		else if (is_o_bracket(*rl))
+			subshell_tokenizing(&rl, &head);
+		else if (*rl)
 			tokenize_else(&rl, &head);
 	}
-	return head;
+	return (head);
 }

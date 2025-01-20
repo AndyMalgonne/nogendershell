@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:14:57 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 15:26:49 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:55:52 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	op_tokenizing(char **rl, t_token **head)
 		n_token = tokenize_and(rl);
 	else if (is_scln(**rl))
 		n_token = tokenize_scln(rl);
+	else if (is_backlash(**rl))
+		n_token = tokenize_backlash(rl);
 	else
 		return (0);
 	if (!n_token)

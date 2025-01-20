@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:50:20 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/28 17:02:51 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/20 23:51:20 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,12 @@ t_token	*tokenize_scln(char **rl)
 {
 	if (is_space_tab((*rl)[1]) || !(*rl)[1])
 		return (new_token(OP_SEMICOLON, ft_strdup(";")));
+	return (NULL);
+}
+
+t_token	*tokenize_backlash(char **rl)
+{
+	if (is_space_tab((*rl)[1]) || !(*rl)[1])
+		return (new_token(OP_BACKLASH, ft_strdup("\\")));
 	return (NULL);
 }

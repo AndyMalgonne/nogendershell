@@ -62,16 +62,20 @@ define SRC 	:=
 		cmd_checks2.c \
 		is_checks.c \
 		op_checks.c \
+		op_checks2.c \
 		parsing.c \
 		quotes_checks.c \
+		token_checks.c \
 	)
 	$(addprefix $(TOKENS_DIR)/, \
 		cmd_tokenizing.c \
 		op_tokenizing_helper.c \
 		op_tokenizing.c \
 		string_tokenizing.c \
+		subshell_tokenizing.c \
 		token_utils.c \
 		token.c \
+	)
 	$(addprefix $(EXEC_DIR)/, \
 		builtin.c \
 		exec.c \

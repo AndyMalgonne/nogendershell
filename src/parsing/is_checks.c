@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:00:45 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/20 23:58:20 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/27 21:24:49 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_space_tab(char c)
 	return (c == ' ' || c == '\t');
 }
 
-int	is_cmd(char *rl)
+int	is_cmd(const char *rl)
 {
 	return (is_bi_echo(rl) || is_bi_cd(rl) || is_bi_pwd(rl) \
 	|| is_bi_export(rl) || is_bi_unset(rl) || is_bi_env(rl) \

@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/27 21:12:02 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/27 21:26:40 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int ac, char **av, char **envp) //ADD PRINT_TOKEN AFTER TOKENIZE DEBUG
 	return (0);
 }
 
-bool	is_bi_token(t_token *token)
+bool	is_bi_token(const t_token *token)
 {
 	if (token->type == BI_ECHO || token->type == BI_CD || token->type == BI_PWD
 		|| token->type == BI_EXPORT || token->type == BI_UNSET

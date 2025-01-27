@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/21 00:00:20 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/27 21:12:02 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_global = 0;
 
-void signal_handler(int sig)
+void	signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
@@ -25,30 +25,25 @@ void signal_handler(int sig)
 	}
 }
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp) //ADD PRINT_TOKEN AFTER TOKENIZE DEBUG
 {
-	char *input;
-	t_token *tokens;
+	char	*input;
+	t_token	*tokens;
 
 	(void)ac, (void)av, (void)envp;
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, SIG_IGN);
-
 	while (1)
 	{
 		input = readline("nogendershell> ");
 		if (!input)
-			break;
+			break ;
 		if (*input)
 			add_history(input);
 		tokens = tokenize(input);
-		print_token_list(tokens);
+		if (tokens && tokens->type == BI_EXIT)
+			return (free(input), free_token_list(&tokens), 0);
 		handle_token_error(&tokens);
-		if (ft_strncmp(input, "exit", 4) == 0 && (is_space_tab(input[4]) || !input[4]))
-		{
-			free(input);
-			break;
-		}
 		free_token_list(&tokens);
 		free(input);
 	}

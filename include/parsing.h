@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/21 00:30:12 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/27 21:27:31 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,7 @@ int		is_d_quote(char c);
 //is_checks.c
 int		is_operator(char c);
 int		is_space_tab(char c);
-int		is_cmd(char *rl);
-
-//is_check_helper.c
-//int		is_builtin1(char *rl);
-//int		is_builtin2(char *rl);
-//int		is_builtin3(char *rl);
+int		is_cmd(const char *rl);
 
 //cmd_checks.c
 int		is_bi_echo(const char *rl);

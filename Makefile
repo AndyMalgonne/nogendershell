@@ -69,6 +69,7 @@ define SRC 	:=
 	$(addprefix $(TOKENS_DIR)/, \
 		cmd_tokenizing.c \
 		op_tokenizing_helper.c \
+		op_tokenizing_helper2.c \
 		op_tokenizing.c \
 		string_tokenizing.c \
 		subshell_tokenizing.c \

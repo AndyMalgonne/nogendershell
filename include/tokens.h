@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/20 23:33:00 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/27 21:10:16 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		append_token(t_token **head, t_token *new_token);
 void		free_token(t_token *token);
 void		free_token_list(t_token **head);
 const char	*tttostr(t_token_type type);
-void		print_token_list(t_token *head);
+//void		print_token_list(t_token *head);
 
 //token.c
 t_token		*tokenize(char *input);
@@ -71,6 +71,8 @@ t_token		*tokenize_rdout(char **rl);
 t_token		*tokenize_pipe(char **rl);
 t_token		*tokenize_and(char **rl);
 t_token		*tokenize_scln(char **rl);
+
+//op_tokenizing_helper2.c
 t_token		*tokenize_backlash(char **rl);
 
 //string_tokenizing.c

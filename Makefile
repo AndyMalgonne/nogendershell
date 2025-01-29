@@ -30,7 +30,10 @@ SRC_DIR 	:= src
 INCLD_DIR 	:= include
 OBJS_DIR 	:= objs
 BUILTIN_DIR	:= builtin
+PARSING_DIR	:= parsing
+TOKENS_DIR	:= tokens
 EXEC_DIR	:= exec
+
 
 ### FILES ###
 define INCLUDES	:=
@@ -52,12 +55,33 @@ define SRC 	:=
 		env.c \
 		unset.c
 	)
+	$(addprefix $(PARSING_DIR)/, \
+		bracket_checks.c \
+		checks.c \
+		cmd_checks.c \
+		cmd_checks2.c \
+		is_checks.c \
+		op_checks.c \
+		op_checks2.c \
+		quotes_checks.c \
+		token_checks.c \
+	)
+	$(addprefix $(TOKENS_DIR)/, \
+		cmd_tokenizing.c \
+		op_tokenizing_helper.c \
+		op_tokenizing_helper2.c \
+		op_tokenizing.c \
+		string_tokenizing.c \
+		subshell_tokenizing.c \
+		token_utils.c \
+		token.c \
+	)
 	$(addprefix $(EXEC_DIR)/, \
 		builtin.c \
 		exec.c \
 		here_doc.c \
 		here_doc_utils.c \
-		path.c 
+		path.c
 	)
 	main.c
 endef
@@ -81,6 +105,8 @@ ${OBJS_DIR}/%.o: ${SRC_DIR}/%.c
 	@printf "${NEW}${PURPLE}[${NAME}] ${UGREEN}Compiling :${DEFAULT} $<"
 	@mkdir -p ${OBJS_DIR}
 	@mkdir -p ${OBJS_DIR}/$(BUILTIN_DIR)
+	@mkdir -p ${OBJS_DIR}/$(PARSING_DIR)
+	@mkdir -p ${OBJS_DIR}/$(TOKENS_DIR)
 	@mkdir -p ${OBJS_DIR}/$(EXEC_DIR)
 	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
 

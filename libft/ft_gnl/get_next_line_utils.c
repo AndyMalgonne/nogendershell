@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 12:37:09 by amalgonn          #+#    #+#             */
-/*   Updated: 2024/06/26 13:06:29 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/01/20 21:57:01 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
-
-char	*ft_strdup(const char *s)
-{
-	int		i;
-	int		size;
-	char	*dest;
-
-	i = 0;
-	size = ft_strlen(s);
-	dest = malloc((size + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	while (s[i])
-	{
-		dest[i] = s[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {

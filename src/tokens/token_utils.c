@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 16:35:37 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/27 21:10:00 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,30 @@ void	free_token_list(t_token **head)
 	}
 	*head = NULL;
 }
+
+const char	*tttostr(t_token_type type)
+{
+	static const char	*token_type_str[] = {
+		"BI_ECHO", "BI_CD", "BI_PWD", "BI_EXPORT", "BI_UNSET",
+		"BI_ENV", "BI_EXIT", "OP_BACKGROUND", "OP_AND", "OP_OR",
+		"OP_SEMICOLON", "OP_PIPE", "OP_REDIR_IN", "OP_REDIR_OUT",
+		"OP_REDIR_APPEND", "OP_REDIR_HEREDOC", "OP_BACKLASH",
+		"STRING_SQ", "STRING_DQ", "SUBSHELL", "UNKNOWN"
+	};
+
+	if (type < 0 || type >= sizeof(token_type_str) / sizeof(token_type_str[0]))
+		return ("UNKNOWN");
+	return (token_type_str[type]);
+}
+
+//void	print_token_list(t_token *head) //TO COMMENT
+//{
+//	t_token	*current;
+
+//	current = head;
+//	while (current)
+//	{
+//		printf("Type: %s, Value: %s\n", tttostr(current->type), current->value);
+//		current = current->next;
+//	}
+//}

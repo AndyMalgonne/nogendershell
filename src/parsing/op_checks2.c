@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_checks.c                                        :+:      :+:    :+:   */
+/*   op_checks2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 17:00:45 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/27 21:24:49 by gmoulin          ###   ########.fr       */
+/*   Created: 2024/10/31 17:20:13 by gmoulin           #+#    #+#             */
+/*   Updated: 2025/01/20 23:27:26 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_operator(char c)
+int	is_backlash(char c)
 {
-	return (is_rdin(c) || is_rdout(c) || is_pipe(c) || is_scln(c) || is_and(c) \
-	|| is_backlash(c));
-}
-
-int	is_space_tab(char c)
-{
-	return (c == ' ' || c == '\t');
-}
-
-int	is_cmd(const char *rl)
-{
-	return (is_bi_echo(rl) || is_bi_cd(rl) || is_bi_pwd(rl) \
-	|| is_bi_export(rl) || is_bi_unset(rl) || is_bi_env(rl) \
-	|| is_bi_exit(rl));
+	return (c == '\\');
 }

@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/06 16:55:23 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/27 21:27:31 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int		is_rdout(char c);
 int		is_pipe(char c);
 int		is_scln(char c);
 int		is_and(char c);
+int		is_backlash(char c);
 
 //quotes_checks.c
 int		is_quotes(char c);
@@ -38,15 +39,7 @@ int		is_d_quote(char c);
 //is_checks.c
 int		is_operator(char c);
 int		is_space_tab(char c);
-int		is_cmd(char *rl);
-
-//is_check_helper.c
-int		is_builtin1(char *rl);
-int		is_builtin2(char *rl);
-int		is_builtin3(char *rl);
-
-//parsing.c
-char	*parsing(char *rl, t_token **head);
+int		is_cmd(const char *rl);
 
 //cmd_checks.c
 int		is_bi_echo(const char *rl);
@@ -58,5 +51,8 @@ int		is_bi_unset(const char *rl);
 //cmd_checks2.c
 int		is_bi_env(const char *rl);
 int		is_bi_exit(const char *rl);
+
+//token_checks.c
+void	handle_token_error(t_token **head);
 
 #endif

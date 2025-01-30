@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_tokenizing_helper.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:50:20 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/30 14:20:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:43:53 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,5 @@ t_token	*tokenize_pipe(char **rl)
 		return (new_token(OP_PIPE, ft_strdup("|")));
 	else if (is_pipe((*rl)[1]) && (is_space_tab((*rl)[2]) || !(*rl)[2]))
 		return (new_token(OP_OR, ft_strdup("||")));
-	return (NULL);
-}
-
-t_token	*tokenize_and(char **rl)
-{
-	if (is_space_tab((*rl)[1]) || !(*rl)[1])
-		return (new_token(OP_BACKGROUND, ft_strdup("&")));
-	else if (is_and((*rl)[1]) && (is_space_tab((*rl)[2]) || !(*rl)[2]))
-		return (new_token(OP_AND, ft_strdup("&&")));
-	return (NULL);
-}
-
-t_token	*tokenize_scln(char **rl)
-{
-	if (is_space_tab((*rl)[1]) || !(*rl)[1])
-		return (new_token(OP_SEMICOLON, ft_strdup(";")));
 	return (NULL);
 }

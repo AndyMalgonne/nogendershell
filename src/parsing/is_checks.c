@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_checks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:00:45 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/30 14:16:06 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:26:02 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,9 @@ int	is_operator(char c)
 int	is_space_tab(char c)
 {
 	return (c == ' ' || c == '\t');
+}
+
+int	is_quotes(char c)
+{
+	return (c == '\'' || c == '\"');
 }

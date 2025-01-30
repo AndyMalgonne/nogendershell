@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/30 14:06:33 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:31:31 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*tokenize(char *input)
 
 	head = NULL;
 	rl = input;
-	if (check_open_quotes(rl) == 1 || check_open_brackets(rl) == 1)
+	if (check_open_quotes(rl) == 1)
 		return (NULL);
 	while (*rl)
 	{
@@ -47,8 +47,6 @@ t_token	*tokenize(char *input)
 			string_tokenizing(&rl, &head);
 		else if (is_cmd(rl))
 			cmd_tokenizing(&rl, &head);
-		else if (is_o_bracket(*rl))
-			subshell_tokenizing(&rl, &head);
 		else if (*rl)
 			tokenize_else(&rl, &head);
 	}

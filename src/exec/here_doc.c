@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:09:35 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/07 15:03:44 by andytropmim      ###   ########.fr       */
+/*   Updated: 2025/01/30 14:22:03 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "exec.h"
 
 char	*find_heredoc_file(void)
 {

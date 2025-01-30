@@ -6,11 +6,12 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/30 15:31:31 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/30 16:32:37 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "tokens.h"
 #include "parsing.h"
 
 int	tokenize_else(char **rl, t_token **head)
@@ -45,8 +46,6 @@ t_token	*tokenize(char *input)
 			op_tokenizing(&rl, &head);
 		else if (is_quotes(*rl))
 			string_tokenizing(&rl, &head);
-		else if (is_cmd(rl))
-			cmd_tokenizing(&rl, &head);
 		else if (*rl)
 			tokenize_else(&rl, &head);
 	}

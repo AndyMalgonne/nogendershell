@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/30 14:06:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:43:15 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENS_H
 # define TOKENS_H
 
+# define CHAR_ERROR "`(){}[];!\\*"
+
 typedef enum s_token_type
 {
-	OP_PIPE,
-	OP_REDIR_IN,
-	OP_REDIR_OUT,
-	OP_REDIR_APPEND,
-	OP_REDIR_HEREDOC,
+	PIPE,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC,
 	STRING_SQ,
 	STRING_DQ,
 	WORD,
@@ -54,11 +56,6 @@ int			op_tokenizing(char **rl, t_token **head);
 t_token		*tokenize_rdin(char **rl);
 t_token		*tokenize_rdout(char **rl);
 t_token		*tokenize_pipe(char **rl);
-t_token		*tokenize_and(char **rl);
-t_token		*tokenize_scln(char **rl);
-
-//op_tokenizing_helper2.c
-t_token		*tokenize_backlash(char **rl);
 
 //string_tokenizing.c
 int			tokenize_s_quote(char **rl, t_token **head);

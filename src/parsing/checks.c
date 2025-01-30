@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:00:00 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/30 14:17:03 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:26:11 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_open_quotes(const char *rl)
 			double_quote++;
 			inside_double_quote = !inside_double_quote;
 		}
-		else if (*rl =='\'' && !inside_double_quote)
+		else if (*rl == '\'' && !inside_double_quote)
 			single_quote++;
 		rl++;
 	}

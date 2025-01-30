@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op_checks2.c                                       :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 17:20:13 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/20 23:27:26 by gmoulin          ###   ########.fr       */
+/*   Created: 2025/01/28 10:02:20 by abasdere          #+#    #+#             */
+/*   Updated: 2025/01/29 09:51:39 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_backlash(char c)
+void	*free_to_null(void *p)
 {
-	return (c == '\\');
+	void	**ptr;
+
+	ptr = (void **)p;
+	if (!ptr || !(*ptr))
+		return (NULL);
+	free(*ptr);
+	*ptr = NULL;
+	return (*ptr);
 }

@@ -3,58 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/27 21:26:40 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/30 14:23:09 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing.h"
+#include "tokens.h"
 
 int	g_global = 0;
 
-void	signal_handler(int sig)
+int	main(int ac, char **av __attribute__((unused)), char **envp)
 {
-	if (sig == SIGINT)
-	{
-		ft_printf("\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
-}
+	t_env *env			__attribute__((cleanup(free_env)));
+	char *user_input	__attribute__((cleanup(cleanup_user_input)));
+	// t_token	*tokens;
 
-int	main(int ac, char **av, char **envp) //ADD PRINT_TOKEN AFTER TOKENIZE DEBUG
-{
-	char	*input;
-	t_token	*tokens;
-
-	(void)ac, (void)av, (void)envp;
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, SIG_IGN);
-	while (1)
+	env = NULL;
+	user_input = NULL;
+	// tokens = NULL;
+	if (ac != 1)
+		return (ft_putstr_fd("Usage: ./minishell\n", 2), 1);
+	if (isatty(0) != 1)
+		return (ft_putstr_fd("U mad bro?\n", 2), 1);
+	if (!create_env(&env, envp))
+		return (1);
+	while (get_input(&user_input))
 	{
-		input = readline("nogendershell> ");
-		if (!input)
-			break ;
-		if (*input)
-			add_history(input);
-		tokens = tokenize(input);
-		if (tokens && tokens->type == BI_EXIT)
-			return (free(input), free_token_list(&tokens), 0);
-		handle_token_error(&tokens);
-		free_token_list(&tokens);
-		free(input);
+		// tokens = tokenize(user_input);
+		// if (tokens && tokens->type == BI_EXIT)
+		// 	return (free_token_list(&tokens), 0);
+		// handle_token_error(&tokens);
+		// free_token_list(&tokens);
 	}
 	return (0);
-}
-
-bool	is_bi_token(const t_token *token)
-{
-	if (token->type == BI_ECHO || token->type == BI_CD || token->type == BI_PWD
-		|| token->type == BI_EXPORT || token->type == BI_UNSET
-		|| token->type == BI_ENV || token->type == BI_EXIT)
-		return (true);
-	return (false);
 }

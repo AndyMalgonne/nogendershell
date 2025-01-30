@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/20 23:10:34 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/30 14:06:33 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "parsing.h"
 
 int	tokenize_else(char **rl, t_token **head)
 {
@@ -20,7 +21,7 @@ int	tokenize_else(char **rl, t_token **head)
 	start = *rl;
 	while (**rl && !is_space_tab(**rl))
 		(*rl)++;
-	n_token = new_token(UNKNOWN, ft_strndup(start, *rl - start));
+	n_token = new_token(WORD, ft_strndup(start, *rl - start));
 	if (!n_token)
 		return (0);
 	append_token(head, n_token);

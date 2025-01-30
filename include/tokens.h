@@ -3,41 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/27 21:10:16 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/30 14:06:30 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENS_H
 # define TOKENS_H
 
-# include "minishell.h"
-
 typedef enum s_token_type
 {
-	BI_ECHO,
-	BI_CD,
-	BI_PWD,
-	BI_EXPORT,
-	BI_UNSET,
-	BI_ENV,
-	BI_EXIT,
-	OP_BACKGROUND,
-	OP_AND,
-	OP_OR,
-	OP_SEMICOLON,
 	OP_PIPE,
 	OP_REDIR_IN,
 	OP_REDIR_OUT,
 	OP_REDIR_APPEND,
 	OP_REDIR_HEREDOC,
-	OP_BACKLASH,
 	STRING_SQ,
 	STRING_DQ,
-	SUBSHELL,
-	UNKNOWN,
+	WORD,
 }	t_token_type;
 
 typedef struct s_token

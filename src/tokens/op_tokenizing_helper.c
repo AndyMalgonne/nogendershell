@@ -3,13 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   op_tokenizing_helper.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 14:50:20 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/27 20:16:14 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/30 14:20:30 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "tokens.h"
+#include "parsing.h"
 #include "minishell.h"
 
 t_token	*tokenize_rdin(char **rl)

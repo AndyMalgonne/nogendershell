@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/07 12:22:59 by andytropmim      ###   ########.fr       */
+/*   Updated: 2025/01/30 14:22:32 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 // 	if (!cmd)
 // 		return (false);
 // 	if (!ft_strcmp("echo", cmd) || !ft_strcmp("cd", cmd)
-// 	|| !ft_strcmp("pwd", cmd) || !ft_strcmp("export", cmd) \
-// 	|| !ft_strcmp("unset", cmd) || !ft_strcmp("env", cmd) \
+// 	|| !ft_strcmp("pwd", cmd) || !ft_strcmp("export", cmd)
+// 	|| !ft_strcmp("unset", cmd) || !ft_strcmp("env", cmd)
 // 	|| !ft_strcmp("exit", cmd))
 // 		return (true);
 // 	return (false);

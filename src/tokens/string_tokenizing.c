@@ -6,11 +6,12 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:33:45 by gmoulin           #+#    #+#             */
-/*   Updated: 2024/11/28 17:23:06 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/30 16:19:59 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "tokens.h"
 
 int	tokenize_s_quote(char **rl, t_token **head)
 {
@@ -19,7 +20,7 @@ int	tokenize_s_quote(char **rl, t_token **head)
 
 	start = *rl;
 	(*rl)++;
-	while (**rl && !is_s_quote(**rl))
+	while (**rl && **rl != '\'')
 		(*rl)++;
 	if (**rl == '\'')
 		(*rl)++;
@@ -37,7 +38,7 @@ int	tokenize_d_quote(char **rl, t_token **head)
 
 	start = *rl;
 	(*rl)++;
-	while (**rl && !is_d_quote(**rl))
+	while (**rl && **rl != '\"')
 		(*rl)++;
 	if (**rl == '\"')
 		(*rl)++;
@@ -50,9 +51,9 @@ int	tokenize_d_quote(char **rl, t_token **head)
 
 int	string_tokenizing(char **rl, t_token **head)
 {
-	if (is_s_quote(**rl))
+	if (**rl == '\'')
 		return (tokenize_s_quote(rl, head));
-	else if (is_d_quote(**rl))
+	else if (**rl == '\"')
 		return (tokenize_d_quote(rl, head));
 	return (0);
 }

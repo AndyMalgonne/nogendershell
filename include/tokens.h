@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 14:21:38 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:26:28 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ const char	*tttostr(t_token_type type);
 //token.c
 int			tokenize_else(char **rl, t_token **head);
 t_token		*tokenize(char *input);
+
+int			parse_input(char *user_input, t_tree **tree, t_env *env);
 
 #endif

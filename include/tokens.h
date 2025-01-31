@@ -22,8 +22,6 @@ typedef enum s_token_type
 	PIPE,
 	REDIR_IN,
 	REDIR_OUT,
-	REDIR_APPEND,
-	REDIR_HEREDOC,
 	STRING_SQ,
 	STRING_DQ,
 	WORD,

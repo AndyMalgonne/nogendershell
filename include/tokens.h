@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 14:26:28 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:53:02 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ t_token		*new_token(t_token_type type, const char *value);
 void		append_token(t_token **head, t_token *new_token);
 void		free_token(t_token *token);
 void		free_token_list(t_token **head);
+
+//token_utils2.c
+void		print_token_list(t_token *head);
 const char	*tttostr(t_token_type type);
-//void		print_token_list(t_token *head);
 
 //token.c
 int			tokenize_else(char **rl, t_token **head);

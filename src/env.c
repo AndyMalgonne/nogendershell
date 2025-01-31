@@ -6,11 +6,34 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:27:14 by abasdere          #+#    #+#             */
-/*   Updated: 2025/01/30 13:42:25 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:57:00 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	split_env(const char *env_str, char **key, char **value)
+{
+	char	*equal_sign;
+	size_t	index;
+	size_t	len;
+
+	equal_sign = ft_strchr(env_str, '=');
+	len = ft_strlen(env_str);
+	index = len;
+	if (equal_sign != NULL)
+		index = equal_sign - env_str;
+	*key = ft_substr(env_str, 0, index);
+	if (*key == NULL)
+		return (0);
+	if (equal_sign)
+	{
+		*value = ft_substr(env_str, index + 1, len - (index + 1));
+		if (*value == NULL)
+			return (free_to_null(key), 0);
+	}
+	return (1);
+}
 
 int	create_env(t_env **env, char **envp)
 {
@@ -25,10 +48,11 @@ int	create_env(t_env **env, char **envp)
 		new_node = ft_calloc(1, sizeof(t_env));
 		if (new_node == NULL)
 			return (ft_putstr_fd(ERR_MALLOC, 2), 0);
-		new_node->value = ft_strdup(envp[i]);
-		if (new_node->value == NULL)
-			return (ft_putstr_fd(ERR_MALLOC, 2), 0);
+		new_node->key = NULL;
+		new_node->value = NULL;
 		new_node->next = NULL;
+		if (!split_env(envp[i], &new_node->key, &new_node->value))
+			return (ft_putstr_fd(ERR_MALLOC, 2), 0);
 		*head = new_node;
 		head = &new_node->next;
 	}
@@ -41,7 +65,18 @@ void	free_env(t_env **env)
 		return ;
 	if ((*env)->next)
 		free_env(&(*env)->next);
+	if ((*env)->key)
+		free((*env)->key);
 	if ((*env)->value)
 		free((*env)->value);
 	free(*env);
+}
+
+void	print_env(const t_env *env)
+{
+	while (env)
+	{
+		printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
 }

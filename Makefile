@@ -63,7 +63,6 @@ define SRC 	:=
 	$(addprefix $(PARSING_DIR)/, \
 		checks.c \
 		is_checks.c \
-		quotes_checks.c \
 	)
 	$(addprefix $(EXEC_DIR)/, \
 		builtin.c \
@@ -72,19 +71,18 @@ define SRC 	:=
 		here_doc_utils.c \
 		path.c
 	)
+	$(addprefix $(TOKENS_DIR)/, \
+		op_tokenizing.c \
+		string_tokenizing.c \
+		token_utils.c \
+		token.c \
+	)
 	main.c
 	env.c
 	utils.c
 	prompt.c
 endef
 
-# $(addprefix $(TOKENS_DIR)/, \
-# 	op_tokenizing_helper.c \
-# 	op_tokenizing.c \
-# 	string_tokenizing.c \
-# 	token_utils.c \
-# 	token.c \
-# )
 
 SRC 		:= ${strip ${SRC}}
 OBJS 		:= ${patsubst %.c,${OBJS_DIR}/%.o,${SRC}}

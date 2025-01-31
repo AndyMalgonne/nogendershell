@@ -72,9 +72,7 @@ define SRC 	:=
 		path.c
 	)
 	$(addprefix $(TOKENS_DIR)/, \
-		op_tokenizing.c \
 		parse_input.c \
-		string_tokenizing.c \
 		token_utils.c \
 		token_utils2.c \
 		token.c \

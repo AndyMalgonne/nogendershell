@@ -75,7 +75,7 @@ define SRC 	:=
 		parse_input.c \
 		token_utils.c \
 		token_utils2.c \
-		token.c \
+		tokenize.c \
 	)
 	main.c
 	env.c

@@ -145,4 +145,11 @@ format:
 		c_formatter_42 $(INCLD_DIR)/$$file; \
 	done
 
-.PHONY: all clean fclean re cleanlib fcleanlib relib norm watch format
+### RUN ###
+run: $(NAME)
+	./$(NAME)
+
+test: $(NAME) $(IGNORE_RDLN)
+	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --suppressions=$(IGNORE_RDLN) ./$(NAME)
+
+.PHONY: all clean fclean re cleanlib fcleanlib relib norm watch format run test

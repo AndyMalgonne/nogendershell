@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   tokens.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 14:03:36 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/31 14:21:38 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKENS_H
 # define TOKENS_H
 
-# include "minishell.h"
+# include "data_struct.h"
 
 # define CHAR_ERROR "`(){}[];!\\*"
 

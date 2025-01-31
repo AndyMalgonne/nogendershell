@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:00:00 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 13:44:52 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/31 14:20:27 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
 #include "minishell.h"
 
 int	check_open_quotes(const char *rl)

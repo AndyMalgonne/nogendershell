@@ -6,13 +6,13 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:14:54 by abasdere          #+#    #+#             */
-/*   Updated: 2025/01/31 15:53:27 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:04:00 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	parse_input(char *user_input, t_tree **tree, t_env *env)
+int	parse_input(char *user_input, t_tree **tree, const t_env *env)
 {
 	t_token *tokens	__attribute__((cleanup(free_token_list)));
 

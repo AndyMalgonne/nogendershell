@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:16:43 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 15:45:50 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:04:15 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ const char	*tttostr(t_token_type type);
 //tokenize.c
 int			tokenize(char *input, t_token **head);
 
-int			parse_input(char *user_input, t_tree **tree, t_env *env);
+int			parse_input(char *user_input, t_tree **tree, const t_env *env);
 
 #endif

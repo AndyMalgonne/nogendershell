@@ -31,7 +31,6 @@ INCLD_DIR 	:= include
 OBJS_DIR 	:= objs
 BUILTIN_DIR	:= builtin
 PARSING_DIR	:= parsing
-TOKENS_DIR	:= tokens
 EXEC_DIR	:= exec
 
 
@@ -60,10 +59,6 @@ define SRC 	:=
 		env.c \
 		unset.c
 	)
-	$(addprefix $(PARSING_DIR)/, \
-		checks.c \
-		is_checks.c \
-	)
 	$(addprefix $(EXEC_DIR)/, \
 		builtin.c \
 		exec.c \
@@ -71,11 +66,13 @@ define SRC 	:=
 		here_doc_utils.c \
 		path.c
 	)
-	$(addprefix $(TOKENS_DIR)/, \
+	$(addprefix $(PARSING_DIR)/, \
+		checks.c \
+		is_checks.c \
 		parse_input.c \
 		token_utils.c \
 		token_utils2.c \
-		tokenize.c \
+		tokenize.c
 	)
 	main.c
 	env.c
@@ -102,7 +99,6 @@ ${OBJS_DIR}/%.o: ${SRC_DIR}/%.c
 	@mkdir -p ${OBJS_DIR}
 	@mkdir -p ${OBJS_DIR}/$(BUILTIN_DIR)
 	@mkdir -p ${OBJS_DIR}/$(PARSING_DIR)
-	@mkdir -p ${OBJS_DIR}/$(TOKENS_DIR)
 	@mkdir -p ${OBJS_DIR}/$(EXEC_DIR)
 	@${CC} ${DEP_FLAGS} ${CFLAGS} ${INCLD_FLAG} -c $< -o $@
 

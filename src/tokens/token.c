@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 14:21:59 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:53:18 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ t_token	*tokenize(char *input)
 
 	head = NULL;
 	rl = input;
-	if (check_open_quotes(rl) == 1)
-		return (NULL);
 	while (*rl)
 	{
 		while (is_space_tab(*rl))

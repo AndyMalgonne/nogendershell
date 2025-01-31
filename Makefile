@@ -78,6 +78,7 @@ define SRC 	:=
 	env.c
 	utils.c
 	prompt.c
+	var.c
 endef
 
 

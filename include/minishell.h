@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/31 13:52:57 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:07:20 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define MINISHELL_H
 
 # include "libft.h"
+# include "data_struct.h"
+# include "parsing.h"
+# include "exec.h"
+
 # include <curses.h>
 # include <termios.h>
 # include <sys/ioctl.h>
@@ -32,34 +36,6 @@
 
 # define PROMPT "> "
 # define ERR_MALLOC "Malloc error"
-
-typedef enum e_iotype
-{
-	INFILE,
-	HEREDOC,
-	OUTFILE_TRUNC,
-	OUTFILE_APPEND,
-}					t_iotype;
-
-typedef struct s_env
-{
-	char			*value;
-	struct s_env	*next;
-}					t_env;
-
-typedef struct s_iofile
-{
-	t_iotype		type;
-	char			*value;
-	struct s_iofile	*next;
-}					t_iofile;
-
-typedef struct s_tree
-{
-	char			**cmd;
-	t_iofile		*io;
-	struct s_tree	*next;
-}					t_tree;
 
 extern int			g_signal;
 

@@ -1,28 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_checks.c                                        :+:      :+:    :+:   */
+/*   data_struct.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 17:00:45 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 14:20:32 by abasdere         ###   ########.fr       */
+/*   Created: 2025/01/31 14:17:26 by abasdere          #+#    #+#             */
+/*   Updated: 2025/01/31 14:18:28 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef DATA_STRUCT_H
+# define DATA_STRUCT_H
 
-int	is_operator(char c)
+typedef enum e_iotype
 {
-	return (c == '<' || c == '>' || c == '|');
-}
+	INFILE,
+	HEREDOC,
+	OUTFILE_TRUNC,
+	OUTFILE_APPEND,
+}					t_iotype;
 
-int	is_space_tab(char c)
+typedef struct s_env
 {
-	return (c == ' ' || c == '\t');
-}
+	char			*value;
+	struct s_env	*next;
+}					t_env;
 
-int	is_quotes(char c)
+typedef struct s_iofile
 {
-	return (c == '\'' || c == '\"');
-}
+	t_iotype		type;
+	char			*value;
+	struct s_iofile	*next;
+}					t_iofile;
+
+typedef struct s_tree
+{
+	char			**cmd;
+	t_iofile		*io;
+	struct s_tree	*next;
+}					t_tree;
+
+#endif

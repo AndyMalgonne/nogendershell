@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:17:26 by abasdere          #+#    #+#             */
-/*   Updated: 2025/01/31 14:18:28 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:38:21 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,16 @@ typedef enum e_iotype
 
 typedef struct s_env
 {
+	char			*key;
 	char			*value;
 	struct s_env	*next;
 }					t_env;
+
+typedef struct s_var
+{
+	t_env			*env;
+	int				code;
+}					t_var;
 
 typedef struct s_iofile
 {

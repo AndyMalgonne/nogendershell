@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 16:11:34 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/01/31 16:36:58 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ const char	*tttostr(t_token_type type);
 //tokenize.c
 int			tokenize(char *input, t_token **head);
 
-int			parse_input(char *user_input, t_tree **tree, const t_env *env);
+int			parse_input(char *user_input, t_tree **tree, t_var *var);
 
 //checks.c
 int			check_open_quotes(const char *rl);

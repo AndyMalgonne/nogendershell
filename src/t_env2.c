@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 09:09:53 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/03 09:13:12 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/03 09:29:04 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	*get_env_value(t_env *env, const char *key)
 
 char	**get_path_from_env(t_env *env)
 {
-	char	*path_value;
-	char	**paths;
+	const char	*path_value;
+	char		**paths;
 
 	path_value = get_env_value(env, "PATH");
 	if (!path_value)

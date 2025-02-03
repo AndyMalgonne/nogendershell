@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   t_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:27:14 by abasdere          #+#    #+#             */
-/*   Updated: 2025/01/31 18:57:00 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:28:48 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static int	split_env(const char *env_str, char **key, char **value)
 {
-	char	*equal_sign;
-	size_t	index;
-	size_t	len;
+	const char	*equal_sign;
+	size_t		index;
+	size_t		len;
 
 	equal_sign = ft_strchr(env_str, '=');
 	len = ft_strlen(env_str);

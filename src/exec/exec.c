@@ -6,30 +6,25 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/30 15:32:09 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/03 09:13:01 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_command(t_tree *tree)
+static bool	exec_cmd(t_tree *tree)
 {
 	pid_t	pid;
 
 	pid = fork();
-	if (pid == -1)
+	if (pid < 0)
+		(perror("fork"), exit(EXIT_FAILURE));
+	else if (pid == 0)
 	{
-		perror("fork");
-		exit(EXIT_FAILURE);
-	}
-	if (pid == 0)
-	{
-		execve(tree->cmd[0], tree->cmd, NULL);
-		perror("execvp");
-		exit(EXIT_FAILURE);
+		if (tree->cmd && tree->cmd[0])
+			child_process(tree);
 	}
 	else
-	{
-		wait(NULL);
-	}
+		parent_process(tree);
+	return (true);
 }

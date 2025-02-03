@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/03 09:25:29 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/03 09:29:16 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	exec_command(t_tree *tree)
 {
 	pid_t	pid;
-	
+
 	pid = fork();
 	if (pid == -1)
 	{

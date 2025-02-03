@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   t_env2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/03 09:13:01 by andymalgonn      ###   ########.fr       */
+/*   Created: 2025/02/03 09:09:53 by andymalgonn       #+#    #+#             */
+/*   Updated: 2025/02/03 09:13:12 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	exec_cmd(t_tree *tree)
+char	*get_env_value(t_env *env, const char *key)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid < 0)
-		(perror("fork"), exit(EXIT_FAILURE));
-	else if (pid == 0)
+	while (env)
 	{
-		if (tree->cmd && tree->cmd[0])
-			child_process(tree);
+		if (ft_strcmp(env->key, key) == 0)
+			return (env->value);
+		env = env->next;
 	}
-	else
-		parent_process(tree);
-	return (true);
+	return (NULL);
+}
+
+char	**get_path_from_env(t_env *env)
+{
+	char	*path_value;
+	char	**paths;
+
+	path_value = get_env_value(env, "PATH");
+	if (!path_value)
+		return (NULL);
+	paths = ft_split(path_value, ':');
+	if (!paths)
+		return (NULL);
+	return (paths);
 }

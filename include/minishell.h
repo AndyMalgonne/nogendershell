@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 12:48:10 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/04 13:31:29 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ void	cleanup_user_input(char **user_input);
 void	set_up_var(t_var *var);
 void	free_var(t_var *var);
 int		set_and_return_code(t_var *var, int code);
+
+// t_env
+char	*get_env_value(t_env *env, const char *key);
+char	**get_path_from_env(t_env *env, int *error);
 
 // utils.c
 void	*free_to_null(void *p);

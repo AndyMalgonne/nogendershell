@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 10:38:35 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/04 10:51:45 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int		bi_unset(char **str, t_env **env);
 
 // Exec functions
 void	minishell_exec(t_tree *cmd, t_var *var);
-int		exec_cmd(t_tree *cmd, int *pip, t_var *var);
+int		exec_cmd(t_tree *cmd, const int *pip, t_var *var);
+
 
 // Here_doc functions
 char	*find_heredoc_file(void);

@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 10:48:56 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/04 10:51:33 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	io_files(t_iofile *io)
 	return (0);
 }
 
-int	exec_cmd(t_tree *cmd, int *pip, t_var *var)
+int	exec_cmd(t_tree *cmd, const int *pip, t_var *var)
 {
 	char	*path;
 

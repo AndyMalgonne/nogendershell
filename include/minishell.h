@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 11:26:42 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:13:05 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,22 @@
 
 extern int			g_signal;
 
-void	*free_to_null(void *p);
 int		create_env(t_env **env, char **envp);
 void	free_env(t_env **env);
 void	print_env(const t_env *env);
-char	*get_env_value(t_env *env, const char *key);
-char	**get_path_from_env(t_env *env);
 int		get_input(char **user_input);
 void	cleanup_user_input(char **user_input);
 void	set_up_var(t_var *var);
 void	free_var(t_var *var);
 int		set_and_return_code(t_var *var, int code);
+
+// t_env
+char	*get_env_value(t_env *env, const char *key);
+char	**get_path_from_env(t_env *env, int *error);
+
+// utils.c
+void	*free_to_null(void *p);
+int		mclose(int *fd);
+int		error(t_var *var, const char *msg, int code);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/04 13:42:32 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/04 13:58:49 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 	key = ft_substr(token_value, i + 1, j - (i + 1));
 	if (!key)
 		return (NULL);
-	printf("Key: %s\n", key); // Debug print
 	env_value = get_env_value(env, key);
-	printf("Env value: %s\n", env_value); // Debug print
 	(free(key), tmp = ft_strndup(token_value, i));
 	if (!env_value)
 		key = ft_strdup(tmp);
@@ -58,7 +56,7 @@ int	expand(t_token *tokens, t_env *env)
 				{
 					tokens->value = replace_env_value(tokens->value, env, i);
 					if (!tokens->value)
-						return 0;
+						return (0);
 					i = 0;
 				}
 				else
@@ -67,5 +65,5 @@ int	expand(t_token *tokens, t_env *env)
 		}
 		tokens = tokens->next;
 	}
-	return 1;
+	return (1);
 }

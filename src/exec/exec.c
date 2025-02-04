@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 10:37:17 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/04 10:44:18 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,7 @@ void	minishell_exec(t_tree *cmd, t_var *var)
 
 	while (cmd)
 	{
-		if (cmd->next)
-			if (pipe(pip) == -1)
+		if (cmd->next && pipe(pip) == -1)
 				return (perror("pipe failed"));
 		pid = fork();
 		if (pid < 0)
@@ -74,8 +73,8 @@ void	minishell_exec(t_tree *cmd, t_var *var)
 				close(pip[0]);
 			exec_cmd(cmd, pip, var);
 		}
-		close(pip[1]);
-		close(pip[0]);
+		if (cmd->next)
+			(close(pip[1]), close(pip[0]));
 		cmd = cmd->next;
 	}
 }

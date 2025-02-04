@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/04 13:58:49 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/04 14:58:25 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,15 @@ static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 		return (NULL);
 	env_value = get_env_value(env, key);
 	(free(key), tmp = ft_strndup(token_value, i));
+	if (!tmp)
+		return (NULL);
 	if (!env_value)
 		key = ft_strdup(tmp);
 	else
 		key = ft_strjoin(tmp, env_value);
-	free(tmp);
 	if (!key)
-		return (NULL);
-	tmp = ft_strjoin(key, &token_value[j]);
-	if (!tmp)
-		return (free(key), NULL);
+		return (free(tmp), NULL);
+	(free(tmp), tmp = ft_strjoin(key, &token_value[j]));
 	return (free(key), free(token_value), tmp);
 }
 

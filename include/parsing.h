@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 16:36:58 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:26:39 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ int			check_open_quotes(const char *rl);
 int			is_operator(char c);
 int			is_space_tab(char c);
 int			is_quotes(char c);
+
+//expand.c
+int	expand(t_token *tokens, t_env *env);
 
 #endif

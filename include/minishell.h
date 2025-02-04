@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 13:31:29 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/04 13:50:08 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ char	**get_path_from_env(t_env *env, int *error);
 // utils.c
 void	*free_to_null(void *p);
 int		mclose(int *fd);
-int		error(t_var *var, char *msg, int code);
+int	error(t_var *var, const char *msg, int code);
 
 #endif

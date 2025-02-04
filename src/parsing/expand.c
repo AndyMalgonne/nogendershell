@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/04 14:58:25 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:02:20 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 {
-	size_t	j;
-	char	*env_value;
-	char	*tmp;
-	char	*key;
+	size_t		j;
+	const char	*env_value;
+	char		*tmp;
+	char		*key;
 
 	j = i + 1;
 	while (token_value[j] && !is_space_tab(token_value[j])

@@ -21,7 +21,7 @@ int	parse_input(char *user_input, t_tree **tree, t_var *var)
 	tokens = NULL;
 	if (!check_open_quotes(user_input))
 		return (1);
-	if (!tokenize(user_input, &tokens))
+	if (!tokenize(user_input, &tokens) && set_and_return_code(var, 1))
 		return (0);
 	print_token_list(tokens);
 	return (1);

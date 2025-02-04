@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:02:20 by abasdere          #+#    #+#             */
-/*   Updated: 2025/01/29 09:51:39 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:48:01 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,23 @@ void	*free_to_null(void *p)
 	free(*ptr);
 	*ptr = NULL;
 	return (*ptr);
+}
+
+int	mclose(int *fd)
+{
+	if (*fd != -1)
+	{
+		close(*fd);
+		*fd = -1;
+	}
+	return (1);
+}
+
+int error(t_var *var, char *msg, int code)
+{
+	if (msg)
+		perror(msg);
+	if (var)
+		var->code = code;
+	return (0);
 }

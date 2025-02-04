@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/31 18:56:56 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:48:10 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@
 
 extern int			g_signal;
 
-void	*free_to_null(void *p);
 int		create_env(t_env **env, char **envp);
 void	free_env(t_env **env);
 void	print_env(const t_env *env);
@@ -48,5 +47,10 @@ void	cleanup_user_input(char **user_input);
 void	set_up_var(t_var *var);
 void	free_var(t_var *var);
 int		set_and_return_code(t_var *var, int code);
+
+// utils.c
+void	*free_to_null(void *p);
+int		mclose(int *fd);
+int		error(t_var *var, char *msg, int code);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 10:51:33 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/04 13:04:10 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	io_files(t_iofile *io)
 	outfd = 0;
 	while (io)
 	{
-		if (io->type == INFILE)
+		if (io->type == INFILE && mclose(&infd))
 			infd = open(io->value, O_RDONLY);
-		if (io->type == OUTFILE_APPEND)
+		if (io->type == OUTFILE_APPEND && mclose(&outfd))
 			outfd = open(io->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (io->type == OUTFILE_TRUNC)
+		if (io->type == OUTFILE_TRUNC && mclose(&outfd))
 			outfd = open(io->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		if (infd < 0 || outfd < 0)
 			return (perror(io->value), -1);
@@ -38,12 +38,10 @@ int	io_files(t_iofile *io)
 
 int	exec_cmd(t_tree *cmd, const int *pip, t_var *var)
 {
-	char	*path;
-
-	path = "/bin/ls";
-	cmd->cmd[0] = path;
+	char **path = get_path_from_env(var->env);
+	
 	if (io_files(cmd->io) < 0)
-		return (set_and_return_code(var, 1));
+		return (error(var, NULL, 1));
 	if (cmd->next)
 	{
 		dup2(pip[1], STDOUT_FILENO);
@@ -55,7 +53,7 @@ int	exec_cmd(t_tree *cmd, const int *pip, t_var *var)
 	return (0);
 }
 
-void	minishell_exec(t_tree *cmd, t_var *var)
+int	minishell_exec(t_tree *cmd, t_var *var)
 {
 	int		pip[2];
 	pid_t	pid;
@@ -63,10 +61,10 @@ void	minishell_exec(t_tree *cmd, t_var *var)
 	while (cmd)
 	{
 		if (cmd->next && pipe(pip) == -1)
-			return (perror("pipe failed"));
+			return (error(var, "pipe failed", 1));
 		pid = fork();
 		if (pid < 0)
-			return (perror("fork failed"));
+			return (error(var, "fork failed", 1));
 		if (pid == 0)
 		{
 			if (cmd->next)
@@ -77,4 +75,5 @@ void	minishell_exec(t_tree *cmd, t_var *var)
 			(close(pip[1]), close(pip[0]));
 		cmd = cmd->next;
 	}
+	return (1);
 }

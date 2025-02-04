@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 15:56:20 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/04 15:00:30 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	op_tokenizing(char **rl, t_token **head)
 	else if (**rl == '|')
 		n_token = new_token(PIPE, "|");
 	if (!n_token)
-		return (ft_putstr_fd(ERR_MALLOC, 2), 0);
+		return (0);
 	append_token(head, n_token);
 	(*rl)++;
 	return (1);

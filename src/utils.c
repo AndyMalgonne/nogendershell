@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:02:20 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/04 13:19:20 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/04 13:46:00 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	mclose(int *fd)
 	return (1);
 }
 
-int	error(t_var *var, char *msg, int code)
+int	error(t_var *var, const char *msg, int code)
 {
 	if (msg)
 		perror(msg);

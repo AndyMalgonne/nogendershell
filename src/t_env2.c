@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 09:09:53 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 13:37:14 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/06 08:14:49 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ char	**get_path_from_env(t_env *env, int *error)
 	path_value = get_env_value(env, "PATH");
 	if (!path_value)
 	{
-		*error = 0;
+		*error = 1;
 		return (NULL);
 	}
 	paths = ft_split(path_value, ':');
 	if (!paths)
 	{
-		*error = 1;
+		*error = 2;
 		return (NULL);
 	}
+	*error = 0;
 	return (paths);
 }

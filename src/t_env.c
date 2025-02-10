@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:27:14 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/03 09:28:48 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/10 14:29:34 by andytropmim      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

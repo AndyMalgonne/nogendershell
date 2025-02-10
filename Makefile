@@ -76,7 +76,6 @@ define SRC 	:=
 	)
 	main.c
 	t_env.c
-	t_env2.c
 	utils.c
 	prompt.c
 	var.c

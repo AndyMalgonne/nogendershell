@@ -6,7 +6,7 @@
 /*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/10 10:07:50 by andytropmim      ###   ########.fr       */
+/*   Updated: 2025/02/10 14:31:54 by andytropmim      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,16 @@ char	*check_file_in_path(char **path, const char *cmd)
 {
 	int		i;
 	char	*file_path;
+	char	*full_cmd;
 
 	i = 0;
-	while (path != NULL)
+	while (path && path[++i])
 	{
-		i++;
-		if (!path[i])
-			break ;
-		file_path = ft_strjoin(path[i], cmd);
+		full_cmd = ft_strjoin("/", cmd);
+		if (!full_cmd)
+			return (NULL);
+		file_path = ft_strjoin(path[i], full_cmd);
+		free(full_cmd);
 		if (!file_path)
 			return (NULL);
 		if (access(file_path, F_OK | X_OK) == 0)
@@ -60,7 +62,6 @@ char	*find_file(char *cmd, t_var *var)
 	char	**paths;
 	int		errorr;
 
-	errorr = 0;
 	cmd = ft_strcut(cmd, ' ');
 	if (!cmd)
 		return (NULL);

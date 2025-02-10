@@ -6,7 +6,7 @@
 /*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/10 14:31:54 by andytropmim      ###   ########.fr       */
+/*   Updated: 2025/02/10 14:38:06 by andytropmim      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*check_file_in_path(char **path, const char *cmd)
 	char	*full_cmd;
 
 	i = 0;
-	while (path && path[++i])
+	while (path && path[i])
 	{
 		full_cmd = ft_strjoin("/", cmd);
 		if (!full_cmd)
@@ -52,6 +52,7 @@ char	*check_file_in_path(char **path, const char *cmd)
 		if (access(file_path, F_OK | X_OK) == 0)
 			return (file_path);
 		free(file_path);
+		i++;
 	}
 	return (NULL);
 }

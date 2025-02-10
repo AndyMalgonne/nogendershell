@@ -38,12 +38,6 @@ int	io_files(t_iofile *io)
 
 int	exec_cmd(t_tree *cmd, const int *pip, t_var *var)
 {
-	char	*path;
-	int		errorr;
-
-	path = get_path_from_env(var->env, &errorr);
-	if (errorr == 2)
-		return (error(var, "Malloc failed", 1));
 	if (io_files(cmd->io) < 0)
 		return (error(var, NULL, 1));
 	if (cmd->next)

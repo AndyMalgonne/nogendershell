@@ -6,7 +6,7 @@
 /*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 13:33:36 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/10 09:33:15 by andymalgonn      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ int	io_files(t_iofile *io)
 
 int	exec_cmd(t_tree *cmd, const int *pip, t_var *var)
 {
+	char	*path;
+	int		errorr;
+
+	path = get_path_from_env(var->env, &errorr);
+	if (errorr == 2)
+		return (error(var, "Malloc failed", 1));
 	if (io_files(cmd->io) < 0)
 		return (error(var, NULL, 1));
 	if (cmd->next)

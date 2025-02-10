@@ -6,13 +6,13 @@
 /*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 09:57:45 by andytropmim       #+#    #+#             */
-/*   Updated: 2025/02/10 09:57:58 by andytropmim      ###   ########.fr       */
+/*   Updated: 2025/02/10 14:36:33 by andytropmim      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcut(char *str, char stop)
+char	*ft_strcut(const char *str, char stop)
 {
 	size_t	i;
 

@@ -77,6 +77,7 @@ define SRC 	:=
 	)
 	main.c
 	t_env.c
+	t_iofile.c
 	t_tree_utils.c
 	t_tree.c
 	utils.c

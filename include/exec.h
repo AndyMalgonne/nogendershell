@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 13:28:10 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/10 10:08:40 by andytropmim      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int		bi_unset(char **str, t_env **env);
 // Exec functions
 int		minishell_exec(t_tree *cmd, t_var *var);
 int		exec_cmd(t_tree *cmd, const int *pip, t_var *var);
+
+// Path functions
+char	*find_file(char *cmd, t_var *var);
 
 // Here_doc functions
 char	*find_heredoc_file(void);

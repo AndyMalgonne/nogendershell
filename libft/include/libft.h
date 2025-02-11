@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 12:31:23 by amalgonn          #+#    #+#             */
-/*   Updated: 2024/10/31 19:25:47 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/10 14:37:03 by andytropmim      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	**ft_fsplit(char **split);
 void	ft_ftab(char **tab);
+char	*ft_strcut(const char *str, char stop);
 
 #endif

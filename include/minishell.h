@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/04 14:13:05 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/10 10:30:49 by andytropmim      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # include "data_struct.h"
 # include "parsing.h"
 # include "exec.h"
-
-# include <curses.h>
+# include <stdbool.h>
 # include <termios.h>
 # include <sys/ioctl.h>
 # include <sys/types.h>

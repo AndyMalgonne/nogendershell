@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/04 15:00:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/11 21:13:41 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ static int	op_tokenizing(char **rl, t_token **head)
 
 	n_token = NULL;
 	if (**rl == '>')
-		n_token = new_token(REDIR_IN, ">");
+		n_token = new_token(REDIR_IN, NULL);
 	else if (**rl == '<')
-		n_token = new_token(REDIR_OUT, "<");
+		n_token = new_token(REDIR_OUT, NULL);
 	else if (**rl == '|')
-		n_token = new_token(PIPE, "|");
+		n_token = new_token(PIPE, NULL);
 	if (!n_token)
 		return (0);
 	append_token(head, n_token);

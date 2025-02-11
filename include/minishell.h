@@ -52,6 +52,14 @@ int		set_and_return_code(t_var *var, int code);
 char	*get_env_value(t_env *env, const char *key);
 char	**get_path_from_env(t_env *env, int *error);
 
+//t_tree_utils
+void		print_tree(t_tree *tree);
+void		free_tree(t_tree **tree);
+
+//t_tree
+int			create_tree(t_tree **tree, t_token *tokens);
+void		free_iofile(t_iofile **io);
+
 // utils.c
 void	*free_to_null(void *p);
 int		mclose(int *fd);

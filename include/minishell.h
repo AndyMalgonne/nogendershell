@@ -35,6 +35,7 @@
 
 # define PROMPT "> "
 # define ERR_MALLOC "Malloc error"
+# define ERR_SYNTAX "Syntax error"
 
 extern int			g_signal;
 

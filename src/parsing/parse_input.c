@@ -56,5 +56,7 @@ int	parse_input(char *user_input, t_tree **tree, t_var *var)
 		return (error(var, ERR_MALLOC, 1));
 	if (!check_tokens(tokens))
 		return (error(var, ERR_SYNTAX, 1), 1);
+	if (!create_tree(tree, tokens))
+		return (error(var, ERR_MALLOC, 1));
 	return (1);
 }

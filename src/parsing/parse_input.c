@@ -12,11 +12,6 @@
 
 #include "minishell.h"
 
-static bool	is_word(t_token_type type)
-{
-	return (type == WORD || type == STRING_SQ || type == STRING_DQ);
-}
-
 static int	check_tokens(t_token *tokens)
 {
 	while (tokens)

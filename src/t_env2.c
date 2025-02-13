@@ -6,11 +6,18 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 12:43:14 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/13 12:45:40 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/13 12:49:37 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	free_env_array(char **env_array, int size)
+{
+	while (size > 0)
+		free(env_array[--size]);
+	free(env_array);
+}
 
 static char	**convert_env_to_array(t_env *env, char **env_array, int *size)
 {
@@ -29,13 +36,6 @@ static char	**convert_env_to_array(t_env *env, char **env_array, int *size)
 		env = env->next;
 	}
 	return (env_array);
-}
-
-static void	free_env_array(char **env_array, int size)
-{
-	while (size > 0)
-		free(env_array[--size]);
-	free(env_array);
 }
 
 char	**linked_list_to_array(t_env *env)

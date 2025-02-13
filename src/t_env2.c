@@ -6,18 +6,11 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 12:43:14 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/13 12:50:43 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:39:09 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	free_env_array(char **env_array, int size)
-{
-	while (size > 0)
-		free(env_array[--size]);
-	free(env_array);
-}
 
 static char	**convert_env_to_array(t_env *env, char **env_array, int *size)
 {
@@ -27,11 +20,11 @@ static char	**convert_env_to_array(t_env *env, char **env_array, int *size)
 	{
 		temp = ft_strjoin(env->key, "=");
 		if (!temp)
-			return (free_env_array(env_array, *size), NULL);
+			return (ft_fsplit(env_array), NULL);
 		env_array[*size] = ft_strjoin(temp, env->value);
 		free(temp);
 		if (!env_array[*size])
-			return (free_env_array(env_array, *size), NULL);
+			return (ft_fsplit(env_array), NULL);
 		(*size)++;
 		env = env->next;
 	}
@@ -51,7 +44,7 @@ char	**linked_list_to_array(t_env *env)
 		i++;
 		tmp = tmp->next;
 	}
-	env_array = malloc((i + 1) * sizeof(char *));
+	env_array = ft_calloc(i + 1, sizeof(char *));
 	if (!env_array)
 		return (NULL);
 	i = 0;

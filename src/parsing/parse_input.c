@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:14:54 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/13 14:50:11 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:53:02 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static int	check_tokens(t_token *tokens)
 			else if (!tokens->next || !is_word(tokens->next->type))
 				return (0);
 		}
-		else if (tokens->type == PIPE && (!tokens->next
-			|| !tokens->prev || !is_word(tokens->prev->type)))
-				return (0);
+		else if (tokens->type == PIPE && (!tokens->next \
+		|| !tokens->prev || !is_word(tokens->prev->type)))
+			return (0);
 		tokens = tokens->next;
 	}
 	return (1);

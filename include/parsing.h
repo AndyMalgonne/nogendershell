@@ -6,12 +6,14 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/04 13:59:11 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/11 20:14:34 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
+
+# include <stdbool.h>
 
 # include "data_struct.h"
 
@@ -44,6 +46,7 @@ void		free_token_list(t_token **head);
 //token_utils2.c
 void		print_token_list(t_token *head);
 const char	*tttostr(t_token_type type);
+bool		is_word(t_token_type type);
 
 //tokenize.c
 int			tokenize(char *input, t_token **head);

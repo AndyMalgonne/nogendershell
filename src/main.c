@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/31 18:57:35 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/11 21:48:42 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av __attribute__((unused)), char **envp)
 {
 	t_var var			__attribute__((cleanup(free_var)));
 	char *user_input	__attribute__((cleanup(cleanup_user_input)));
-	t_tree *tree		__attribute__((cleanup(free_to_null)));
+	t_tree *tree		__attribute__((cleanup(free_tree)));
 
 	set_up_var(&var);
 	user_input = NULL;
@@ -33,6 +33,7 @@ int	main(int ac, char **av __attribute__((unused)), char **envp)
 	{
 		if (!parse_input(user_input, &tree, &var))
 			break ;
+		free_tree(&tree);
 	}
 	return (var.code);
 }

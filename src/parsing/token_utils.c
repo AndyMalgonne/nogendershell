@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/01/31 15:11:44 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/11 21:18:26 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@ t_token	*new_token(t_token_type type, const char *value)
 	if (!token)
 		return (NULL);
 	token->type = type;
-	token->value = ft_strdup(value);
-	if (!token->value)
-		return (free(token), NULL);
+	token->value = NULL;
+	if (value)
+	{
+		token->value = ft_strdup(value);
+		if (!token->value)
+			return (free(token), NULL);
+	}
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);

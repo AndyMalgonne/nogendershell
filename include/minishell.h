@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/13 14:45:54 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:47:22 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ void		free_tree(t_tree **tree);
 //t_tree
 int			create_tree(t_tree **tree, t_token *tokens);
 
-char	*get_env_value(t_env *env, const char *key);
-char	**get_path_from_env(t_env *env, int *error);
-char	**linked_list_to_array(t_env *env);
+char		*get_env_value(t_env *env, const char *key);
+char		**get_path_from_env(t_env *env, int *error);
+char		**linked_list_to_array(t_env *env);
 
 // utils.c
 void		*free_to_null(void *p);

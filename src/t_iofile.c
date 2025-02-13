@@ -6,13 +6,13 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 19:34:28 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/11 21:39:25 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:44:05 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_iofile	*new_iofile(t_iotype type, char *value)
+t_iofile	*new_iofile(t_iotype type, const char *value)
 {
 	t_iofile	*io;
 

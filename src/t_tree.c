@@ -6,13 +6,13 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 19:11:39 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/13 14:29:25 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:43:58 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	handle_word_token(t_tree *new, t_token *tokens)
+static int	handle_word_token(t_tree *new, const t_token *tokens)
 {
 	size_t	i;
 

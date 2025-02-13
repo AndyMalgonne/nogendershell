@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/13 14:39:25 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:45:54 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ char		*get_env_value(t_env *env, const char *key);
 char		**get_path_from_env(t_env *env, int *error);
 
 //t_iofile
-t_iofile	*new_iofile(t_iotype type, char *value);
+t_iofile	*new_iofile(t_iotype type, const char *value);
 void		append_iofile(t_iofile **head, t_iofile *new);
 const char	*iottostr(t_iotype type);
+void		free_iofile(t_iofile **io);
 
 //t_tree_utils
 size_t		token_word_count(t_token *tokens);
@@ -66,7 +67,7 @@ void		free_tree(t_tree **tree);
 
 //t_tree
 int			create_tree(t_tree **tree, t_token *tokens);
-void		free_iofile(t_iofile **io);
+
 char	*get_env_value(t_env *env, const char *key);
 char	**get_path_from_env(t_env *env, int *error);
 char	**linked_list_to_array(t_env *env);

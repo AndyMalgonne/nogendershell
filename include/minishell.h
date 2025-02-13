@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/10 10:30:49 by andytropmim      ###   ########.fr       */
+/*   Updated: 2025/02/13 12:44:31 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int		set_and_return_code(t_var *var, int code);
 // t_env
 char	*get_env_value(t_env *env, const char *key);
 char	**get_path_from_env(t_env *env, int *error);
+char	**linked_list_to_array(t_env *env);
 
 // utils.c
 void	*free_to_null(void *p);

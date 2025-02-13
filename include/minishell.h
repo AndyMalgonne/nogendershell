@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/11 22:00:45 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:26:58 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ void		append_iofile(t_iofile **head, t_iofile *new);
 const char	*iottostr(t_iotype type);
 
 //t_tree_utils
+size_t		token_word_count(t_token *tokens);
+void		append_to_tree(t_tree **head, t_tree *new);
+t_tree		*create_new_tree_node(t_token *tokens);
 void		print_tree(t_tree *tree);
 void		free_tree(t_tree **tree);
 

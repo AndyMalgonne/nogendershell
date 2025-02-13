@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 12:43:14 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/13 12:49:37 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/13 12:50:43 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	**linked_list_to_array(t_env *env)
 	int		i;
 	t_env	*tmp;
 	char	**env_array;
-	char	*temp;
 
 	i = 0;
 	tmp = env;

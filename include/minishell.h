@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/13 14:47:22 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/13 15:45:03 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "data_struct.h"
 # include "parsing.h"
 # include "exec.h"
-# include <stdbool.h>
 # include <termios.h>
 # include <sys/ioctl.h>
 # include <sys/types.h>

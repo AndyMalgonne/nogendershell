@@ -36,8 +36,6 @@
 # define ERR_MALLOC "Malloc error"
 # define ERR_SYNTAX "Syntax error"
 
-extern int			g_signal;
-
 int			create_env(t_env **env, char **envp);
 void		free_env(t_env **env);
 void		print_env(const t_env *env);

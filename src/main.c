@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-int	g_global = 0;
-
 int	main(int ac, char **av __attribute__((unused)), char **envp)
 {
 	t_var var			__attribute__((cleanup(free_var)));

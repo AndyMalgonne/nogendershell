@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/10 09:33:15 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/17 08:04:16 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ int	io_files(t_iofile *io)
 
 int	exec_cmd(t_tree *cmd, const int *pip, t_var *var)
 {
+	char **env_array;
+	char *full_cmd;
+
 	if (io_files(cmd->io) < 0)
 		return (error(var, NULL, 1));
 	if (cmd->next)
@@ -46,7 +49,13 @@ int	exec_cmd(t_tree *cmd, const int *pip, t_var *var)
 		close(pip[0]);
 		close(pip[1]);
 	}
-	execve(cmd->cmd[0], cmd->cmd, NULL);
+	env_array = linked_list_to_array(var->env);
+	if (!env_array)
+        return (error(var, "Malloc failed", 1));
+	full_cmd = find_file(cmd->cmd[0], var);
+	if (!full_cmd)
+		return (error(var, "Command not found", 127));
+	execve(full_cmd, cmd->cmd, env_array);
 	perror("execve failed");
 	return (0);
 }

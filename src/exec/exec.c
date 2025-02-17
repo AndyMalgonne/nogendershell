@@ -6,11 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2025/02/17 17:21:49 by amalgonn         ###   ########.fr       */
-=======
-/*   Updated: 2025/02/17 17:35:00 by amalgonn         ###   ########.fr       */
->>>>>>> dbeee51 (fix sonarclound issue)
+/*   Updated: 2025/02/17 17:40:02 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

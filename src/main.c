@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/17 14:25:29 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/17 19:22:12 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@ void	main_loop(t_var *var, char **user_input, t_tree **tree)
 		if (get_input(user_input) == 0)
 		{
 			if (g_exit_flag)
-			{
-				handle_eof();
-				break ;
-			}
-			else
-				break ;
+				handle_eof();;
+			break ;
 		}
 		if (!parse_input(*user_input, tree, var))
 			break ;

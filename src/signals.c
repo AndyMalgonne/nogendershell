@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:24:10 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/17 12:26:05 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/17 14:22:08 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 int	g_exit_flag = 0;
 
-void	handle_sigint(int sig)
+void	handle_sigint(int sig, siginfo_t *info, void *context)
 {
 	(void)sig;
+	(void)info;
+	(void)context;
 	ft_putstr_fd("\n", STDOUT_FILENO);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
-void	handle_sigquit(int sig)
+void	handle_sigquit(int sig, siginfo_t *info, void *context)
 {
 	(void)sig;
+	(void)info;
+	(void)context;
 }
 
 void	handle_eof(void)
@@ -36,6 +40,15 @@ void	handle_eof(void)
 
 void	setup_signal_handlers(void)
 {
-	signal(SIGINT, handle_sigint);
-	signal(SIGQUIT, handle_sigquit);
+	struct sigaction	sa_int;
+	struct sigaction	sa_quit;
+
+	sa_int.sa_flags = SA_SIGINFO;
+	sa_int.sa_sigaction = handle_sigint;
+	sigemptyset(&sa_int.sa_mask);
+	sigaction(SIGINT, &sa_int, NULL);
+	sa_quit.sa_flags = SA_SIGINFO;
+	sa_quit.sa_sigaction = handle_sigquit;
+	sigemptyset(&sa_quit.sa_mask);
+	sigaction(SIGQUIT, &sa_quit, NULL);
 }

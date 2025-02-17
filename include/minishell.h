@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/17 12:26:45 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/17 14:24:19 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void		set_up_var(t_var *var);
 void		free_var(t_var *var);
 int			set_and_return_code(t_var *var, int code);
 void		setup_signal_handlers(void);
-void		handle_sigint(int sig);
-void		handle_sigquit(int sig);
+void		handle_sigint(int sig, siginfo_t *info, void *context);
+void		handle_sigquit(int sig, siginfo_t *info, void *context);
 void		handle_eof(void);
 
 // t_env

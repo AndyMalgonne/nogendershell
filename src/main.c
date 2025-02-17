@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/11 21:48:42 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/17 10:29:02 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int ac, char **av __attribute__((unused)), char **envp)
 	{
 		if (!parse_input(user_input, &tree, &var))
 			break ;
+		minishell_exec(tree, &var);
 		free_tree(&tree);
 	}
 	return (var.code);

@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/17 08:04:16 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/17 09:41:49 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	io_files(t_iofile *io)
 
 	infd = 1;
 	outfd = 0;
+	if (!io)
+		return (0);
 	while (io)
 	{
 		if (io->type == INFILE && mclose(&infd))
@@ -36,50 +38,67 @@ int	io_files(t_iofile *io)
 	return (0);
 }
 
-int	exec_cmd(t_tree *cmd, const int *pip, t_var *var)
+int	exec_cmd(t_tree *cmd, t_var *var)
 {
-	char **env_array;
-	char *full_cmd;
+	char	**env_array;
+	char	*full_cmd;
 
 	if (io_files(cmd->io) < 0)
 		return (error(var, NULL, 1));
+	env_array = linked_list_to_array(var->env);
+	if (!env_array)
+		return (error(var, "Malloc failed", 1));
+	full_cmd = find_file(cmd->cmd[0], var);
+	if (!full_cmd)
+		return (error(var, "Command not found", 127));
+	execve(full_cmd, cmd->cmd, env_array);
+	perror("execve failed");
+	free(full_cmd);
+	ft_fsplit(env_array);
+	return (0);
+}
+
+void	child_process(t_tree *cmd, const int *pip, t_var *var)
+{
 	if (cmd->next)
 	{
 		dup2(pip[1], STDOUT_FILENO);
 		close(pip[0]);
 		close(pip[1]);
 	}
-	env_array = linked_list_to_array(var->env);
-	if (!env_array)
-        return (error(var, "Malloc failed", 1));
-	full_cmd = find_file(cmd->cmd[0], var);
-	if (!full_cmd)
-		return (error(var, "Command not found", 127));
-	execve(full_cmd, cmd->cmd, env_array);
-	perror("execve failed");
-	return (0);
+	exec_cmd(cmd, var);
+	exit(1);
+}
+
+void	parent_process(pid_t pid, const int *pip, int has_next)
+{
+	if (has_next)
+	{
+		close(pip[1]);
+		dup2(pip[0], STDIN_FILENO);
+		close(pip[0]);
+	}
+	waitpid(pid, NULL, 0);
 }
 
 int	minishell_exec(t_tree *cmd, t_var *var)
 {
 	int		pip[2];
 	pid_t	pid;
+	int		has_next;
 
 	while (cmd)
 	{
+		has_next = cmd->next != NULL;
 		if (cmd->next && pipe(pip) == -1)
 			return (error(var, "pipe failed", 1));
 		pid = fork();
 		if (pid < 0)
 			return (error(var, "fork failed", 1));
 		if (pid == 0)
-		{
-			if (cmd->next)
-				close(pip[0]);
-			exec_cmd(cmd, pip, var);
-		}
-		if (cmd->next)
-			(close(pip[1]), close(pip[0]));
+			child_process(cmd, pip, var);
+		else
+			parent_process(pid, pip, has_next);
 		cmd = cmd->next;
 	}
 	return (1);

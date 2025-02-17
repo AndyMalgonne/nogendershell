@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/17 10:50:16 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/17 12:26:45 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define PROMPT "> "
 # define ERR_MALLOC "Malloc error"
 # define ERR_SYNTAX "Syntax error"
+
+extern int	g_exit_flag;
 
 int			create_env(t_env **env, char **envp);
 void		free_env(t_env **env);

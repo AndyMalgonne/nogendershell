@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/17 14:13:13 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:17:53 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,13 @@ int	exec_cmd(t_tree *cmd, t_var *var)
 	return (0);
 }
 
-void	child_process(t_tree *cmd, int *pip, t_var *var)
+void	child_process(t_tree *cmd, int *pip, t_var *var, int first_fd)
 {
+	if (first_fd != -1)
+	{
+		dup2(first_fd, STDIN_FILENO);
+		mclose(&first_fd);
+	}
 	if (cmd->next)
 	{
 		if (dup2(pip[1], STDOUT_FILENO) == -1)
@@ -67,24 +72,26 @@ void	child_process(t_tree *cmd, int *pip, t_var *var)
 	exit(1);
 }
 
-
-void	parent_process(pid_t pid, const int *pip, int has_next)
+void	parent_process(t_tree *cmd, int *pip, int *first_fd)
 {
-	if (has_next)
+	if (*first_fd != -1)
+		mclose(first_fd);
+	if (cmd->next)
 	{
-		close(pip[1]);
-		dup2(pip[0], STDIN_FILENO);
-		close(pip[0]);
+		mclose(&pip[1]);
+		*first_fd = pip[0];
 	}
-	waitpid(pid, NULL, 0);
+	else
+		mclose(&pip[0]);
 }
-
 
 int	minishell_exec(t_tree *cmd, t_var *var)
 {
 	int		pip[2];
+	int		first_fd;
 	pid_t	pid;
 
+	first_fd = -1;
 	while (cmd)
 	{
 		if (cmd->next && pipe(pip) == -1)
@@ -93,14 +100,11 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 		if (pid < 0)
 			return (error(var, "fork failed", 1));
 		if (pid == 0)
-			child_process(cmd, pip, var);
+			child_process(cmd, pip, var, first_fd);
 		else
-		{
-			if(cmd->next)
-				(mclose(&pip[1]), mclose(&pip[0]));
-		}
+			parent_process(cmd, pip, &first_fd);
+		waitpid(pid, NULL, 0);
 		cmd = cmd->next;
 	}
-	waitpid(pid, NULL, 0);
 	return (1);
 }

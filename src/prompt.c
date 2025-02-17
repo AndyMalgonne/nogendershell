@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:54:18 by abasdere          #+#    #+#             */
 /*   Updated: 2025/02/17 10:41:24 by gmoulin          ###   ########.fr       */
@@ -35,14 +35,3 @@ void	cleanup_user_input(char **user_input)
 	free_to_null(user_input);
 	rl_clear_history();
 }
-
-// void	signal_handler(int sig)
-// {
-// 	if (sig == SIGINT)
-// 	{
-// 		ft_printf("\n");
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 	}
-// }

@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/13 15:45:03 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/17 10:50:16 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ void		cleanup_user_input(char **user_input);
 void		set_up_var(t_var *var);
 void		free_var(t_var *var);
 int			set_and_return_code(t_var *var, int code);
+void		setup_signal_handlers(void);
+void		handle_sigint(int sig);
+void		handle_sigquit(int sig);
+void		handle_eof(void);
 
 // t_env
 char		*get_env_value(t_env *env, const char *key);

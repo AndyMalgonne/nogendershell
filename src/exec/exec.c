@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/17 17:17:53 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:21:49 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	child_process(t_tree *cmd, int *pip, t_var *var, int first_fd)
 	exit(1);
 }
 
-void	parent_process(t_tree *cmd, int *pip, int *first_fd)
+void	parent_process(const t_tree *cmd, int *pip, int *first_fd)
 {
 	if (*first_fd != -1)
 		mclose(first_fd);

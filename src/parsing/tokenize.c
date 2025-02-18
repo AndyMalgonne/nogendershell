@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/11 21:13:41 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/18 16:39:18 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ static int	op_tokenizing(char **rl, t_token **head)
 	t_token	*n_token;
 
 	n_token = NULL;
-	if (**rl == '>')
+	if (**rl == '<')
 		n_token = new_token(REDIR_IN, NULL);
-	else if (**rl == '<')
+	else if (**rl == '>')
 		n_token = new_token(REDIR_OUT, NULL);
 	else if (**rl == '|')
 		n_token = new_token(PIPE, NULL);

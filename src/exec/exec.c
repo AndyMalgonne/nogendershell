@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 11:04:02 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:15:10 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 		if (pid < 0)
 			return (error(var, "fork failed", 1));
 		if (pid == 0)
-			return(exec_cmd(cmd, var), 0);
+			return (exec_cmd(cmd, var), 0);
 		else
 			if (cmd->next)
 				(mclose(&pip[1]), mclose(&pip[0]));

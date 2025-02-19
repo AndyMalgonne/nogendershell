@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 11:24:31 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:02:42 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,22 +38,23 @@ int	io_files(t_iofile *io)
 	return (0);
 }
 
-int	exec_cmd(t_tree *cmd, t_var *var)
+void	exec_cmd(t_tree *cmd, t_var *var)
 {
 	char	**env_array;
 	char	*full_cmd;
 
 	if (io_files(cmd->io) < 0)
-		return (error(var, NULL, 1));
+		(free_all(cmd, var), exit(1));
 	env_array = linked_list_to_array(var->env);
 	if (!env_array)
-		return (ft_fsplit(env_array), error(var, "Malloc failed", 1));
+		(perror("Malloc failed"), free_all(cmd, var), exit(1));
 	full_cmd = find_file(cmd->cmd[0], var);
 	if (!full_cmd)
-		return (error(var, "Command not found", 127));
-	if (execve(full_cmd, cmd->cmd, env_array) == -1)
-		(perror("execve failed"), free(full_cmd), ft_fsplit(env_array));
-	return (0);
+		(ft_fsplit(env_array), free_all(cmd, var), exit(127));
+	execve(full_cmd, cmd->cmd, env_array);
+	(perror("execve failed"),
+		free(full_cmd), ft_fsplit(env_array), free_all(cmd, var));
+	exit(0);
 }
 
 int	wait_children(int pid)
@@ -92,7 +93,7 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 		if (pid < 0)
 			return (error(var, "fork failed", 1));
 		if (pid == 0)
-			return (exec_cmd(cmd, var), 0);
+			exec_cmd(cmd, var);
 		else
 			if (cmd->next)
 				(mclose(&pip[1]), mclose(&pip[0]));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 15:02:42 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/19 19:27:46 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	io_files(t_iofile *io)
 			return (perror(io->value), -1);
 		io = io->next;
 	}
-	if (infd != 0)
-		(dup2(infd, STDIN_FILENO), mclose(&infd));
-	if (outfd != 1)
-		(dup2(outfd, STDOUT_FILENO), mclose(&outfd));
+	if (infd != 0 && dup2(infd, STDIN_FILENO) == -1)
+		return (mclose(&infd), -1);
+	if (outfd != 1 && dup2(outfd, STDOUT_FILENO) == -1)
+		return (mclose(&outfd), -1);
 	return (0);
 }
 
@@ -51,9 +51,9 @@ void	exec_cmd(t_tree *cmd, t_var *var)
 	full_cmd = find_file(cmd->cmd[0], var);
 	if (!full_cmd)
 		(ft_fsplit(env_array), free_all(cmd, var), exit(127));
-	execve(full_cmd, cmd->cmd, env_array);
-	(perror("execve failed"),
-		free(full_cmd), ft_fsplit(env_array), free_all(cmd, var));
+	if (execve(full_cmd, cmd->cmd, env_array) == -1)
+		(perror("execve failed"), free(full_cmd), ft_fsplit(env_array),
+			free_all(cmd, var), exit(1));
 	exit(0);
 }
 
@@ -79,11 +79,22 @@ int	wait_children(int pid)
 	return (code);
 }
 
+void	children_process(int prev_fd, int pip[2], t_tree *cmd, t_var *var)
+{
+	if (prev_fd != -1 && dup2(prev_fd, STDIN_FILENO) == -1)
+		(mclose(&prev_fd), exit(1));
+	if (cmd->next && dup2(pip[1], STDOUT_FILENO) == -1)
+		(mclose(&pip[1]), exit(1));
+	exec_cmd(cmd, var);
+}
+
 int	minishell_exec(t_tree *cmd, t_var *var)
 {
 	int		pip[2];
+	int		prev_fd;
 	pid_t	pid;
 
+	prev_fd = -1;
 	pid = 0;
 	while (cmd)
 	{
@@ -93,10 +104,11 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 		if (pid < 0)
 			return (error(var, "fork failed", 1));
 		if (pid == 0)
-			exec_cmd(cmd, var);
-		else
-			if (cmd->next)
-				(mclose(&pip[1]), mclose(&pip[0]));
+			children_process(prev_fd, pip, cmd, var);
+		if (prev_fd != -1)
+			mclose(&prev_fd);
+		if (cmd->next)
+			(mclose(&pip[1]), prev_fd = pip[0]);
 		cmd = cmd->next;
 	}
 	wait_children(pid);

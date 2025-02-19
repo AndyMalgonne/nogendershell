@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 11:18:46 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:24:31 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	io_files(t_iofile *io)
 			return (perror(io->value), -1);
 		io = io->next;
 	}
-	printf("infd: %d\n", infd);
-	printf("outfd: %d\n", outfd);
 	if (infd != 0)
 		(dup2(infd, STDIN_FILENO), mclose(&infd));
 	if (outfd != 1)

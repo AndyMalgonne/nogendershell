@@ -81,9 +81,9 @@ define SRC 	:=
 	t_tree_utils.c
 	t_tree.c
 	t_env2.c
+	t_var.c
 	utils.c
 	prompt.c
-	var.c
 endef
 
 

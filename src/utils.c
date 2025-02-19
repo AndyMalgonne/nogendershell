@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:02:20 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/04 13:46:00 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/19 09:44:24 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*free_to_null(void *p)
 
 int	mclose(int *fd)
 {
-	if (*fd != -1)
+	if (*fd != -1 || *fd != 0 || *fd != 1 || *fd != 2)
 	{
 		close(*fd);
 		*fd = -1;

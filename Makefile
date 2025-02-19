@@ -76,14 +76,14 @@ define SRC 	:=
 		tokenize.c
 	)
 	main.c
+	prompt.c
 	t_env.c
 	t_iofile.c
 	t_tree_utils.c
 	t_tree.c
 	t_env2.c
+	t_var.c
 	utils.c
-	prompt.c
-	var.c
 endef
 
 

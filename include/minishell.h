@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/13 15:45:03 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/19 11:08:38 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include <sys/wait.h>
 
 # define PROMPT "> "
+# define SPACES " \t"
 # define ERR_MALLOC "Malloc error"
 # define ERR_SYNTAX "Syntax error"
 

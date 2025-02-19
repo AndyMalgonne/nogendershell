@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_tree_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 21:41:00 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/13 14:27:11 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/19 10:58:39 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,13 @@ void	print_tree(t_tree *tree)
 		{
 			i = 0;
 			while (tree->cmd[i])
-				printf(" %s", tree->cmd[i++]);
+				printf(" %s,", tree->cmd[i++]);
 		}
 		printf("\n\tIO:");
 		tmp = tree->io;
 		while (tmp)
 		{
-			printf(" Type: %s, Value: %s", iottostr(tmp->type), tmp->value);
+			printf(" Type: %s, Value: %s ;", iottostr(tmp->type), tmp->value);
 			tmp = tmp->next;
 		}
 		printf("\n");

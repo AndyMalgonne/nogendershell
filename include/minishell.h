@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 11:08:38 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:27:17 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ char		**linked_list_to_array(t_env *env);
 void		*free_to_null(void *p);
 int			mclose(int *fd);
 int			error(t_var *var, const char *msg, int code);
+void		free_all(t_tree *tree, t_var *var);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 19:12:31 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/19 19:27:46 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	exec_cmd(t_tree *cmd, t_var *var)
 		(ft_fsplit(env_array), free_all(cmd, var), exit(127));
 	if (execve(full_cmd, cmd->cmd, env_array) == -1)
 		(perror("execve failed"), free(full_cmd), ft_fsplit(env_array),
-			free_all(cmd, var));
+			free_all(cmd, var), exit(1));
 	exit(0);
 }
 

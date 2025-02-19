@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 18:49:44 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:54:52 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@ int	io_files(t_iofile *io)
 			return (perror(io->value), -1);
 		io = io->next;
 	}
-	if (infd != 0)
-		if ((dup2(infd, STDIN_FILENO), mclose(&infd)) == -1)
-			return (-1);
-	if (outfd != 1)
-		if ((dup2(outfd, STDOUT_FILENO), mclose(&outfd)) == -1)
-			return (-1);
+	if (infd != 0 && (dup2(infd, STDIN_FILENO), mclose(&infd)) == -1)
+		return (-1);
+	if (outfd != 1 && (dup2(outfd, STDOUT_FILENO), mclose(&outfd)) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -83,12 +81,10 @@ int	wait_children(int pid)
 
 void	children_process(int prev_fd, int pip[2], t_tree *cmd, t_var *var)
 {
-	if (prev_fd != -1)
-		if ((dup2(prev_fd, STDIN_FILENO), mclose(&prev_fd)) == -1)
-			exit(1);
-	if (cmd->next)
-		if ((dup2(pip[1], STDOUT_FILENO), mclose(&pip[1]), mclose(&pip[0])) == -1)
-			exit(1);
+	if (prev_fd != -1 && (dup2(prev_fd, STDIN_FILENO), mclose(&prev_fd)) == -1)
+		exit(1);
+	if (cmd->next && (dup2(pip[1], STDOUT_FILENO), mclose(&pip[1])) == -1)
+		exit(1);
 	exec_cmd(cmd, var);
 }
 

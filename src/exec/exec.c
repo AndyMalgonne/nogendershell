@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 11:15:10 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:18:46 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 	int		pip[2];
 	pid_t	pid;
 
-	print_tree(cmd);
+	pid = 0;
 	while (cmd)
 	{
 		if (cmd->next && pipe(pip) == -1)

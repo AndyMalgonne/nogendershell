@@ -79,13 +79,12 @@ define SRC 	:=
 	prompt.c
 	signals.c
 	t_env.c
+	t_env2.c
 	t_iofile.c
 	t_tree_utils.c
 	t_tree.c
-	t_env2.c
 	t_var.c
 	utils.c
-	var.c
 endef
 
 

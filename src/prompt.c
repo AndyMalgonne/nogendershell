@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:54:18 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/20 20:38:36 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/20 21:49:44 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	get_input(char **user_input)
 	free_to_null(user_input);
 	raw_input = readline(PROMPT);
 	if (raw_input == NULL)
+	{
+		handle_eof();
 		return (0);
+	}
 	*user_input = ft_strtrim(raw_input, SPACES);
 	if (*user_input == NULL)
 		return (0);

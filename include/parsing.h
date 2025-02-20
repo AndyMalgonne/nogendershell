@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/11 20:14:34 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/20 23:54:39 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ bool		is_word(t_token_type type);
 
 //tokenize.c
 int			tokenize(char *input, t_token **head);
-
 int			parse_input(char *user_input, t_tree **tree, t_var *var);
 
 //checks.c
@@ -62,6 +61,6 @@ int			is_space_tab(char c);
 int			is_quotes(char c);
 
 //expand.c
-int			expand(t_token *tokens, t_env *env);
+int			expand(t_token *tokens, t_env *env, int exst);
 
 #endif

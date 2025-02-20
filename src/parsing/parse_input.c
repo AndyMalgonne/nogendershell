@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:14:54 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/13 14:53:02 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/20 23:47:50 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	parse_input(char *user_input, t_tree **tree, t_var *var)
 		return (set_and_return_code(var, 1));
 	if (!tokenize(user_input, &tokens))
 		return (error(var, ERR_MALLOC, 1));
-	if (!expand(tokens, var->env))
+	if (!expand(tokens, var->env, var->code))
 		return (error(var, ERR_MALLOC, 1));
 	if (!check_tokens(tokens))
 		return (error(var, ERR_SYNTAX, 1), 1);

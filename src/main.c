@@ -12,6 +12,16 @@
 
 #include "minishell.h"
 
+void	signal_exit_status(t_var *var)
+{
+	if (g_exit_flag == SIGINT)
+		set_and_return_code(var, 130);
+	else if (g_exit_flag == SIGQUIT)
+		set_and_return_code(var, 131);
+	else if (g_exit_flag == EOF)
+		set_and_return_code(var, 0);
+}
+
 void	main_loop(t_var *var, char **user_input, t_tree **tree)
 {
 	while (!g_exit_flag)

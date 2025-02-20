@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/17 19:22:12 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:38:19 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	main_loop(t_var *var, char **user_input, t_tree **tree)
 int	main(int ac, char **av __attribute__((unused)), char **envp)
 {
 	t_var var			__attribute__((cleanup(free_var)));
-	char *user_input	__attribute__((cleanup(cleanup_user_input)));
+	char *input			__attribute__((cleanup(cleanup_user_input)));
 	t_tree *tree		__attribute__((cleanup(free_tree)));
 
 	set_up_var(&var);
-	user_input = NULL;
+	input = NULL;
 	tree = NULL;
 	if (ac != 1)
 		return (ft_putstr_fd("Usage: ./minishell\n", 2), 1);
@@ -44,6 +44,15 @@ int	main(int ac, char **av __attribute__((unused)), char **envp)
 	if (!create_env(&var.env, envp))
 		return (1);
 	setup_signal_handlers();
-	main_loop(&var, &user_input, &tree);
+	main_loop(&var, &input, &tree);
+	while (get_input(&input))
+	{
+		if (!parse_input(input, &tree, &var))
+			break ;
+		free_to_null(&input);
+		if (!minishell_exec(tree, &var))
+			break ;
+		free_tree(&tree);
+	}
 	return (var.code);
 }

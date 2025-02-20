@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/17 14:24:19 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:36:10 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include <sys/wait.h>
 
 # define PROMPT "> "
+# define SPACES " \t"
 # define ERR_MALLOC "Malloc error"
 # define ERR_SYNTAX "Syntax error"
 
@@ -79,5 +80,6 @@ char		**linked_list_to_array(t_env *env);
 void		*free_to_null(void *p);
 int			mclose(int *fd);
 int			error(t_var *var, const char *msg, int code);
+void		free_all(t_tree *tree, t_var *var);
 
 #endif

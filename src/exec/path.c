@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/10 14:38:06 by andytropmim      ###   ########.fr       */
+/*   Updated: 2025/02/19 15:05:20 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	*find_file(char *cmd, t_var *var)
 	if (errorr == 2)
 		return (error(var, "Malloc failed", 1), NULL);
 	file_path = check_file_in_path(paths, cmd);
+	ft_fsplit(paths);
 	if (file_path)
 		return (free(cmd), file_path);
 	ft_dprintf(2, "%s: command not found\n", cmd);

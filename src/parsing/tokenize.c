@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/20 20:03:53 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:07:45 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	string_tokenizing(char **rl, t_token **head)
 {
 	t_token_type	type;
 	t_token			*n_token;
-	char			*start;
+	const char		*start;
 	char			*value;
 
 	start = (*rl)++;

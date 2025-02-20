@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/20 00:31:39 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:07:45 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static int	string_tokenizing(char **rl, t_token **head)
 {
 	t_token_type	type;
 	t_token			*n_token;
-	char			*start;
+	const char		*start;
+	char			*value;
 
 	start = (*rl)++;
 	type = STRING_SQ;
@@ -44,14 +45,16 @@ static int	string_tokenizing(char **rl, t_token **head)
 		(*rl)++;
 	if (**rl == *start)
 		(*rl)++;
-	start = ft_strndup(start + 1, *rl - start - 2);
-	if (!start)
+	value = ft_strndup(start + 1, *rl - start - 2);
+	if (!value)
 		return (0);
-	n_token = new_token(type, start);
+	if (ft_strlen(value) == 0)
+		return (free(value), 1);
+	n_token = new_token(type, value);
 	if (!n_token)
-		return (free(start), 0);
+		return (free(value), 0);
 	append_token(head, n_token);
-	return (free(start), 1);
+	return (free(value), 1);
 }
 
 static int	op_tokenizing(char **rl, t_token **head)

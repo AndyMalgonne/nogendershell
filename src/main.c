@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 00:09:26 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/21 00:20:09 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ void	main_loop(t_var *var, char **user_input, t_tree **tree)
 	{
 		signal_exit_status(var);
 		g_exit_flag = 0;
-		if (!parse_input(*user_input, tree, var))
-			break ;
-		if (!minishell_exec(*tree, var))
+		if (!parse_input(*user_input, tree, var) \
+		|| !minishell_exec(*tree, var))
 			break ;
 		free_tree(tree);
 	}

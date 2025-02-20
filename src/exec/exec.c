@@ -6,35 +6,38 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 19:27:46 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/20 21:10:32 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	io_files(t_iofile *io)
+int	io_files(t_iofile *io, int *infd, int *outfd)
 {
-	int	infd;
-	int	outfd;
-
-	infd = 0;
-	outfd = 1;
 	while (io)
 	{
-		if (io->type == INFILE && mclose(&infd))
-			infd = open(io->value, O_RDONLY);
-		if (io->type == OUTFILE_APPEND && mclose(&outfd))
-			outfd = open(io->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (io->type == OUTFILE_TRUNC && mclose(&outfd))
-			outfd = open(io->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (infd < 0 || outfd < 0)
-			return (perror(io->value), -1);
+		if (io->type == INFILE)
+		{
+			if (*infd > 0)
+				mclose(infd);
+			*infd = open(io->value, O_RDONLY);
+		}
+		else if (io->type == OUTFILE_APPEND)
+		{
+			if (*outfd > 1)
+				mclose(outfd);
+			*outfd = open(io->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		}
+		else if (io->type == OUTFILE_TRUNC)
+		{
+			if (*outfd > 1)
+				mclose(outfd);
+			*outfd = open(io->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		}
+		if (*infd < 0 || *outfd < 0)
+			return (perror(io->value), mclose(infd), mclose(outfd), -1);
 		io = io->next;
 	}
-	if (infd != 0 && dup2(infd, STDIN_FILENO) == -1)
-		return (mclose(&infd), -1);
-	if (outfd != 1 && dup2(outfd, STDOUT_FILENO) == -1)
-		return (mclose(&outfd), -1);
 	return (0);
 }
 
@@ -43,8 +46,6 @@ void	exec_cmd(t_tree *cmd, t_var *var)
 	char	**env_array;
 	char	*full_cmd;
 
-	if (io_files(cmd->io) < 0)
-		(free_all(cmd, var), exit(1));
 	env_array = linked_list_to_array(var->env);
 	if (!env_array)
 		(perror("Malloc failed"), free_all(cmd, var), exit(1));
@@ -79,12 +80,45 @@ int	wait_children(int pid)
 	return (code);
 }
 
+void	redir(int prev_fd, int pip[2], int in, int out, t_tree *cmd, t_var *var)
+{
+	if (prev_fd != -1)
+	{
+		if (dup2(prev_fd, STDIN_FILENO) == -1)
+			(mclose(&prev_fd), exit(1));
+		mclose(&prev_fd);
+	}
+	if (in > 0)
+	{
+		if (dup2(in, STDIN_FILENO) == -1)
+			(mclose(&in), free_all(cmd, var), exit(1));
+		mclose(&in);
+	}
+	if (cmd->next)
+	{
+		if (dup2(pip[1], STDOUT_FILENO) == -1)
+			(mclose(&pip[1]), exit(1));
+	}
+	if (out > 1)
+	{
+		if (dup2(out, STDOUT_FILENO) == -1)
+			(mclose(&out), free_all(cmd, var), exit(1));
+		mclose(&out);
+	}
+	mclose(&pip[0]);
+	mclose(&pip[1]);
+}
+
 void	children_process(int prev_fd, int pip[2], t_tree *cmd, t_var *var)
 {
-	if (prev_fd != -1 && dup2(prev_fd, STDIN_FILENO) == -1)
-		(mclose(&prev_fd), exit(1));
-	if (cmd->next && dup2(pip[1], STDOUT_FILENO) == -1)
-		(mclose(&pip[1]), exit(1));
+	int		infd;
+	int		outfd;
+
+	infd = 0;
+	outfd = 1;
+	if (io_files(cmd->io, &infd, &outfd) < 0)
+		(free_all(cmd, var), exit(1));
+	redir(prev_fd, pip, infd, outfd, cmd, var);
 	exec_cmd(cmd, var);
 }
 
@@ -98,7 +132,7 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 	pid = 0;
 	while (cmd)
 	{
-		if (cmd->next && pipe(pip) == -1)
+		if (pipe(pip) == -1)
 			return (error(var, "pipe failed", 1));
 		pid = fork();
 		if (pid < 0)
@@ -109,6 +143,8 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 			mclose(&prev_fd);
 		if (cmd->next)
 			(mclose(&pip[1]), prev_fd = pip[0]);
+		else
+			(mclose(&pip[0]), mclose(&pip[1]));
 		cmd = cmd->next;
 	}
 	wait_children(pid);

@@ -6,45 +6,17 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 08:30:12 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:28:19 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	io_files(t_iofile *io)
-{
-	int	infd;
-	int	outfd;
-
-	infd = 0;
-	outfd = 1;
-	while (io)
-	{
-		if (io->type == INFILE && mclose(&infd))
-			infd = open(io->value, O_RDONLY);
-		if (io->type == OUTFILE_APPEND && mclose(&outfd))
-			outfd = open(io->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (io->type == OUTFILE_TRUNC && mclose(&outfd))
-			outfd = open(io->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (infd < 0 || outfd < 0)
-			return (perror(io->value), -1);
-		io = io->next;
-	}
-	if (infd != 0 && dup2(infd, STDIN_FILENO) == -1)
-		return (mclose(&infd), -1);
-	if (outfd != 1 && dup2(outfd, STDOUT_FILENO) == -1)
-		return (mclose(&outfd), -1);
-	return (0);
-}
 
 void	exec_cmd(t_tree *cmd, t_var *var)
 {
 	char	**env_array;
 	char	*full_cmd;
 
-	if (io_files(cmd->io) < 0)
-		(free_all(cmd, var), exit(1));
 	env_array = linked_list_to_array(var->env);
 	if (!env_array)
 		(perror("Malloc failed"), free_all(cmd, var), exit(1));
@@ -79,36 +51,44 @@ int	wait_children(int pid)
 	return (code);
 }
 
-void	children_process(int prev_fd, int pip[2], t_tree *cmd, t_var *var)
+void	children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 {
-	if (prev_fd != -1 && dup2(prev_fd, STDIN_FILENO) == -1)
-		(mclose(&prev_fd), exit(1));
-	if (cmd->next && dup2(pip[1], STDOUT_FILENO) == -1)
-		(mclose(&pip[1]), exit(1));
+	if (io_files(cmd->io, fds) < 0)
+		(free_all(cmd, var), exit(1));
+	redir(fds, pip, cmd, var);
 	exec_cmd(cmd, var);
+}
+
+void	init_fds_and_pid(t_fds *fds, pid_t *pid)
+{
+	fds->prev_fd = -1;
+	fds->infd = 0;
+	fds->outfd = 1;
+	*pid = 0;
 }
 
 int	minishell_exec(t_tree *cmd, t_var *var)
 {
 	int		pip[2];
-	int		prev_fd;
+	t_fds	fds;
 	pid_t	pid;
 
-	prev_fd = -1;
-	pid = 0;
+	init_fds_and_pid(&fds, &pid);
 	while (cmd)
 	{
-		if (cmd->next && pipe(pip) == -1)
+		if (pipe(pip) == -1)
 			return (error(var, "pipe failed", 1));
 		pid = fork();
 		if (pid < 0)
 			return (error(var, "fork failed", 1));
 		if (pid == 0)
-			children_process(prev_fd, pip, cmd, var);
-		if (prev_fd != -1)
-			mclose(&prev_fd);
+			children_process(&fds, pip, cmd, var);
+		if (fds.prev_fd != -1)
+			mclose(&(fds.prev_fd));
 		if (cmd->next)
-			(mclose(&pip[1]), prev_fd = pip[0]);
+			(mclose(&pip[1]), fds.prev_fd = pip[0]);
+		else
+			(mclose(&pip[0]), mclose(&pip[1]));
 		cmd = cmd->next;
 	}
 	var->code = wait_children(pid);

@@ -1,0 +1,87 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/21 12:18:37 by amalgonn          #+#    #+#             */
+/*   Updated: 2025/02/21 13:30:07 by amalgonn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+void	close_fds(t_fds *fds)
+{
+	mclose(&(fds->prev_fd));
+	mclose(&(fds->infd));
+	mclose(&(fds->outfd));
+}
+
+int	handle_fd_error(const t_iofile *io, t_fds *fds)
+{
+	if (fds->infd < 0 || fds->outfd < 0)
+	{
+		perror(io->value);
+		mclose(&(fds->infd));
+		mclose(&(fds->outfd));
+		return (-1);
+	}
+	return (0);
+}
+
+int	io_files(t_iofile *io, t_fds *fds)
+{
+	while (io)
+	{
+		if (io->type == INFILE)
+		{
+			if (fds->infd > 0)
+				mclose(&(fds->infd));
+			fds->infd = open(io->value, O_RDONLY);
+		}
+		else if (io->type == OUTFILE_APPEND)
+		{
+			if (fds->outfd > 1)
+				mclose(&(fds->outfd));
+			fds->outfd = open(io->value, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		}
+		else if (io->type == OUTFILE_TRUNC)
+		{
+			if (fds->outfd > 1)
+				mclose(&(fds->outfd));
+			fds->outfd = open(io->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		}
+		if (handle_fd_error(io, fds) < 0)
+			return (-1);
+		io = io->next;
+	}
+	return (0);
+}
+
+void	redir(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
+{
+	if (fds->prev_fd != -1)
+	{
+		if (dup2(fds->prev_fd, STDIN_FILENO) == -1)
+			(close_fds(fds), free_all(cmd, var), exit(1));
+		mclose(&(fds->prev_fd));
+	}
+	if (fds->infd > 0)
+	{
+		if (dup2(fds->infd, STDIN_FILENO) == -1)
+			(close_fds(fds), free_all(cmd, var), exit(1));
+		mclose(&(fds->infd));
+	}
+	if (cmd->next && dup2(pip[1], STDOUT_FILENO) == -1)
+		(mclose(&pip[1]), free_all(cmd, var), exit(1));
+	if (fds->outfd > 1)
+	{
+		if (dup2(fds->outfd, STDOUT_FILENO) == -1)
+			(close_fds(fds), free_all(cmd, var), exit(1));
+		mclose(&(fds->outfd));
+	}
+	mclose(&pip[0]);
+	mclose(&pip[1]);
+}

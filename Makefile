@@ -78,6 +78,7 @@ define SRC 	:=
 	)
 	main.c
 	prompt.c
+	signals_utils.c
 	signals.c
 	t_env.c
 	t_env2.c

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 12:05:53 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:46:32 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ static void	check_signal_code(t_var *var)
 
 static void	main_loop(t_var *var, char **user_input, t_tree **tree)
 {
-	while (get_input(user_input))
+	while (set_parent_signals() && get_input(user_input))
 	{
 		check_signal_code(var);
-		if (!parse_input(*user_input, tree, var))
+		if (!set_child_signals()
+			|| !parse_input(*user_input, tree, var))
 			break ;
 		free_to_null(user_input);
 		if (!minishell_exec(*tree, var))
@@ -47,7 +48,7 @@ int	main(int ac, char **av __attribute__((unused)), char **envp)
 		return (ft_putstr_fd("Usage: ./minishell\n", 2), 1);
 	if (isatty(0) != 1)
 		return (ft_putstr_fd("U mad bro?\n", 2), 1);
-	if (!create_env(&var.env, envp) || !setup_main_signal_handlers())
+	if (!create_env(&var.env, envp))
 		return (1);
 	main_loop(&var, &input, &tree);
 	return (ft_putstr_fd("exit\n", STDOUT_FILENO), var.code);

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 08:58:13 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:44:40 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,15 @@ void		cleanup_user_input(char **user_input);
 void		set_up_var(t_var *var);
 void		free_var(t_var *var);
 int			set_and_return_code(t_var *var, int code);
+
+// signals.c
 int			register_sigaction(int sig, struct sigaction *old,
 				void (*handler)(int));
-int			setup_main_signal_handlers(void);
+int			replace_sigaction(int signal, void (*handler)(int));
+
+// signals_utils.c
+int			set_parent_signals(void);
+int			set_child_signals(void);
 
 // t_env
 char		*get_env_value(t_env *env, const char *key);

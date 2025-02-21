@@ -21,10 +21,7 @@ int	get_input(char **user_input)
 	free_to_null(user_input);
 	raw_input = readline(PROMPT);
 	if (raw_input == NULL)
-	{
-		handle_eof();
 		return (0);
-	}
 	*user_input = ft_strtrim(raw_input, SPACES);
 	if (*user_input == NULL)
 		return (0);

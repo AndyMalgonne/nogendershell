@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 12:28:19 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/21 20:15:19 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 	{
 		if (pipe(pip) == -1)
 			return (error(var, "pipe failed", 1));
+		if (is_builtin(cmd))
+		{
+			launch_builtin(&fds, pip, cmd, var);
+			cmd = cmd->next;
+			continue ;
+		}
 		pid = fork();
 		if (pid < 0)
 			return (error(var, "fork failed", 1));

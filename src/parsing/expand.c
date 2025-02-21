@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/21 00:25:51 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/21 08:19:09 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*replace_exit_status(const char *token_value, int exst, size_t i)
+static char	*replace_exit_status(char *token_value, int exst, size_t i)
 {
 	char	*status_str;
 	char	*tmp;
@@ -25,13 +25,11 @@ static char	*replace_exit_status(const char *token_value, int exst, size_t i)
 	if (!tmp)
 		return (free(status_str), NULL);
 	result = ft_strjoin(tmp, status_str);
-	free(tmp);
-	free(status_str);
+	(free(tmp), free(status_str));
 	if (!result)
 		return (NULL);
 	tmp = ft_strjoin(result, &token_value[i + 2]);
-	free(result);
-	return (tmp);
+	return (free(result), free(token_value), tmp);
 }
 
 static char	*replace_env_value(char *token_value, t_env *env, size_t i)

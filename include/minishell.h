@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 18:24:00 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:58:25 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			set_and_return_code(t_var *var, int code);
 
 // signals.c
 int			set_signals(void (*handler_sigint)(int),
-			void (*handler_sigquit)(int));
+				void (*handler_sigquit)(int));
 
 // signals_utils.c
 void		handle_parent_sigint(int sig);

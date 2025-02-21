@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:02:20 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/19 14:27:30 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:56:44 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,5 @@ void	free_all(t_tree *tree, t_var *var)
 {
 	free_tree(&tree);
 	free_var(var);
+	rl_clear_history();
 }

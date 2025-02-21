@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 14:27:17 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 08:58:13 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define ERR_MALLOC "Malloc error"
 # define ERR_SYNTAX "Syntax error"
 
-extern int			g_signal;
+extern int	g_exit_flag;
 
 int			create_env(t_env **env, char **envp);
 void		free_env(t_env **env);
@@ -47,6 +47,9 @@ void		cleanup_user_input(char **user_input);
 void		set_up_var(t_var *var);
 void		free_var(t_var *var);
 int			set_and_return_code(t_var *var, int code);
+int			register_sigaction(int sig, struct sigaction *old,
+				void (*handler)(int));
+int			setup_main_signal_handlers(void);
 
 // t_env
 char		*get_env_value(t_env *env, const char *key);

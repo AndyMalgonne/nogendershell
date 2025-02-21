@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:24:10 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/21 07:48:59 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:33:08 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_exit_flag = 0;
 
-void	handle_sigint(int sig)
+static void	handle_sigint(int sig)
 {
 	g_exit_flag = sig;
 	ft_putstr_fd("\n", STDOUT_FILENO);

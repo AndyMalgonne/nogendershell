@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:24:10 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/21 16:45:09 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:59:43 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_exit_flag = 0;
+
+int	set_heredoc_signals(void)
+{
+	return (replace_sigaction(SIGINT, &handle_child_sigint)
+		&& register_sigaction(SIGQUIT, NULL, SIG_IGN));
+}
 
 int	register_sigaction(int sig, struct sigaction *old, void (*handler)(int))
 {

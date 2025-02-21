@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 16:41:54 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/21 16:46:51 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 17:01:00 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	handle_parent_sigint(int sig)
 	rl_redisplay();
 }
 
-static void	handle_child_sigint(int sig)
+void	handle_child_sigint(int sig)
 {
 	g_exit_flag = sig;
 	ft_putstr_fd("\n", STDOUT_FILENO);

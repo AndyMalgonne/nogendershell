@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 14:58:10 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:27:33 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define EXEC_H
 
 # include "data_struct.h"
+
+typedef struct s_fds
+{
+    int infd;
+    int outfd;
+    int prev_fd;
+} t_fds;
 
 // Builtin functions
 
@@ -27,6 +34,10 @@ int		bi_unset(char **str, t_env **env);
 // Exec functions
 int		minishell_exec(t_tree *cmd, t_var *var);
 void	exec_cmd(t_tree *cmd, t_var *var);
+
+// Redir functions
+void	redir(t_fds *fds, int pip[2], t_tree *cmd, t_var *var);
+int		io_files(t_iofile *io, t_fds *fds);
 
 // Path functions
 char	*find_file(char *cmd, t_var *var);

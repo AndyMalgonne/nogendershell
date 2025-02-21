@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
 /*   Updated: 2025/02/21 12:28:19 by amalgonn         ###   ########.fr       */
@@ -91,6 +91,6 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 			(mclose(&pip[0]), mclose(&pip[1]));
 		cmd = cmd->next;
 	}
-	wait_children(pid);
+	var->code = wait_children(pid);
 	return (1);
 }

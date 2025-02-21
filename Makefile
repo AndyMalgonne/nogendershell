@@ -78,11 +78,12 @@ define SRC 	:=
 	)
 	main.c
 	prompt.c
+	signals.c
 	t_env.c
+	t_env2.c
 	t_iofile.c
 	t_tree_utils.c
 	t_tree.c
-	t_env2.c
 	t_var.c
 	utils.c
 endef
@@ -148,10 +149,7 @@ format:
 		c_formatter_42 $(INCLD_DIR)/$$file; \
 	done
 
-### RUN ###
-run: $(NAME)
-	./$(NAME)
-
+### TEST ###
 test: $(NAME) $(IGNORE_RDLN)
 	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --suppressions=$(IGNORE_RDLN) ./$(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:24:10 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/21 18:27:04 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:57:45 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static int	replace_sigaction(int signal, void (*handler)(int))
 		&& register_sigaction(signal, NULL, handler));
 }
 
-int set_signals(void (*handler_sigint)(int), void (*handler_sigquit)(int))
+int	set_signals(void (*handler_sigint)(int), void (*handler_sigquit)(int))
 {
-	int n;
+	int	n;
 
 	n = 0;
 	n += replace_sigaction(SIGINT, handler_sigint);

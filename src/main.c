@@ -3,36 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 00:20:09 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:39:41 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	signal_exit_status(t_var *var)
-{
+static void check_signal_code(t_var *var) {
 	if (g_exit_flag == SIGINT)
-		set_and_return_code(var, 130);
-	else if (g_exit_flag == SIGQUIT)
-		set_and_return_code(var, 131);
-	else if (g_exit_flag == EOF)
-		set_and_return_code(var, 0);
+		var->code = 130;
+	g_exit_flag = 0;
 }
 
-void	main_loop(t_var *var, char **user_input, t_tree **tree)
+static void	main_loop(t_var *var, char **user_input, t_tree **tree)
 {
 	while (get_input(user_input))
 	{
-		signal_exit_status(var);
-		g_exit_flag = 0;
-		if (!parse_input(*user_input, tree, var) \
-		|| !minishell_exec(*tree, var))
+		check_signal_code(var);
+		if (!parse_input(*user_input, tree, var))
+			break ;
+		free_to_null(user_input);
+		if (!minishell_exec(*tree, var))
 			break ;
 		free_tree(tree);
 	}
+	check_signal_code(var);
 }
 
 int	main(int ac, char **av __attribute__((unused)), char **envp)
@@ -48,9 +46,8 @@ int	main(int ac, char **av __attribute__((unused)), char **envp)
 		return (ft_putstr_fd("Usage: ./minishell\n", 2), 1);
 	if (isatty(0) != 1)
 		return (ft_putstr_fd("U mad bro?\n", 2), 1);
-	if (!create_env(&var.env, envp))
+	if (!create_env(&var.env, envp) || !setup_main_signal_handlers())
 		return (1);
-	setup_signal_handlers();
 	main_loop(&var, &input, &tree);
-	return (var.code);
+	return (ft_putstr_fd("exit\n", STDOUT_FILENO), var.code);
 }

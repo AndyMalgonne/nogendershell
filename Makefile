@@ -148,10 +148,7 @@ format:
 		c_formatter_42 $(INCLD_DIR)/$$file; \
 	done
 
-### RUN ###
-run: $(NAME)
-	./$(NAME)
-
+### TEST ###
 test: $(NAME) $(IGNORE_RDLN)
 	valgrind --track-origins=yes --leak-check=full --show-leak-kinds=all --trace-children=yes --track-fds=yes --suppressions=$(IGNORE_RDLN) ./$(NAME)
 

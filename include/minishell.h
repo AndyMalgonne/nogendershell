@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/20 20:36:10 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/21 08:58:13 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,9 @@ void		cleanup_user_input(char **user_input);
 void		set_up_var(t_var *var);
 void		free_var(t_var *var);
 int			set_and_return_code(t_var *var, int code);
-void		setup_signal_handlers(void);
-void		handle_sigint(int sig, siginfo_t *info, void *context);
-void		handle_sigquit(int sig, siginfo_t *info, void *context);
-void		handle_eof(void);
+int			register_sigaction(int sig, struct sigaction *old,
+				void (*handler)(int));
+int			setup_main_signal_handlers(void);
 
 // t_env
 char		*get_env_value(t_env *env, const char *key);

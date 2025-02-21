@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 09:54:18 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/20 21:49:44 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/21 07:59:32 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ int	get_input(char **user_input)
 	free_to_null(user_input);
 	raw_input = readline(PROMPT);
 	if (raw_input == NULL)
-	{
-		handle_eof();
 		return (0);
-	}
 	*user_input = ft_strtrim(raw_input, SPACES);
 	if (*user_input == NULL)
 		return (0);
@@ -35,8 +32,7 @@ int	get_input(char **user_input)
 
 void	cleanup_user_input(char **user_input)
 {
-	if (!user_input || !(*user_input))
-		return ;
-	free_to_null(user_input);
+	if (user_input && *user_input)
+		free_to_null(user_input);
 	rl_clear_history();
 }

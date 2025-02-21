@@ -6,13 +6,14 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 10:39:41 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:05:53 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void check_signal_code(t_var *var) {
+static void	check_signal_code(t_var *var)
+{
 	if (g_exit_flag == SIGINT)
 		var->code = 130;
 	g_exit_flag = 0;

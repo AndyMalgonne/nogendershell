@@ -60,25 +60,7 @@ static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 	return (free(key), free(token_value), tmp);
 }
 
-static int	expand_dollar(t_token *token, t_env *env, int exst, size_t *i)
-{
-	if (token->value[*i + 1] == '?')
-	{
-		token->value = replace_exit_status(token->value, exst, *i);
-		if (!token->value)
-			return (0);
-	}
-	else
-	{
-		token->value = replace_env_value(token->value, env, *i);
-		if (!token->value)
-			return (0);
-	}
-	*i = 0;
-	return (1);
-}
-
-static int	expand_token_value(t_token *token, t_env *env, int exit_status)
+static int	expand_token_value(t_token *token, const t_var *var)
 {
 	size_t	i;
 
@@ -87,8 +69,13 @@ static int	expand_token_value(t_token *token, t_env *env, int exit_status)
 	{
 		if (token->value[i] == '$')
 		{
-			if (!expand_dollar(token, env, exit_status, &i))
+			if (token->value[i + 1] == '?')
+				token->value = replace_exit_status(token->value, var->code, i);
+			else
+				token->value = replace_env_value(token->value, var->env, i);
+			if (!token->value)
 				return (0);
+			i = 0;
 		}
 		else
 			i++;
@@ -96,12 +83,12 @@ static int	expand_token_value(t_token *token, t_env *env, int exit_status)
 	return (1);
 }
 
-int	expand(t_token *tokens, t_env *env, int exst)
+int	expand(t_token *tokens, const t_var *var)
 {
 	while (tokens)
 	{
-		if ((tokens->type == WORD || tokens->type == STRING_DQ) \
-		&& !expand_token_value(tokens, env, exst))
+		if ((tokens->type == WORD || tokens->type == STRING_DQ)
+			&& !expand_token_value(tokens, var))
 			return (0);
 		tokens = tokens->next;
 	}

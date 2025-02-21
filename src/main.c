@@ -6,19 +6,23 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 08:31:21 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:39:41 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void check_signal_code(t_var *var) {
+	if (g_exit_flag == SIGINT)
+		var->code = 130;
+	g_exit_flag = 0;
+}
+
 static void	main_loop(t_var *var, char **user_input, t_tree **tree)
 {
 	while (get_input(user_input))
 	{
-		if (g_exit_flag == SIGINT)
-			set_and_return_code(var, 130);
-		g_exit_flag = 0;
+		check_signal_code(var);
 		if (!parse_input(*user_input, tree, var))
 			break ;
 		free_to_null(user_input);
@@ -26,6 +30,7 @@ static void	main_loop(t_var *var, char **user_input, t_tree **tree)
 			break ;
 		free_tree(tree);
 	}
+	check_signal_code(var);
 }
 
 int	main(int ac, char **av __attribute__((unused)), char **envp)

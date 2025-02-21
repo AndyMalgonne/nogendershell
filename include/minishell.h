@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 16:44:40 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:58:25 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ void		free_var(t_var *var);
 int			set_and_return_code(t_var *var, int code);
 
 // signals.c
-int			register_sigaction(int sig, struct sigaction *old,
-				void (*handler)(int));
-int			replace_sigaction(int signal, void (*handler)(int));
+int			set_signals(void (*handler_sigint)(int),
+				void (*handler_sigquit)(int));
 
 // signals_utils.c
-int			set_parent_signals(void);
-int			set_child_signals(void);
+void		handle_parent_sigint(int sig);
+void		handle_child_sigint(int sig);
+void		handle_child_sigquit(int sig);
 
 // t_env
 char		*get_env_value(t_env *env, const char *key);

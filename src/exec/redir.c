@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:37 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/21 13:04:14 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:30:07 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	redir(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 	{
 		if (dup2(fds->outfd, STDOUT_FILENO) == -1)
 			(close_fds(fds), free_all(cmd, var), exit(1));
-		close_fds(fds);
+		mclose(&(fds->outfd));
 	}
 	mclose(&pip[0]);
 	mclose(&pip[1]);

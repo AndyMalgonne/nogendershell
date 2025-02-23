@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/21 19:18:20 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/24 00:54:40 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	string_tokenizing(char **rl, t_token **head)
 	if (**rl == *start)
 		(*rl)++;
 	if (*rl - start - 2 == 0)
-		value = ft_strdup("\0");
+		value = ft_strdup("");
 	else
 		value = ft_strndup(start + 1, *rl - start - 2);
 	if (!value)

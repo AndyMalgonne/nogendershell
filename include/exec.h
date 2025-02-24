@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 18:21:12 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:23:22 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,5 @@ void	increment_random_bytes(unsigned char random_bytes[], int alphanum_size);
 // Utils functions
 int		wait_children(int pid);
 void	init_and_reset_pipes(int pip[2]);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 17:39:30 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:12:55 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ int		bi_env(t_env *env);
 int		bi_unset(char **str, t_env **env);
 
 // Builtin exec functions
+int		handle_builtin(t_fds *fds, int pip[2], t_tree *cmd);
 bool	is_builtin(t_tree *node);
-void	launch_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *var);
+void	launch_builtin(t_fds *fds, int pip[2], t_tree *cmd);
 
 // Exec functions
 int		minishell_exec(t_tree *cmd, t_var *var);
@@ -52,5 +53,10 @@ char	*r_name(unsigned char r_bytes[], const char alpha[],
 			int alpha_size, int size);
 int		get_random_bytes(unsigned char random_bytes[], int size);
 void	increment_random_bytes(unsigned char random_bytes[], int alphanum_size);
+
+// Utils functions
+int		wait_children(int pid);
+void	init_and_reset_pipes(int pip[2]);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 17:40:09 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:40:57 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,13 @@ int minishell_exec(t_tree *cmd, t_var *var)
         pip[1] = -1;
         if (cmd->next && pipe(pip) == -1)
             return (error(var, "pipe failed", 1));
+		if(is_builtin(cmd))
+		{
+			launch_builtin(&fds, pip, cmd, var);
+			(mclose(&pip[0]), mclose(&pip[1]));
+			cmd = cmd->next;
+			continue ;
+		}
         pid = fork();
         if (pid < 0)
             return (error(var, "fork failed", 1));
@@ -89,14 +96,13 @@ int minishell_exec(t_tree *cmd, t_var *var)
             mclose(&(fds.prev_fd));
         if (cmd->next)
         {
-			mclose(&pip[0]);
-            fds.prev_fd = pip[0];
+			fds.prev_fd = pip[0];
             mclose(&pip[1]);
         }
         else
         {
             mclose(&pip[0]);
-            mclose(&pip[1]);
+			mclose(&pip[1]);
         }
         cmd = cmd->next;
     }

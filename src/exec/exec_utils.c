@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/31 08:30:59 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 18:26:02 by amalgonn         ###   ########.fr       */
+/*   Created: 2025/02/24 17:52:15 by amalgonn          #+#    #+#             */
+/*   Updated: 2025/02/24 18:12:37 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	bi_pwd(void)
+int	wait_children(int pid)
 {
-	char	cwd[PATH_MAX];
+	int	wstatus;
+	int	code;
 
-	if (getcwd(cwd, PATH_MAX))
-		return (ft_putendl_fd(cwd, 1), 0);
-	else
-		return (ft_putendl_fd(strerror(errno), 2), 1);
+	wstatus = 0;
+	code = 0;
+	while (errno != ECHILD)
+	{
+		if (wait(&wstatus) == pid)
+		{
+			if (WIFEXITED(wstatus))
+				code = WEXITSTATUS(wstatus);
+			else
+				code = 128 + WTERMSIG(wstatus);
+		}
+	}
+	if (pid == -1)
+		return (127);
+	return (code);
+}
+
+void	init_and_reset_pipes(int pip[2])
+{
+	pip[0] = -1;
+	pip[1] = -1;
 }

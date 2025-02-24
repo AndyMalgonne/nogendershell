@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 08:41:22 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:19:04 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,10 @@ void	exec_cmd(const t_tree *cmd, t_var *var)
 	exit(0);
 }
 
-int	wait_children(int pid)
-{
-	int	wstatus;
-	int	code;
-
-	wstatus = 0;
-	code = 0;
-	while (errno != ECHILD)
-	{
-		if (wait(&wstatus) == pid)
-		{
-			if (WIFEXITED(wstatus))
-				code = WEXITSTATUS(wstatus);
-			else
-				code = 128 + WTERMSIG(wstatus);
-		}
-	}
-	if (pid == -1)
-		return (127);
-	return (code);
-}
-
 void	children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 {
 	if (io_files(cmd->io, fds) < 0)
-		(free_all(cmd, var), exit(1));
+		(mclose(&pip[0]), mclose(&pip[1]), free_all(var->head, var), exit(1));
 	redir(fds, pip, cmd, var);
 	exec_cmd(cmd, var);
 }
@@ -67,6 +45,19 @@ void	init_fds_and_pid(t_fds *fds, pid_t *pid)
 	*pid = 0;
 }
 
+void	parent_process(t_fds *fds, int pip[2], const t_tree *cmd)
+{
+	if (fds->prev_fd != -1)
+		mclose(&(fds->prev_fd));
+	if (cmd->next)
+	{
+		fds->prev_fd = pip[0];
+		mclose(&pip[1]);
+	}
+	else
+		(mclose(&pip[0]), mclose(&pip[1]));
+}
+
 int	minishell_exec(t_tree *cmd, t_var *var)
 {
 	int		pip[2];
@@ -76,19 +67,20 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 	init_fds_and_pid(&fds, &pid);
 	while (cmd)
 	{
-		if (pipe(pip) == -1)
+		init_and_reset_pipes(pip);
+		if (cmd->next && pipe(pip) == -1)
 			return (error(var, "pipe failed", 1));
+		if (handle_builtin(&fds, pip, cmd))
+		{
+			cmd = cmd->next;
+			continue ;
+		}
 		pid = fork();
 		if (pid < 0)
 			return (error(var, "fork failed", 1));
 		if (pid == 0)
 			children_process(&fds, pip, cmd, var);
-		if (fds.prev_fd != -1)
-			mclose(&(fds.prev_fd));
-		if (cmd->next)
-			(mclose(&pip[1]), fds.prev_fd = pip[0]);
-		else
-			(mclose(&pip[0]), mclose(&pip[1]));
+		parent_process(&fds, pip, cmd);
 		cmd = cmd->next;
 	}
 	var->code = wait_children(pid);

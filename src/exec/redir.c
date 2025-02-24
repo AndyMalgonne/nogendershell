@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:37 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/24 08:41:55 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:04:20 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,17 @@ void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var)
 			(close_fds(fds), free_all(var->head, var), exit(1));
 		mclose(&(fds->infd));
 	}
-	if (cmd->next && dup2(pip[1], STDOUT_FILENO) == -1)
-		(mclose(&pip[1]), free_all(var->head, var), exit(1));
+	if (cmd->next)
+	{
+		if (dup2(pip[1], STDOUT_FILENO) == -1)
+			(close_fds(fds), free_all(var->head, var), exit(1));
+		mclose(&pip[0]);
+		mclose(&pip[1]);
+	}
 	if (fds->outfd > 1)
 	{
 		if (dup2(fds->outfd, STDOUT_FILENO) == -1)
 			(close_fds(fds), free_all(var->head, var), exit(1));
 		mclose(&(fds->outfd));
 	}
-	mclose(&pip[0]);
-	mclose(&pip[1]);
 }

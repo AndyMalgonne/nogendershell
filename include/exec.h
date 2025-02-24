@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 18:27:23 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 19:25:24 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		bi_unset(char **str, t_env **env);
 
 // Builtin exec functions
 int		handle_builtin(t_fds *fds, int pip[2], t_tree *cmd);
-bool	is_builtin(const t_tree *cmd);
 void	launch_builtin(t_fds *fds, const int pip[2], t_tree *cmd);
 
 // Exec functions

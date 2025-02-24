@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/22 09:23:55 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:37:17 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ void	launch_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *var);
 
 // Exec functions
 int		minishell_exec(t_tree *cmd, t_var *var);
-void	exec_cmd(t_tree *cmd, t_var *var);
+void	exec_cmd(const t_tree *cmd, t_var *var);
 
 // Redir functions
-void	redir(t_fds *fds, int pip[2], t_tree *cmd, t_var *var);
+void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var);
 int		io_files(t_iofile *io, t_fds *fds);
 void	close_fds(t_fds *fds);
 

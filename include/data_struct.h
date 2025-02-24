@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:17:26 by abasdere          #+#    #+#             */
-/*   Updated: 2025/01/31 16:38:21 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/24 08:38:04 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
-typedef struct s_var
-{
-	t_env			*env;
-	int				code;
-}					t_var;
-
 typedef struct s_iofile
 {
 	t_iotype		type;
@@ -47,5 +41,12 @@ typedef struct s_tree
 	t_iofile		*io;
 	struct s_tree	*next;
 }					t_tree;
+
+typedef struct s_var
+{
+	t_env			*env;
+	int				code;
+	t_tree			*head;
+}					t_var;
 
 #endif

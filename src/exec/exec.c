@@ -6,26 +6,26 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 10:23:10 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:36:58 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_cmd(t_tree *cmd, t_var *var)
+void	exec_cmd(const t_tree *cmd, t_var *var)
 {
 	char	**env_array;
 	char	*full_cmd;
 
 	env_array = linked_list_to_array(var->env);
 	if (!env_array)
-		(perror("Malloc failed"), free_all(cmd, var), exit(1));
+		(perror("Malloc failed"), free_all(var->head, var), exit(1));
 	full_cmd = find_file(cmd->cmd[0], var);
 	if (!full_cmd)
-		(ft_fsplit(env_array), free_all(cmd, var), exit(127));
+		(ft_fsplit(env_array), free_all(var->head, var), exit(127));
 	if (execve(full_cmd, cmd->cmd, env_array) == -1)
 		(perror("execve failed"), free(full_cmd), ft_fsplit(env_array),
-			free_all(cmd, var), exit(1));
+			free_all(var->head, var), exit(1));
 	exit(0);
 }
 

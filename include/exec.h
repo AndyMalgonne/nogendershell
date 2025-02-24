@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 12:40:31 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 08:41:48 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int		bi_unset(char **str, t_env **env);
 
 // Exec functions
 int		minishell_exec(t_tree *cmd, t_var *var);
-void	exec_cmd(t_tree *cmd, t_var *var);
+void	exec_cmd(const t_tree *cmd, t_var *var);
 
 // Redir functions
-void	redir(t_fds *fds, int pip[2], t_tree *cmd, t_var *var);
+void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var);
 int		io_files(t_iofile *io, t_fds *fds);
 
 // Path functions

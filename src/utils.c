@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:02:20 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/24 10:38:22 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:00:15 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	*free_to_null(void *p)
 
 int	mclose(int *fd)
 {
-	if (*fd >= 0)
+	if (*fd != -1 && *fd != STDIN_FILENO
+		&& *fd != STDOUT_FILENO && *fd != STDERR_FILENO)
     {
         close(*fd);
         *fd = -1;

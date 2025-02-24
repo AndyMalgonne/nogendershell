@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 17:39:02 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:40:37 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,29 @@ void	exec_builtin(t_tree *cmd)
 		bi_pwd();
 }
 
-void launch_builtin(t_fds *fds, t_tree *cmd, t_var *var)
+void launch_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 {
-    int saved_stdout = dup(STDOUT_FILENO);
-    int saved_stdin = dup(STDIN_FILENO);
-
+	(void)var;
     if (io_files(cmd->io, fds) < 0)
-        (free_all(cmd, var), exit(1));
-    if (fds->infd > 0)
-    {
-        if (dup2(fds->infd, STDIN_FILENO) == -1)
-            (close_fds(fds), free_all(cmd, var), exit(1));
-        mclose(&(fds->infd));
-    }
+		return;
+    int saved_stdout = -1;
     if (fds->outfd > 1)
     {
+        saved_stdout = dup(STDOUT_FILENO);
         if (dup2(fds->outfd, STDOUT_FILENO) == -1)
-            (close_fds(fds), free_all(cmd, var), exit(1));
-        mclose(&(fds->outfd));
+			return ;
+        mclose(&fds->outfd);
+    }
+    else if (cmd->next)
+    {
+        saved_stdout = dup(STDOUT_FILENO);
+        if (dup2(pip[1], STDOUT_FILENO) == -1)
+			return ;
     }
     exec_builtin(cmd);
-    if (saved_stdin != -1)
-    {
-        if (dup2(saved_stdin, STDIN_FILENO) == -1)
-            (close(saved_stdin), close_fds(fds), free_all(cmd, var), exit(1));
-        mclose(&saved_stdin);
-    }
-
     if (saved_stdout != -1)
     {
-        if (dup2(saved_stdout, STDOUT_FILENO) == -1)
-            (close(saved_stdout), close_fds(fds), free_all(cmd, var), exit(1));
+        dup2(saved_stdout, STDOUT_FILENO);
         mclose(&saved_stdout);
     }
 }

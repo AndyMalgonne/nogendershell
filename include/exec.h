@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 19:25:24 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 19:36:24 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_fds
 {
 	int	infd;
 	int	outfd;
+	int heredocfd;
 	int	prev_fd;
 }	t_fds;
 
@@ -47,11 +48,11 @@ void	close_fds(t_fds *fds);
 char	*find_file(char *cmd, t_var *var);
 
 // Here_doc functions
-char	*find_heredoc_file(void);
 char	*r_name(unsigned char r_bytes[], const char alpha[],
 			int alpha_size, int size);
 int		get_random_bytes(unsigned char random_bytes[], int size);
 void	increment_random_bytes(unsigned char random_bytes[], int alphanum_size);
+int		get_here_doc(char *del);
 
 // Utils functions
 int		wait_children(int pid);

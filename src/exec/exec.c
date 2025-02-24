@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 18:19:04 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:33:59 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	init_fds_and_pid(t_fds *fds, pid_t *pid)
 	fds->prev_fd = -1;
 	fds->infd = 0;
 	fds->outfd = 1;
+	fds->heredocfd = -1;
 	*pid = 0;
 }
 
@@ -58,6 +59,26 @@ void	parent_process(t_fds *fds, int pip[2], const t_tree *cmd)
 		(mclose(&pip[0]), mclose(&pip[1]));
 }
 
+static int process_heredoc(t_tree *cmd, t_fds *fds)
+{
+    t_iofile *io;
+
+    io = cmd->io;
+    while (io)
+    {
+        if (io->type == HEREDOC)
+        {
+            if (fds->heredocfd > 0)
+                mclose(&(fds->heredocfd));
+            fds->heredocfd = get_here_doc(io->value);
+            if (fds->heredocfd < 0)
+                return (-1);
+        }
+        io = io->next;
+    }
+    return (0);
+}
+
 int	minishell_exec(t_tree *cmd, t_var *var)
 {
 	int		pip[2];
@@ -69,7 +90,12 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 	{
 		init_and_reset_pipes(pip);
 		if (cmd->next && pipe(pip) == -1)
-			return (error(var, "pipe failed", 1));
+		return (error(var, "pipe failed", 1));
+		if (process_heredoc(cmd, &fds) < 0) // Handle heredoc first
+        {
+            close_fds(&fds);
+            return (error(var, "heredoc failed", 1));
+        }
 		if (handle_builtin(&fds, pip, cmd))
 		{
 			cmd = cmd->next;
@@ -84,5 +110,6 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 		cmd = cmd->next;
 	}
 	var->code = wait_children(pid);
+	close_fds(&fds);
 	return (1);
 }

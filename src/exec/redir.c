@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:37 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/24 18:04:20 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:27:04 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	close_fds(t_fds *fds)
 	mclose(&(fds->prev_fd));
 	mclose(&(fds->infd));
 	mclose(&(fds->outfd));
+	mclose(&(fds->heredocfd));
 }
 
 int	handle_fd_error(const t_iofile *io, t_fds *fds)
@@ -67,6 +68,12 @@ void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var)
 		if (dup2(fds->prev_fd, STDIN_FILENO) == -1)
 			(close_fds(fds), free_all(var->head, var), exit(1));
 		mclose(&(fds->prev_fd));
+	}
+	if (fds->heredocfd > 0)
+	{
+		if (dup2(fds->heredocfd, STDIN_FILENO) == -1)
+			(close_fds(fds), free_all(var->head, var), exit(1));
+		mclose(&(fds->heredocfd));
 	}
 	if (fds->infd > 0)
 	{

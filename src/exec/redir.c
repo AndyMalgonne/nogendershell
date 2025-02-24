@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:37 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/21 13:30:07 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 10:34:58 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,31 @@ int	io_files(t_iofile *io, t_fds *fds)
 	return (0);
 }
 
-void	redir(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
+void redir(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 {
-	if (fds->prev_fd != -1)
+    if (fds->prev_fd != -1)
+    {
+        if (dup2(fds->prev_fd, STDIN_FILENO) == -1)
+            (close_fds(fds), free_all(cmd, var), exit(1));
+        mclose(&(fds->prev_fd));
+    }
+    if (fds->infd > 0)
+    {
+        if (dup2(fds->infd, STDIN_FILENO) == -1)
+            (close_fds(fds), free_all(cmd, var), exit(1));
+        mclose(&(fds->infd));
+    }
+	if (cmd->next)
 	{
-		if (dup2(fds->prev_fd, STDIN_FILENO) == -1)
+		if (dup2(pip[1], STDOUT_FILENO) == -1)
 			(close_fds(fds), free_all(cmd, var), exit(1));
-		mclose(&(fds->prev_fd));
+		mclose(&pip[0]);
+		mclose(&pip[1]);
 	}
-	if (fds->infd > 0)
-	{
-		if (dup2(fds->infd, STDIN_FILENO) == -1)
-			(close_fds(fds), free_all(cmd, var), exit(1));
-		mclose(&(fds->infd));
-	}
-	if (cmd->next && dup2(pip[1], STDOUT_FILENO) == -1)
-		(mclose(&pip[1]), free_all(cmd, var), exit(1));
-	if (fds->outfd > 1)
-	{
+    if (fds->outfd > 1)
+    {
 		if (dup2(fds->outfd, STDOUT_FILENO) == -1)
 			(close_fds(fds), free_all(cmd, var), exit(1));
-		mclose(&(fds->outfd));
-	}
-	mclose(&pip[0]);
-	mclose(&pip[1]);
+        mclose(&(fds->outfd));
+    }
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 18:58:03 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/24 08:38:09 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static void	main_loop(t_var *var, char **user_input, t_tree **tree)
 		if (!set_signals(&handle_child_sigint, &handle_child_sigquit)
 			|| !parse_input(*user_input, tree, var))
 			break ;
-		free_to_null(user_input);
+		(free_to_null(user_input), var->head = *tree);
 		if (!minishell_exec(*tree, var))
 			break ;
-		free_tree(tree);
+		(free_tree(tree), var->head = NULL);
 	}
 	check_signal_code(var);
 }

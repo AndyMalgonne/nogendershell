@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 18:13:03 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 18:19:04 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	init_fds_and_pid(t_fds *fds, pid_t *pid)
 	*pid = 0;
 }
 
-void	parent_process(t_fds *fds, int pip[2], t_tree *cmd)
+void	parent_process(t_fds *fds, int pip[2], const t_tree *cmd)
 {
 	if (fds->prev_fd != -1)
 		mclose(&(fds->prev_fd));

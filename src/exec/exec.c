@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 17:39:44 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:40:09 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	wait_children(int pid)
 void children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 {
     if (io_files(cmd->io, fds) < 0)
-        (mclose(&pip[0]), mclose(&pip[1]), free_all(cmd, var), exit(1));
+        (mclose(&pip[0]), mclose(&pip[1]), free_all(var->head, var), exit(1));
     redir(fds, pip, cmd, var);
     exec_cmd(cmd, var);
 }
@@ -89,6 +89,7 @@ int minishell_exec(t_tree *cmd, t_var *var)
             mclose(&(fds.prev_fd));
         if (cmd->next)
         {
+			mclose(&pip[0]);
             fds.prev_fd = pip[0];
             mclose(&pip[1]);
         }

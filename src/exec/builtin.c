@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 17:40:37 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:41:29 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 bool	is_builtin(t_tree *cmd)
 {
+	if (!cmd || !cmd->cmd || !cmd->cmd[0])
+        return (false);
 	if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
 		return (true);
 	return (false);
@@ -50,4 +52,9 @@ void launch_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
         dup2(saved_stdout, STDOUT_FILENO);
         mclose(&saved_stdout);
     }
+	if (!cmd->next && fds->prev_fd != -1)
+	{
+		mclose(&fds->prev_fd);
+		fds->prev_fd = -1;
+	}
 }

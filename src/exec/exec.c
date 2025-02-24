@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 17:40:57 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:41:16 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	wait_children(int pid)
 
 void children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 {
-    if (io_files(cmd->io, fds) < 0)
-        (mclose(&pip[0]), mclose(&pip[1]), free_all(var->head, var), exit(1));
-    redir(fds, pip, cmd, var);
-    exec_cmd(cmd, var);
+	if (io_files(cmd->io, fds) < 0)
+		(mclose(&pip[0]), mclose(&pip[1]), free_all(var->head, var), exit(1));
+	redir(fds, pip, cmd, var);
+	exec_cmd(cmd, var);
 }
 
 void	init_fds_and_pid(t_fds *fds, pid_t *pid)
@@ -80,12 +80,12 @@ int minishell_exec(t_tree *cmd, t_var *var)
         pip[1] = -1;
         if (cmd->next && pipe(pip) == -1)
             return (error(var, "pipe failed", 1));
-		if(is_builtin(cmd))
+		if (is_builtin(cmd))
 		{
 			launch_builtin(&fds, pip, cmd, var);
 			(mclose(&pip[0]), mclose(&pip[1]));
 			cmd = cmd->next;
-			continue ;
+			continue;
 		}
         pid = fork();
         if (pid < 0)
@@ -100,10 +100,7 @@ int minishell_exec(t_tree *cmd, t_var *var)
             mclose(&pip[1]);
         }
         else
-        {
-            mclose(&pip[0]);
-			mclose(&pip[1]);
-        }
+            (mclose(&pip[0]), mclose(&pip[1]));
         cmd = cmd->next;
     }
     var->code = wait_children(pid);

@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 10:21:18 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:49:19 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 		return (error(var, "pipe failed", 1));
 		if (handle_builtin(&fds, pip, cmd))
 		{
-			close_fds(&fds);
 			cmd = cmd->next;
 			continue ;
 		}

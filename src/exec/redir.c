@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:37 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/24 20:27:04 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:55:09 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int	handle_fd_error(const t_iofile *io, t_fds *fds)
 	if (fds->infd < 0 || fds->outfd < 0)
 	{
 		perror(io->value);
-		mclose(&(fds->infd));
-		mclose(&(fds->outfd));
+		close_fds(fds);
 		return (-1);
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 11:00:27 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:53:57 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,7 @@ void	launch_builtin(t_fds *fds, const int pip[2], t_tree *cmd)
 		mclose(&saved_stdout);
 	}
 	if (!cmd->next && fds->prev_fd != -1)
-	{
 		mclose(&fds->prev_fd);
-		fds->prev_fd = -1;
-	}
+	(mclose(&fds->infd), fds->infd = 0);
+	(mclose(&fds->outfd), fds->outfd = 1);
 }

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:09:35 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/31 14:20:19 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:27:09 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	get_here_doc(char *del)
 	fd[1] = open(file, O_RDONLY);
 	(unlink(file), free(file));
 	if (fd[0] < 0 || fd[1] < 0)
-		return (free(del), close(fd[0]), close(fd[1]), -1);
+		return (free(del), mclose(&fd[0]), mclose(&fd[1]), -1);
 	if (write_to_heredoc(fd[0], del) < 0)
-		return (free(del), close(fd[0]), close(fd[1]), -1);
-	return (free(del), close(fd[0]), fd[1]);
+		return (free(del), mclose(&fd[0]), mclose(&fd[1]), -1);
+	return (free(del), mclose(&fd[0]), fd[1]);
 }

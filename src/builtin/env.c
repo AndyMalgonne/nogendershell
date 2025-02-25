@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:28:05 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 18:02:44 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:25:47 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,5 @@
 int	bi_env(t_var *env)
 {
 	print_env(env->env);
-	return(0);
+	return (0);
 }

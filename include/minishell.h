@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/21 18:58:25 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/26 00:16:03 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void		handle_child_sigint(int sig);
 void		handle_child_sigquit(int sig);
 
 // t_env
+int			split_env(const char *env_str, char **key, char **value);
 char		*get_env_value(t_env *env, const char *key);
 char		**get_path_from_env(t_env *env, int *error);
 

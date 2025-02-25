@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 18:35:26 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:52:39 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static bool	is_builtin(const t_tree *cmd)
 		return (true);
 	if (ft_strcmp(cmd->cmd[0], "env") == 0)
 		return (true);
+	if (ft_strcmp(cmd->cmd[0], "echo") == 0)
+		return (true);
 	return (false);
 }
 
@@ -29,6 +31,8 @@ void	exec_builtin(const t_tree *cmd, t_var *env)
 		bi_pwd();
 	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
 		bi_env(env, cmd->cmd[1]);
+	else if (ft_strcmp(cmd->cmd[0], "echo") == 0)
+		bi_echo(cmd->cmd);
 }
 
 int	handle_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *env)

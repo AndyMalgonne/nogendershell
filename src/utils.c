@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:02:20 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/25 20:50:13 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/25 21:30:30 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	error(t_var *var, const char *msg, int code)
 {
 	if (msg)
 	{
-		ft_putstr_fd((char *)msg, STDERR_FILENO);
-		ft_putstr_fd("\n", STDERR_FILENO);
+		write(STDERR_FILENO, msg, ft_strlen(msg));
+		write(STDERR_FILENO, "\n", 1);
 	}
 	if (var)
 		var->code = code;

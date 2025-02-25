@@ -61,6 +61,7 @@ void		handle_child_sigquit(int sig);
 int			split_env(const char *env_str, char **key, char **value);
 char		*get_env_value(t_env *env, const char *key);
 char		**get_path_from_env(t_env *env, int *error);
+t_env		*get_node_from_key(t_env *env, const char *key);
 
 //t_iofile
 t_iofile	*new_iofile(t_iotype type, const char *value);

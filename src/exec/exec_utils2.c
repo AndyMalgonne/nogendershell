@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:09:54 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/25 14:14:43 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:06:41 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	handle_heredoc(t_tree *cmd, t_fds *fds, t_var *var)
 	return (0);
 }
 
-int	handle_builtin_and_continue(t_fds *fds, int pip[2], t_tree **cmd)
+int	handle_builtin_and_continue(t_fds *fds, int pip[2], t_tree **cmd, t_var *env)
 {
-	if (handle_builtin(fds, pip, *cmd))
+	if (handle_builtin(fds, pip, *cmd, env))
 	{
 		*cmd = (*cmd)->next;
 		return (1);

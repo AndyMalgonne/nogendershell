@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:37 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/25 11:55:09 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:12:58 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,8 @@ int	io_files(t_iofile *io, t_fds *fds)
 	return (0);
 }
 
-void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var)
+void	handle_input_redirection(t_fds *fds, t_var *var)
 {
-	if (fds->prev_fd != -1)
-	{
-		if (dup2(fds->prev_fd, STDIN_FILENO) == -1)
-			(close_fds(fds), free_all(var->head, var), exit(1));
-		mclose(&(fds->prev_fd));
-	}
 	if (fds->heredocfd > 0)
 	{
 		if (dup2(fds->heredocfd, STDIN_FILENO) == -1)
@@ -80,6 +74,17 @@ void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var)
 			(close_fds(fds), free_all(var->head, var), exit(1));
 		mclose(&(fds->infd));
 	}
+}
+
+void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var)
+{
+	if (fds->prev_fd != -1)
+	{
+		if (dup2(fds->prev_fd, STDIN_FILENO) == -1)
+			(close_fds(fds), free_all(var->head, var), exit(1));
+		mclose(&(fds->prev_fd));
+	}
+	handle_input_redirection(fds, var);
 	if (cmd->next)
 	{
 		if (dup2(pip[1], STDOUT_FILENO) == -1)

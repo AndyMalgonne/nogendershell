@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 13:49:19 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:14:34 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,6 @@ void	children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 	exec_cmd(cmd, var);
 }
 
-void	init_fds_and_pid(t_fds *fds, pid_t *pid)
-{
-	fds->prev_fd = -1;
-	fds->infd = 0;
-	fds->outfd = 1;
-	fds->heredocfd = -1;
-	*pid = 0;
-}
-
 void	parent_process(t_fds *fds, int pip[2], const t_tree *cmd)
 {
 	if (fds->prev_fd != -1)
@@ -62,26 +53,6 @@ void	parent_process(t_fds *fds, int pip[2], const t_tree *cmd)
 		(mclose(&pip[0]), mclose(&pip[1]), mclose(&fds->heredocfd));
 }
 
-static int process_heredoc(t_tree *cmd, t_fds *fds)
-{
-    t_iofile *io;
-
-    io = cmd->io;
-    while (io)
-    {
-        if (io->type == HEREDOC)
-        {
-            if (fds->heredocfd > 0)
-                mclose(&(fds->heredocfd));
-            fds->heredocfd = get_here_doc(io->value);
-            if (fds->heredocfd < 0)
-                return (mclose(&fds->heredocfd), -1);
-        }
-        io = io->next;
-    }
-    return (0);
-}
-
 int	minishell_exec(t_tree *cmd, t_var *var)
 {
 	int		pip[2];
@@ -92,23 +63,14 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 	while (cmd)
 	{
 		init_and_reset_pipes(pip);
-		if (process_heredoc(cmd, &fds) < 0) // Handle heredoc first
-		{
-			close_fds(&fds);
-			return (error(var, "heredoc failed", 1));
-		}
+		if (handle_heredoc(cmd, &fds, var))
+			return (1);
 		if (cmd->next && pipe(pip) == -1)
-		return (error(var, "pipe failed", 1));
-		if (handle_builtin(&fds, pip, cmd))
-		{
-			cmd = cmd->next;
+			return (error(var, "pipe failed", 1));
+		if (handle_builtin_and_continue(&fds, pip, &cmd))
 			continue ;
-		}
-		pid = fork();
-		if (pid < 0)
-			return (error(var, "fork failed", 1));
-		if (pid == 0)
-			children_process(&fds, pip, cmd, var);
+		if (handle_fork(&fds, pip, cmd, var))
+			return (1);
 		parent_process(&fds, pip, cmd);
 		cmd = cmd->next;
 	}

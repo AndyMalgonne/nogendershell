@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:09:35 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 11:27:09 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:11:38 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,24 @@ int	get_here_doc(char *del)
 	if (write_to_heredoc(fd[0], del) < 0)
 		return (free(del), mclose(&fd[0]), mclose(&fd[1]), -1);
 	return (free(del), mclose(&fd[0]), fd[1]);
+}
+
+int	process_heredoc(t_tree *cmd, t_fds *fds)
+{
+	t_iofile	*io;
+
+	io = cmd->io;
+	while (io)
+	{
+		if (io->type == HEREDOC)
+		{
+			if (fds->heredocfd > 0)
+				mclose(&(fds->heredocfd));
+			fds->heredocfd = get_here_doc(io->value);
+			if (fds->heredocfd < 0)
+				return (mclose(&fds->heredocfd), -1);
+		}
+		io = io->next;
+	}
+	return (0);
 }

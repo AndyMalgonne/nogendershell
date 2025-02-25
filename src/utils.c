@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 10:02:20 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/24 18:23:00 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:50:13 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int	mclose(int *fd)
 int	error(t_var *var, const char *msg, int code)
 {
 	if (msg)
-		perror(msg);
+	{
+		ft_putstr_fd((char *)msg, STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+	}
 	if (var)
 		var->code = code;
 	return (0);

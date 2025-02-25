@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 18:35:26 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:10:00 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	launch_builtin(t_fds *fds, const int pip[2], t_tree *cmd, t_var *env)
 {
 	int	saved_stdout;
 
-	if (io_files(cmd->io, fds) < 0)
+	if (io_files(cmd->io, fds, env) < 0)
 		return ;
 	saved_stdout = redirect_output(fds, pip, cmd);
 	exec_builtin(cmd, env);

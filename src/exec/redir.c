@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 12:18:37 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/25 14:12:58 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:08:01 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ void	close_fds(t_fds *fds)
 	mclose(&(fds->heredocfd));
 }
 
-int	handle_fd_error(const t_iofile *io, t_fds *fds)
+int	handle_fd_error(const t_iofile *io, t_fds *fds, t_var *var)
 {
 	if (fds->infd < 0 || fds->outfd < 0)
 	{
-		perror(io->value);
+		error(var, io->value, 1);
 		close_fds(fds);
 		return (-1);
 	}
 	return (0);
 }
 
-int	io_files(t_iofile *io, t_fds *fds)
+int	io_files(t_iofile *io, t_fds *fds, t_var *var)
 {
 	while (io)
 	{
@@ -53,7 +53,7 @@ int	io_files(t_iofile *io, t_fds *fds)
 				mclose(&(fds->outfd));
 			fds->outfd = open(io->value, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		}
-		if (handle_fd_error(io, fds) < 0)
+		if (handle_fd_error(io, fds, var) < 0)
 			return (-1);
 		io = io->next;
 	}

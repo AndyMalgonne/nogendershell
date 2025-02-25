@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 18:24:54 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:08:58 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,21 @@ void	exec_cmd(const t_tree *cmd, t_var *var)
 
 	env_array = linked_list_to_array(var->env);
 	if (!env_array)
-		(perror("Malloc failed"), free_all(var->head, var), exit(1));
+		(error(var, "Malloc failed", 1), \
+		free_all(var->head, var), exit(1));
 	full_cmd = find_file(cmd->cmd[0], var);
 	if (!full_cmd)
 		(ft_fsplit(env_array), free_all(var->head, var), exit(127));
 	if (execve(full_cmd, cmd->cmd, env_array) == -1)
-		(perror("execve failed"), free(full_cmd), ft_fsplit(env_array),
+		(error(var, "execve failed", 1), \
+		free(full_cmd), ft_fsplit(env_array),
 			free_all(var->head, var), exit(1));
 	exit(0);
 }
 
 void	children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 {
-	if (io_files(cmd->io, fds) < 0)
+	if (io_files(cmd->io, fds, var) < 0)
 		(mclose(&pip[0]), mclose(&pip[1]), free_all(var->head, var), exit(1));
 	redir(fds, pip, cmd, var);
 	exec_cmd(cmd, var);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:17:34 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/20 12:41:39 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/25 21:03:20 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static int	nb_args(char **args)
 	return (i);
 }
 
-static int	handle_write_error(void)
+static int	handle_write_error(t_var *var)
 {
-	perror("echo: write error");
+	error(var, "echo: write error", 1);
 	return (1);
 }
 
@@ -47,7 +47,7 @@ static void	check_and_flag(char **args, int *i, int *flag)
 	}
 }
 
-static int	write_newline_if_no_flag(int flag)
+static int	write_newline_if_no_flag(int flag, t_var *var)
 {
 	ssize_t	write_ret;
 
@@ -55,12 +55,12 @@ static int	write_newline_if_no_flag(int flag)
 	{
 		write_ret = write(STDOUT_FILENO, "\n", 1);
 		if (write_ret == -1)
-			return (handle_write_error());
+			return (handle_write_error(var));
 	}
 	return (0);
 }
 
-int	bi_echo(char **args)
+int	bi_echo(char **args, t_var *var)
 {
 	int		i;
 	int		flag;
@@ -73,17 +73,17 @@ int	bi_echo(char **args)
 	{
 		write_ret = write(STDOUT_FILENO, args[i], ft_strlen(args[i]));
 		if (write_ret == -1)
-			return (handle_write_error());
+			return (handle_write_error(var));
 		if (args[i + 1])
 		{
 			write_ret = write(STDOUT_FILENO, " ", 1);
 			if (write_ret == -1)
-				return (handle_write_error());
+				return (handle_write_error(var));
 		}
 		i++;
 	}
 	if (!flag)
-		if (write_newline_if_no_flag(flag) != 0)
+		if (write_newline_if_no_flag(flag, var) != 0)
 			return (1);
 	return (0);
 }

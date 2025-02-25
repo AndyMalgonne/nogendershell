@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 08:38:09 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:23:27 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ static void	check_signal_code(t_var *var)
 
 static void	main_loop(t_var *var, char **user_input, t_tree **tree)
 {
-	while (set_signals(&handle_parent_sigint, SIG_IGN) && get_input(user_input))
+	while (set_signals(&handle_parent_sigint, SIG_IGN, var) \
+		&& get_input(user_input))
 	{
 		check_signal_code(var);
-		if (!set_signals(&handle_child_sigint, &handle_child_sigquit)
+		if (!set_signals(&handle_child_sigint, &handle_child_sigquit, var)
 			|| !parse_input(*user_input, tree, var))
 			break ;
 		(free_to_null(user_input), var->head = *tree);

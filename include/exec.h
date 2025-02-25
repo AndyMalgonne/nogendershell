@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 18:36:17 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:09:09 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_env	t_env;
 // Builtin functions
 int		bi_pwd(void);
 int		bi_env(t_var *env, const char *key);
-int		bi_echo(char **args);
+int		bi_echo(char **args, t_var *var);
 int		bi_unset(char **str, t_env **env);
 
 // Builtin exec functions
@@ -42,7 +42,7 @@ void	children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var);
 
 // Redir functions
 void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var);
-int		io_files(t_iofile *io, t_fds *fds);
+int		io_files(t_iofile *io, t_fds *fds, t_var *var);
 void	close_fds(t_fds *fds);
 
 // Path functions

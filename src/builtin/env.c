@@ -3,24 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:28:05 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/01/30 13:49:13 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:48:00 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	bi_env(t_env *env)
+int	bi_env(t_var *env, const char *key)
 {
+	char	*value;
+
 	if (!env)
 		return (1);
-	while (env->next)
+	if (key)
 	{
-		if (ft_strchr(env->value, '='))
-			printf("%s\n", env->value);
-		env = env->next;
+		value = get_env_value(env->env, key);
+		if (value)
+			printf("%s=%s\n", key, value);
+		else
+			printf("env: '%s': No such file or directory\n", key);
 	}
+	else
+		print_env(env->env);
 	return (0);
 }

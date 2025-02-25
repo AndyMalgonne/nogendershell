@@ -66,7 +66,8 @@ define SRC 	:=
 		here_doc_utils.c \
 		path.c \
 		redir.c \
-		exec_utils.c
+		exec_utils.c \
+		exec_utils2.c
 	)
 	$(addprefix $(PARSING_DIR)/, \
 		checks.c \

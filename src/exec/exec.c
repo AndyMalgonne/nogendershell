@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 18:19:04 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:14:34 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,20 @@ void	children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 	exec_cmd(cmd, var);
 }
 
-void	init_fds_and_pid(t_fds *fds, pid_t *pid)
-{
-	fds->prev_fd = -1;
-	fds->infd = 0;
-	fds->outfd = 1;
-	*pid = 0;
-}
-
 void	parent_process(t_fds *fds, int pip[2], const t_tree *cmd)
 {
 	if (fds->prev_fd != -1)
+	{
+		mclose(&fds->heredocfd);
 		mclose(&(fds->prev_fd));
+	}
 	if (cmd->next)
 	{
 		fds->prev_fd = pip[0];
 		mclose(&pip[1]);
 	}
 	else
-		(mclose(&pip[0]), mclose(&pip[1]));
+		(mclose(&pip[0]), mclose(&pip[1]), mclose(&fds->heredocfd));
 }
 
 int	minishell_exec(t_tree *cmd, t_var *var)
@@ -68,18 +63,14 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 	while (cmd)
 	{
 		init_and_reset_pipes(pip);
+		if (handle_heredoc(cmd, &fds, var))
+			return (1);
 		if (cmd->next && pipe(pip) == -1)
 			return (error(var, "pipe failed", 1));
-		if (handle_builtin(&fds, pip, cmd))
-		{
-			cmd = cmd->next;
+		if (handle_builtin_and_continue(&fds, pip, &cmd))
 			continue ;
-		}
-		pid = fork();
-		if (pid < 0)
-			return (error(var, "fork failed", 1));
-		if (pid == 0)
-			children_process(&fds, pip, cmd, var);
+		if (handle_fork(&fds, pip, cmd, var))
+			return (1);
 		parent_process(&fds, pip, cmd);
 		cmd = cmd->next;
 	}

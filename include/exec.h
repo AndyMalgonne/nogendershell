@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 19:25:24 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:16:37 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_fds
 {
 	int	infd;
 	int	outfd;
+	int	heredocfd;
 	int	prev_fd;
 }	t_fds;
 
@@ -37,6 +38,7 @@ void	launch_builtin(t_fds *fds, const int pip[2], t_tree *cmd);
 // Exec functions
 int		minishell_exec(t_tree *cmd, t_var *var);
 void	exec_cmd(const t_tree *cmd, t_var *var);
+void	children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var);
 
 // Redir functions
 void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var);
@@ -47,14 +49,21 @@ void	close_fds(t_fds *fds);
 char	*find_file(char *cmd, t_var *var);
 
 // Here_doc functions
-char	*find_heredoc_file(void);
 char	*r_name(unsigned char r_bytes[], const char alpha[],
 			int alpha_size, int size);
 int		get_random_bytes(unsigned char random_bytes[], int size);
 void	increment_random_bytes(unsigned char random_bytes[], int alphanum_size);
+int		get_here_doc(char *del);
+int		process_heredoc(t_tree *cmd, t_fds *fds);
 
 // Utils functions
 int		wait_children(int pid);
 void	init_and_reset_pipes(int pip[2]);
+void	init_fds_and_pid(t_fds *fds, pid_t *pid);
+
+// Utils2 functions
+int		handle_heredoc(t_tree *cmd, t_fds *fds, t_var *var);
+int		handle_builtin_and_continue(t_fds *fds, int pip[2], t_tree **cmd);
+int		handle_fork(t_fds *fds, int pip[2], t_tree *cmd, t_var *var);
 
 #endif

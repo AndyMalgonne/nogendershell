@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/24 19:26:03 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:53:57 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ static bool	is_builtin(const t_tree *cmd)
 	return (false);
 }
 
+void	exec_builtin(const t_tree *cmd)
+{
+	if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
+		bi_pwd();
+}
+
 int	handle_builtin(t_fds *fds, int pip[2], t_tree *cmd)
 {
 	if (is_builtin(cmd))
@@ -30,12 +36,6 @@ int	handle_builtin(t_fds *fds, int pip[2], t_tree *cmd)
 		return (1);
 	}
 	return (0);
-}
-
-void	exec_builtin(const t_tree *cmd)
-{
-	if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
-		bi_pwd();
 }
 
 int	redirect_output(t_fds *fds, const int pip[2], const t_tree *cmd)
@@ -66,8 +66,6 @@ void	launch_builtin(t_fds *fds, const int pip[2], t_tree *cmd)
 	if (io_files(cmd->io, fds) < 0)
 		return ;
 	saved_stdout = redirect_output(fds, pip, cmd);
-	if (saved_stdout == -1)
-		return ;
 	exec_builtin(cmd);
 	if (saved_stdout != -1)
 	{
@@ -75,8 +73,7 @@ void	launch_builtin(t_fds *fds, const int pip[2], t_tree *cmd)
 		mclose(&saved_stdout);
 	}
 	if (!cmd->next && fds->prev_fd != -1)
-	{
 		mclose(&fds->prev_fd);
-		fds->prev_fd = -1;
-	}
+	(mclose(&fds->infd), fds->infd = 0);
+	(mclose(&fds->outfd), fds->outfd = 1);
 }

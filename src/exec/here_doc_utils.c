@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:38:10 by andytropmim       #+#    #+#             */
-/*   Updated: 2025/01/07 14:56:49 by andytropmim      ###   ########.fr       */
+/*   Updated: 2025/02/24 19:42:28 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int alpha_size, int size)
 	if (!file)
 		return (NULL);
 	i = -1;
-	while (i++ < 3)
+	while (i++ < 2)
 		file[i] = alpha[r_bytes[i] % alpha_size];
 	file[3] = '\0';
 	return (file);

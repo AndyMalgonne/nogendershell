@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 10:41:15 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:58:50 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	exec_builtin(const t_tree *cmd, t_var *env, t_fds *fds)
 	else if (ft_strcmp(cmd->cmd[0], "export") == 0)
 		bi_export(cmd, env);
 	else if (ft_strcmp(cmd->cmd[0], "unset") == 0)
-		bi_unset(cmd->cmd, &env->env);
+		bi_unset(cmd->cmd, &env);
 }
 
 int	handle_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *env)

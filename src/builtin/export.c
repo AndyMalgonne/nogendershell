@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 22:57:00 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/26 00:24:19 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:35:17 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 static bool	invalid_identifier(const char *id)
 {
-	ft_putstr_fd("export: `", 2);
-	ft_putstr_fd((char *)id, 2);
-	ft_putendl_fd("': not a valid identifier", 2);
+	ft_dprintf(STDERR_FILENO, "export: `%s': not a valid identifier\n", id);
 	return (false);
 }
 
@@ -90,7 +88,8 @@ int	bi_export(const t_tree *node, t_var *var)
 
 	i = 1;
 	if (!node || !node->cmd[1])
-		return (ft_putendl_fd("Usage: export name[=word]...", 2),
+		return (ft_putendl_fd("Usage: export name[=word]...",
+				STDERR_FILENO),
 			set_and_return_code(var, 1));
 	if (!check_args((const char **)node->cmd + 1))
 		return (set_and_return_code(var, 1));
@@ -98,7 +97,7 @@ int	bi_export(const t_tree *node, t_var *var)
 		return (set_and_return_code(var, 0));
 	while (node->cmd[i])
 		if (!export(node->cmd[i++], var))
-			return (ft_putendl_fd(ERR_MALLOC, 2),
+			return (ft_putendl_fd(ERR_MALLOC, STDERR_FILENO),
 				set_and_return_code(var, 1));
 	return (set_and_return_code(var, 0));
 }

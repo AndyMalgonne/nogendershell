@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 13:32:43 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:46:37 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	exec_builtin(const t_tree *cmd, t_var *env, t_fds *fds)
 	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
 		bi_env(cmd, env);
 	else if (ft_strcmp(cmd->cmd[0], "echo") == 0)
-		bi_echo(cmd->cmd);
+		bi_echo(cmd->cmd, env);
 	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)
 		bi_exit(cmd, env, fds);
 	else if (ft_strcmp(cmd->cmd[0], "export") == 0)

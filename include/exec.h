@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 13:32:22 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:46:17 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_env	t_env;
 int		bi_pwd(const t_tree *node, t_var *var);
 int		bi_env(const t_tree *node, t_var *var);
 int		bi_exit(const t_tree *node, t_var *var, t_fds *fds);
-int		bi_echo(char **args);
+int		bi_echo(char **args, t_var *var);
 int		bi_unset(char **cmd, t_var **var);
 int		bi_export(const t_tree *node, t_var *var);
 

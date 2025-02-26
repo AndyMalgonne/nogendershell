@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andymalgonne <andymalgonne@student.42.f    +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:17:34 by andymalgonn       #+#    #+#             */
-/*   Updated: 2024/11/20 12:41:39 by andymalgonn      ###   ########.fr       */
+/*   Updated: 2025/02/26 13:45:46 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ static int	nb_args(char **args)
 	while (args[i])
 		i++;
 	return (i);
-}
-
-static int	handle_write_error(void)
-{
-	perror("echo: write error");
-	return (1);
 }
 
 static void	check_and_flag(char **args, int *i, int *flag)
@@ -47,7 +41,7 @@ static void	check_and_flag(char **args, int *i, int *flag)
 	}
 }
 
-static int	write_newline_if_no_flag(int flag)
+static int	write_newline_if_no_flag(int flag, t_var *var)
 {
 	ssize_t	write_ret;
 
@@ -55,35 +49,46 @@ static int	write_newline_if_no_flag(int flag)
 	{
 		write_ret = write(STDOUT_FILENO, "\n", 1);
 		if (write_ret == -1)
-			return (handle_write_error());
+			return (perror("echo: write error"), set_and_return_code(var, 1));
 	}
-	return (0);
+	return (set_and_return_code(var, 0));
 }
 
-int	bi_echo(char **args)
+static int	write_args(char **args, int i, t_var *var)
 {
-	int		i;
-	int		flag;
-	int		write_ret;
+	ssize_t	write_ret;
 
-	i = 1;
-	flag = 0;
-	check_and_flag(args, &i, &flag);
 	while (args[i])
 	{
 		write_ret = write(STDOUT_FILENO, args[i], ft_strlen(args[i]));
 		if (write_ret == -1)
-			return (handle_write_error());
+			return (perror("echo: write error"), set_and_return_code(var, 1));
 		if (args[i + 1])
 		{
 			write_ret = write(STDOUT_FILENO, " ", 1);
 			if (write_ret == -1)
-				return (handle_write_error());
+				return (perror("echo: write error"),
+					set_and_return_code(var, 1));
 		}
 		i++;
 	}
-	if (!flag)
-		if (write_newline_if_no_flag(flag) != 0)
-			return (1);
 	return (0);
+}
+
+int	bi_echo(char **args, t_var *var)
+{
+	int		i;
+	int		flag;
+
+	i = 1;
+	flag = 0;
+	if (!var)
+		return (1);
+	check_and_flag(args, &i, &flag);
+	if (write_args(args, i, var) != 0)
+		return (1);
+	if (!flag)
+		if (write_newline_if_no_flag(flag, var) != 0)
+			return (1);
+	return (set_and_return_code(var, 0));
 }

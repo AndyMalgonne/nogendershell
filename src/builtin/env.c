@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:28:05 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 09:59:46 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:32:08 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	bi_env(t_var *var, const t_tree *node)
+int	bi_env(const t_tree *node, t_var *var)
 {
 	if (!var || !node)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 08:52:19 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:05:30 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static bool	is_builtin(const t_tree *cmd)
 	return (false);
 }
 
-static void	exec_builtin(t_tree *cmd, t_var *env, t_fds *fds)
+static void	exec_builtin(const t_tree *cmd, t_var *env, t_fds *fds)
 {
 	if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
 		bi_pwd();

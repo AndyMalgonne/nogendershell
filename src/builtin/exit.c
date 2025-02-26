@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 08:01:30 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/26 08:49:27 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:05:18 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static bool	check_num_arg(const char *arg)
 	return (true);
 }
 
-int	bi_exit(t_tree *node, t_var *var, t_fds *fds)
+int	bi_exit(const t_tree *node, t_var *var, t_fds *fds)
 {
 	if (node->next != NULL || var->head != node)
 		return (set_and_return_code(var, 0));

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 00:16:03 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:04:56 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 
 # define PROMPT "> "
 # define SPACES " \t"
-# define ERR_MALLOC "Malloc error"
-# define ERR_SYNTAX "Syntax error"
+# define ERR_MALLOC "nogendershell: malloc error"
+# define ERR_SYNTAX "nogendershell: syntax error"
 
 extern int	g_exit_flag;
 

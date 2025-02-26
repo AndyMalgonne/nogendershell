@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:14:54 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/21 08:19:36 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:10:04 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@ static int	check_tokens(t_token *tokens)
 	return (1);
 }
 
+static int	set_varcode_and_return(t_var *var, int code, int ret_code)
+{
+	var->code = code;
+	return (ret_code);
+}
+
 int	parse_input(char *user_input, t_tree **tree, t_var *var)
 {
 	t_token *tokens	__attribute__((cleanup(free_token_list)));
@@ -42,12 +48,16 @@ int	parse_input(char *user_input, t_tree **tree, t_var *var)
 	if (!check_open_quotes(user_input))
 		return (set_and_return_code(var, 1));
 	if (!tokenize(user_input, &tokens))
-		return (error(var, ERR_MALLOC, 1));
+		return (ft_putendl_fd(ERR_MALLOC, 2),
+			set_varcode_and_return(var, 1, 0));
 	if (!expand(tokens, var))
-		return (error(var, ERR_MALLOC, 1));
+		return (ft_putendl_fd(ERR_MALLOC, 2),
+			set_varcode_and_return(var, 1, 0));
 	if (!check_tokens(tokens))
-		return (error(var, ERR_SYNTAX, 1), 1);
+		return (ft_putendl_fd(ERR_SYNTAX, 2),
+			set_and_return_code(var, 1));
 	if (!create_tree(tree, tokens))
-		return (error(var, ERR_MALLOC, 1));
+		return (ft_putendl_fd(ERR_MALLOC, 2),
+			set_varcode_and_return(var, 1, 0));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 09:17:34 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 13:45:46 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:00:01 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ int	bi_echo(char **args, t_var *var)
 	check_and_flag(args, &i, &flag);
 	if (write_args(args, i, var) != 0)
 		return (1);
-	if (!flag)
-		if (write_newline_if_no_flag(flag, var) != 0)
-			return (1);
+	if (!flag && write_newline_if_no_flag(flag, var) != 0)
+		return (1);
 	return (set_and_return_code(var, 0));
 }

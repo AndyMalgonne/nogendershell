@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 17:52:15 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/25 14:13:35 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 08:57:06 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	wait_children(int pid)
+int	wait_children(int pid, int old_code)
 {
 	int	wstatus;
 	int	code;
 
 	wstatus = 0;
-	code = 0;
+	code = old_code;
 	while (errno != ECHILD)
 	{
 		if (wait(&wstatus) == pid)

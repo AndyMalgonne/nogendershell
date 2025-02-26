@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 18:24:54 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 08:56:46 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,6 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 		parent_process(&fds, pip, cmd);
 		cmd = cmd->next;
 	}
-	var->code = wait_children(pid);
+	var->code = wait_children(pid, var->code);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 08:51:57 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 08:56:54 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		get_here_doc(char *del);
 int		process_heredoc(t_tree *cmd, t_fds *fds);
 
 // Utils functions
-int		wait_children(int pid);
+int		wait_children(int pid, int old_code);
 void	init_and_reset_pipes(int pip[2]);
 void	init_fds_and_pid(t_fds *fds, pid_t *pid);
 

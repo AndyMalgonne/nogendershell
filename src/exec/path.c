@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 19:07:39 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 22:32:42 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**get_path_from_env(t_env *env, int *error)
 	return (paths);
 }
 
-char	*check_file_in_path(char **path, const char *cmd)
+char	*check_file_in_path(char **path, const char *cmd, t_var *var)
 {
 	int		i;
 	char	*file_path;
@@ -49,10 +49,15 @@ char	*check_file_in_path(char **path, const char *cmd)
 		free(full_cmd);
 		if (!file_path)
 			return (NULL);
-		if (access(file_path, F_OK | X_OK) == 0)
-			return (file_path);
-		free(file_path);
-		i++;
+		if (access(file_path, F_OK) == 0)
+		{
+			if (access(file_path, X_OK) == 0)
+				return (file_path);
+			else
+				return (ft_dprintf(2, "%s: Permission denied\n", cmd),
+					set_and_return_code(var, 126), free(file_path), NULL);
+		}
+		(free(file_path), i++);
 	}
 	return (NULL);
 }
@@ -97,10 +102,12 @@ char	*find_file(char *cmd, t_var *var)
 	paths = get_path_from_env(var->env, &errorr);
 	if (errorr == 2)
 		return (error(var, "Malloc failed", 1), NULL);
-	file_path = check_file_in_path(paths, cmd);
+	file_path = check_file_in_path(paths, cmd, var);
 	ft_fsplit(paths);
 	if (file_path)
 		return (free(cmd), file_path);
+	if (var->code == 126)
+		return (free(cmd), NULL);
 	set_and_return_code(var, 127);
 	ft_dprintf(2, "%s: command not found\n", cmd);
 	return (free(cmd), NULL);

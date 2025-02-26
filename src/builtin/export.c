@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 22:57:00 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/26 11:35:17 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:42:34 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ static bool	check_args(const char **args)
 	i = 0;
 	while (args[i])
 	{
-		if (args[i][0] == '=' || ft_isdigit(args[i][0]))
+		if (args[i][0] == '=' || ft_isdigit(args[i][0])
+			|| (args[i][0] == '_' && args[i][1] == '='))
 			return (invalid_identifier(args[i]));
 		j = 0;
 		while (args[i][j] && args[i][j] != '=')
 		{
-			if (!ft_isprint(args[i][j]) || is_space_tab(args[i][j]))
+			if (!ft_isalnum(args[i][j]) && args[i][j] != '_')
 				return (invalid_identifier(args[i]));
 			++j;
 		}

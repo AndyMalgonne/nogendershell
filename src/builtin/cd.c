@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:02:32 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/26 15:56:02 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:04:42 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	update_oldpwd(t_var *var)
 	t_env	*tmp;
 	char	*oldpwd;
 
+	oldpwd = NULL;
 	tmp = var->env;
 	while (tmp)
 	{

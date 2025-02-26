@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 08:56:46 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:04:19 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 {
 	int		pip[2];
 	t_fds	fds;
-	pid_t	pid;
 
-	init_fds_and_pid(&fds, &pid);
+	init_fds_and_pid(&fds);
 	while (cmd)
 	{
 		init_and_reset_pipes(pip);
@@ -74,6 +73,6 @@ int	minishell_exec(t_tree *cmd, t_var *var)
 		parent_process(&fds, pip, cmd);
 		cmd = cmd->next;
 	}
-	var->code = wait_children(pid, var->code);
+	var->code = wait_children(fds.pid, var->code);
 	return (1);
 }

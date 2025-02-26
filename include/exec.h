@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 09:05:41 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:04:29 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 
 typedef struct s_fds
 {
-	int	infd;
-	int	outfd;
-	int	heredocfd;
-	int	prev_fd;
+	int		infd;
+	int		outfd;
+	int		heredocfd;
+	int		prev_fd;
+	pid_t	pid;
 }	t_fds;
 
 typedef struct s_env	t_env;
@@ -61,7 +62,7 @@ int		process_heredoc(t_tree *cmd, t_fds *fds);
 // Utils functions
 int		wait_children(int pid, int old_code);
 void	init_and_reset_pipes(int pip[2]);
-void	init_fds_and_pid(t_fds *fds, pid_t *pid);
+void	init_fds_and_pid(t_fds *fds);
 
 // Utils2 functions
 int		handle_heredoc(t_tree *cmd, t_fds *fds, t_var *var);

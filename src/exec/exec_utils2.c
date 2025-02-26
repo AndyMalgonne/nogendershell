@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:09:54 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/25 18:25:19 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:27:28 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ int	handle_builtin_next(t_fds *fds, int pip[2], t_tree **cmd, t_var *env)
 
 int	handle_fork(t_fds *fds, int pip[2], t_tree *cmd, t_var *var)
 {
-	pid_t	pid;
-
-	pid = fork();
-	if (pid < 0)
+	fds->pid = fork();
+	if (fds->pid < 0)
 		return (error(var, "fork failed", 1));
-	if (pid == 0)
+	if (fds->pid == 0)
 		children_process(fds, pip, cmd, var);
 	return (0);
 }

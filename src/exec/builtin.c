@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 18:52:39 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 00:05:25 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static bool	is_builtin(const t_tree *cmd)
 		return (true);
 	if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		return (true);
+	if (ft_strcmp(cmd->cmd[0], "export") == 0)
+		return (true);
 	return (false);
 }
 
@@ -33,6 +35,8 @@ void	exec_builtin(const t_tree *cmd, t_var *env)
 		bi_env(env, cmd->cmd[1]);
 	else if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		bi_echo(cmd->cmd);
+	else if (ft_strcmp(cmd->cmd[0], "export") == 0)
+		bi_export(cmd, env);
 }
 
 int	handle_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *env)

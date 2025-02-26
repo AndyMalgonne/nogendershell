@@ -56,6 +56,7 @@ define SRC 	:=
 	$(addprefix $(BUILTIN_DIR)/, \
 		pwd.c \
 		echo.c \
+		export.c \
 		env.c \
 		unset.c
 	)

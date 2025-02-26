@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_env2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 12:43:14 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/13 13:39:09 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 00:15:51 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,15 @@ char	**linked_list_to_array(t_env *env)
 		return (NULL);
 	env_array[i] = NULL;
 	return (env_array);
+}
+
+t_env	*get_node_from_key(t_env *env, const char *key)
+{
+	while (env)
+	{
+		if (ft_strcmp(env->key, key) == 0)
+			return (env);
+		env = env->next;
+	}
+	return (NULL);
 }

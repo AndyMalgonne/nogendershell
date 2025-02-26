@@ -14,9 +14,7 @@
 
 static bool	invalid_identifier(const char *id)
 {
-	ft_putstr_fd("export: `", 2);
-	ft_putstr_fd((char *)id, 2);
-	ft_putendl_fd("': not a valid identifier", 2);
+	ft_dprintf(STDERR_FILENO, "export: `%s': not a valid identifier\n", id);
 	return (false);
 }
 
@@ -28,12 +26,13 @@ static bool	check_args(const char **args)
 	i = 0;
 	while (args[i])
 	{
-		if (args[i][0] == '=' || ft_isdigit(args[i][0]))
+		if (args[i][0] == '=' || ft_isdigit(args[i][0])
+			|| (args[i][0] == '_' && args[i][1] == '='))
 			return (invalid_identifier(args[i]));
 		j = 0;
 		while (args[i][j] && args[i][j] != '=')
 		{
-			if (!ft_isprint(args[i][j]) || is_space_tab(args[i][j]))
+			if (!ft_isalnum(args[i][j]) && args[i][j] != '_')
 				return (invalid_identifier(args[i]));
 			++j;
 		}
@@ -90,7 +89,8 @@ int	bi_export(const t_tree *node, t_var *var)
 
 	i = 1;
 	if (!node || !node->cmd[1])
-		return (ft_putendl_fd("Usage: export name[=word]...", 2),
+		return (ft_putendl_fd("Usage: export name[=word]...",
+				STDERR_FILENO),
 			set_and_return_code(var, 1));
 	if (!check_args((const char **)node->cmd + 1))
 		return (set_and_return_code(var, 1));
@@ -99,6 +99,7 @@ int	bi_export(const t_tree *node, t_var *var)
 	while (node->cmd[i])
 		if (!using_export(node->cmd[i++], var))
 			return (ft_putendl_fd(ERR_MALLOC, 2),
+
 				set_and_return_code(var, 1));
 	return (set_and_return_code(var, 0));
 }

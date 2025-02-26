@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:09:35 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/25 14:11:38 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:55:38 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int	process_heredoc(t_tree *cmd, t_fds *fds)
 	{
 		if (io->type == HEREDOC)
 		{
+			set_signals(&handle_child_sigint, SIG_IGN);
 			if (fds->heredocfd > 0)
 				mclose(&(fds->heredocfd));
 			fds->heredocfd = get_here_doc(io->value);

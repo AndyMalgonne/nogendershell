@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andytropmimi <andytropmimi@student.42.f    +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:27:14 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/10 14:29:34 by andytropmim      ###   ########.fr       */
+/*   Updated: 2025/02/25 23:58:51 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	split_env(const char *env_str, char **key, char **value)
+int	split_env(const char *env_str, char **key, char **value)
 {
 	const char	*equal_sign;
 	size_t		index;
@@ -52,7 +52,7 @@ int	create_env(t_env **env, char **envp)
 		new_node->value = NULL;
 		new_node->next = NULL;
 		if (!split_env(envp[i], &new_node->key, &new_node->value))
-			return (ft_putstr_fd(ERR_MALLOC, 2), 0);
+			return (ft_putstr_fd(ERR_MALLOC, 2), free(new_node), 0);
 		*head = new_node;
 		head = &new_node->next;
 	}

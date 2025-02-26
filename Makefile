@@ -57,6 +57,7 @@ define SRC 	:=
 		pwd.c \
 		echo.c \
 		exit.c \
+		export.c \
 		env.c \
 		unset.c
 	)

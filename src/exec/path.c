@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/19 15:05:20 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 19:07:39 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,30 @@ char	*check_file_in_path(char **path, const char *cmd)
 	return (NULL);
 }
 
+static int	is_directory(const char *path)
+{
+	struct stat	path_stat;
+
+	if (stat(path, &path_stat) == -1)
+		return (0);
+	return (S_ISDIR(path_stat.st_mode));
+}
+
+static char	*check_cmd_path(char *cmd, t_var *var)
+{
+	if (is_directory(cmd))
+	{
+		ft_dprintf(2, "%s: is a directory\n", cmd);
+		return (set_and_return_code(var, 126), free(cmd), NULL);
+	}
+	if (access(cmd, X_OK) != 0)
+	{
+		ft_dprintf(2, "%s: Permission denied\n", cmd);
+		return (set_and_return_code(var, 126), free(cmd), NULL);
+	}
+	return (cmd);
+}
+
 char	*find_file(char *cmd, t_var *var)
 {
 	char	*file_path;
@@ -67,7 +91,7 @@ char	*find_file(char *cmd, t_var *var)
 	if (!cmd)
 		return (NULL);
 	if (ft_strchr(cmd, '/') != NULL)
-		return (cmd);
+		return (check_cmd_path(cmd, var));
 	if (ft_strncmp(cmd, "", 1) == 0)
 		return (ft_dprintf(2, "%s: command not found\n", cmd), free(cmd), NULL);
 	paths = get_path_from_env(var->env, &errorr);
@@ -77,6 +101,7 @@ char	*find_file(char *cmd, t_var *var)
 	ft_fsplit(paths);
 	if (file_path)
 		return (free(cmd), file_path);
+	set_and_return_code(var, 127);
 	ft_dprintf(2, "%s: command not found\n", cmd);
 	return (free(cmd), NULL);
 }

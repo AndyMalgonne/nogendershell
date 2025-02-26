@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 22:57:00 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/26 14:46:09 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:06:24 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	bi_export(const t_tree *node, t_var *var)
 	while (node->cmd[i])
 		if (!using_export(node->cmd[i++], var))
 			return (ft_putendl_fd(ERR_MALLOC, 2),
-
 				set_and_return_code(var, 1));
 	return (set_and_return_code(var, 0));
 }

@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:02:32 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/26 16:04:42 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:06:07 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	update_oldpwd(t_var *var)
 		(using_export(oldpwd, var), free(oldpwd));
 }
 
-static void	update_pwd(char *cmd, t_var *var)
+static void	update_pwd(const char *cmd, t_var *var)
 {
 	char	cwd[PATH_MAX];
 	char	*pwd;

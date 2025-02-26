@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:09:35 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 19:25:23 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/26 19:41:27 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*replace_env_value(char *value, t_env *env, size_t i)
 
 	j = i + 1;
 	while (value[j] && !is_space_tab(value[j])
-		&& value[j] != '$' && value[j] != '"')
+		&& value[j] != '$' && value[j] != '"' && value[j] != '\n')
 		j++;
 	key = ft_substr(value, i + 1, j - (i + 1));
 	if (!key)

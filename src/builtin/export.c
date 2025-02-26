@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 22:57:00 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/26 00:24:19 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:46:09 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	add_new_node(char *key, char *value, t_var *var)
 	return (1);
 }
 
-static int	export(const char *id, t_var *var)
+int	using_export(const char *id, t_var *var)
 {
 	char	*key;
 	char	*value;
@@ -97,7 +97,7 @@ int	bi_export(const t_tree *node, t_var *var)
 	if (var->head != node || node->next != NULL)
 		return (set_and_return_code(var, 0));
 	while (node->cmd[i])
-		if (!export(node->cmd[i++], var))
+		if (!using_export(node->cmd[i++], var))
 			return (ft_putendl_fd(ERR_MALLOC, 2),
 				set_and_return_code(var, 1));
 	return (set_and_return_code(var, 0));

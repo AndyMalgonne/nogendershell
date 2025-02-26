@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 13:46:17 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:56:20 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int		bi_exit(const t_tree *node, t_var *var, t_fds *fds);
 int		bi_echo(char **args, t_var *var);
 int		bi_unset(char **cmd, t_var **var);
 int		bi_export(const t_tree *node, t_var *var);
+int		using_export(const char *id, t_var *var);
+int		bi_cd(char **cmd, t_var *var);
 
 // Builtin exec functions
 int		handle_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *env);

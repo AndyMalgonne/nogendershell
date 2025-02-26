@@ -59,7 +59,8 @@ define SRC 	:=
 		exit.c \
 		export.c \
 		env.c \
-		unset.c
+		unset.c \
+		cd.c
 	)
 	$(addprefix $(EXEC_DIR)/, \
 		builtin.c \

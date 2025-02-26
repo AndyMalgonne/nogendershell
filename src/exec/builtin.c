@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 09:57:07 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 10:07:09 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ static bool	is_builtin(const t_tree *cmd)
 		return (true);
 	if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		return (true);
+	if (ft_strcmp(cmd->cmd[0], "exit") == 0)
+		return (true);
 	if (ft_strcmp(cmd->cmd[0], "export") == 0)
 		return (true);
 	return (false);
 }
 
-void	exec_builtin(const t_tree *cmd, t_var *env)
+static void	exec_builtin(const t_tree *cmd, t_var *env, t_fds *fds)
 {
 	if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
 		bi_pwd();
@@ -35,6 +37,8 @@ void	exec_builtin(const t_tree *cmd, t_var *env)
 		bi_env(env, cmd);
 	else if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		bi_echo(cmd->cmd);
+	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)
+		bi_exit(cmd, env, fds);
 	else if (ft_strcmp(cmd->cmd[0], "export") == 0)
 		bi_export(cmd, env);
 }
@@ -78,7 +82,7 @@ void	launch_builtin(t_fds *fds, const int pip[2], t_tree *cmd, t_var *env)
 	if (io_files(cmd->io, fds) < 0)
 		return ;
 	saved_stdout = redirect_output(fds, pip, cmd);
-	exec_builtin(cmd, env);
+	exec_builtin(cmd, env, fds);
 	if (saved_stdout != -1)
 	{
 		dup2(saved_stdout, STDOUT_FILENO);

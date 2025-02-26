@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 11:58:50 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:32:43 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static bool	is_builtin(const t_tree *cmd)
 static void	exec_builtin(const t_tree *cmd, t_var *env, t_fds *fds)
 {
 	if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
-		bi_pwd();
+		bi_pwd(cmd, env);
 	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
-		bi_env(env, cmd);
+		bi_env(cmd, env);
 	else if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		bi_echo(cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)

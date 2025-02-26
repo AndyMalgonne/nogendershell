@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 11:59:11 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:32:22 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ typedef struct s_fds
 typedef struct s_env	t_env;
 
 // Builtin functions
-int		bi_pwd(void);
-int		bi_env(t_var *var, const t_tree *node);
+int		bi_pwd(const t_tree *node, t_var *var);
+int		bi_env(const t_tree *node, t_var *var);
 int		bi_exit(const t_tree *node, t_var *var, t_fds *fds);
 int		bi_echo(char **args);
 int		bi_unset(char **cmd, t_var **var);

@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 08:01:30 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/26 09:05:18 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:34:08 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ static bool	check_num_arg(const char *arg)
 	{
 		if (!ft_isdigit(arg[i++]))
 		{
-			ft_putstr_fd("nogendershell: exit: ", STDERR_FILENO);
-			ft_putstr_fd((char *)arg, STDERR_FILENO);
-			ft_putendl_fd(" numeric argument required", STDERR_FILENO);
+			ft_dprintf(STDERR_FILENO,
+				"nogendershell: exit: %s numeric argument required", arg);
 			return (false);
 		}
 	}

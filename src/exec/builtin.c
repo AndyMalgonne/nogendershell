@@ -22,6 +22,8 @@ static bool	is_builtin(const t_tree *cmd)
 		return (true);
 	if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		return (true);
+	if (ft_strcmp(cmd->cmd[0], "exit") == 0)
+		return (true);
 	if (ft_strcmp(cmd->cmd[0], "export") == 0)
 		return (true);
 	if (ft_strcmp(cmd->cmd[0], "unset") == 0)
@@ -29,14 +31,16 @@ static bool	is_builtin(const t_tree *cmd)
 	return (false);
 }
 
-void	exec_builtin(const t_tree *cmd, t_var *env)
+static void	exec_builtin(const t_tree *cmd, t_var *env, t_fds *fds)
 {
 	if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
 		bi_pwd();
 	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
-		bi_env(env, cmd->cmd[1]);
+		bi_env(env, cmd);
 	else if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		bi_echo(cmd->cmd);
+	else if (ft_strcmp(cmd->cmd[0], "exit") == 0)
+		bi_exit(cmd, env, fds);
 	else if (ft_strcmp(cmd->cmd[0], "export") == 0)
 		bi_export(cmd, env);
 	else if (ft_strcmp(cmd->cmd[0], "unset") == 0)
@@ -82,7 +86,7 @@ void	launch_builtin(t_fds *fds, const int pip[2], t_tree *cmd, t_var *env)
 	if (io_files(cmd->io, fds) < 0)
 		return ;
 	saved_stdout = redirect_output(fds, pip, cmd);
-	exec_builtin(cmd, env);
+	exec_builtin(cmd, env, fds);
 	if (saved_stdout != -1)
 	{
 		dup2(saved_stdout, STDOUT_FILENO);

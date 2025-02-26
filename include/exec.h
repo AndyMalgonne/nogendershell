@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
 /*   Updated: 2025/02/26 10:25:13 by amalgonn         ###   ########.fr       */
@@ -28,7 +28,8 @@ typedef struct s_env	t_env;
 
 // Builtin functions
 int		bi_pwd(void);
-int		bi_env(t_var *env, const char *key);
+int		bi_env(t_var *var, const t_tree *node);
+int		bi_exit(const t_tree *node, t_var *var, t_fds *fds);
 int		bi_echo(char **args);
 int		bi_unset(char **cmd, t_env **env);
 int		bi_export(const t_tree *node, t_var *var);
@@ -59,7 +60,7 @@ int		get_here_doc(char *del);
 int		process_heredoc(t_tree *cmd, t_fds *fds);
 
 // Utils functions
-int		wait_children(int pid);
+int		wait_children(int pid, int old_code);
 void	init_and_reset_pipes(int pip[2]);
 void	init_fds_and_pid(t_fds *fds);
 

@@ -6,13 +6,13 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:15:50 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/26 20:21:21 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/26 20:46:38 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*replace_exit_status(char *value, int exst, size_t i)
+static char	*replace_exit_status(const char *value, int exst, size_t i)
 {
 	char	*status_str;
 	char	*tmp;
@@ -32,7 +32,7 @@ static char	*replace_exit_status(char *value, int exst, size_t i)
 	return (free(result), tmp);
 }
 
-static char	*replace_env_value(char *value, t_env *env, size_t i)
+static char	*replace_env_value(const char *value, t_env *env, size_t i)
 {
 	size_t		j;
 	const char	*env_value;

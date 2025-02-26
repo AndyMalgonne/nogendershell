@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 18:55:17 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/26 20:17:52 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ int		get_random_bytes(unsigned char random_bytes[], int size);
 void	increment_random_bytes(unsigned char random_bytes[], int alphanum_size);
 int		get_here_doc(char *del, t_var *var);
 int		process_heredoc(t_tree *cmd, t_fds *fds, t_var *var);
+
+// Here_doc expand functions
+int		expand_heredoc_value(char **value, t_var *var);
 
 // Utils functions
 int		wait_children(int pid, int old_code);

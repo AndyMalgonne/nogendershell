@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:09:35 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 19:41:27 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/26 20:16:41 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,78 +38,6 @@ char	*find_heredoc_file(void)
 	return (file);
 }
 
-static char	*replace_exit_status(char *value, int exst, size_t i)
-{
-	char	*status_str;
-	char	*tmp;
-	char	*result;
-
-	status_str = ft_itoa(exst);
-	if (!status_str)
-		return (NULL);
-	tmp = ft_strndup(value, i);
-	if (!tmp)
-		return (free(status_str), NULL);
-	result = ft_strjoin(tmp, status_str);
-	(free(tmp), free(status_str));
-	if (!result)
-		return (NULL);
-	tmp = ft_strjoin(result, &value[i + 2]);
-	return (free(result), tmp);
-}
-
-static char	*replace_env_value(char *value, t_env *env, size_t i)
-{
-	size_t		j;
-	const char	*env_value;
-	char		*tmp;
-	char		*key;
-
-	j = i + 1;
-	while (value[j] && !is_space_tab(value[j])
-		&& value[j] != '$' && value[j] != '"' && value[j] != '\n')
-		j++;
-	key = ft_substr(value, i + 1, j - (i + 1));
-	if (!key)
-		return (NULL);
-	env_value = get_env_value(env, key);
-	printf("Replacing $%s with %s\n", key, env_value); // Debugging line
-	(free(key), tmp = ft_strndup(value, i));
-	if (!tmp)
-		return (NULL);
-	if (!env_value)
-		key = ft_strdup(tmp);
-	else
-		key = ft_strjoin(tmp, env_value);
-	if (!key)
-		return (free(tmp), NULL);
-	(free(tmp), tmp = ft_strjoin(key, &value[j]));
-	return (free(key), tmp);
-}
-
-int	expand_heredoc_value(char *value, t_var *var)
-{
-	size_t	i;
-
-	i = 0;
-	while (value[i])
-	{
-		if (value[i] == '$')
-		{
-			if (value[i + 1] == '?')
-				value = replace_exit_status(value, var->code, i);
-			else
-				value = replace_env_value(value, var->env, i);
-			if (!value)
-				return (0);
-			i = 0;
-		}
-		else
-			i++;
-	}
-	return (1);
-}
-
 int	write_to_heredoc(int fd, const char *del, t_var *var)
 {
 	char	*gnl;
@@ -120,7 +48,11 @@ int	write_to_heredoc(int fd, const char *del, t_var *var)
 	{
 		if (ft_strncmp(gnl, del, ft_strlen(del) + 1) == 0)
 			break ;
-		expand_heredoc_value(gnl, var);
+		if (!expand_heredoc_value(&gnl, var))
+		{
+			free(gnl);
+			return (-1);
+		}
 		ft_putstr_fd(gnl, fd);
 		free(gnl);
 		ft_printf("here_doc > ");

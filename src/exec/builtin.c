@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 09:42:31 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:57:07 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_builtin(const t_tree *cmd, t_var *env)
 	if (ft_strcmp(cmd->cmd[0], "pwd") == 0)
 		bi_pwd();
 	else if (ft_strcmp(cmd->cmd[0], "env") == 0)
-		bi_env(env);
+		bi_env(env, cmd);
 	else if (ft_strcmp(cmd->cmd[0], "echo") == 0)
 		bi_echo(cmd->cmd);
 	else if (ft_strcmp(cmd->cmd[0], "export") == 0)

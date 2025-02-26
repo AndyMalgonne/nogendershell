@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 09:53:37 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:56:59 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_env	t_env;
 
 // Builtin functions
 int		bi_pwd(void);
-int		bi_env(const t_var *env);
+int		bi_env(t_var *var, const t_tree *node);
 int		bi_echo(char **args);
 int		bi_unset(char **str, t_env **env);
 int		bi_export(const t_tree *node, t_var *var);

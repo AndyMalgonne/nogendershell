@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 20:45:06 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 10:38:04 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ char	*r_name(unsigned char r_bytes[], const char alpha[],
 			int alpha_size, int size);
 int		get_random_bytes(unsigned char random_bytes[], int size);
 void	increment_random_bytes(unsigned char random_bytes[], int alphanum_size);
-int		get_here_doc(char *del, t_var *var);
 int		process_heredoc(t_tree *cmd, t_fds *fds, t_var *var);
 
 // Here_doc expand functions

@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 17:29:29 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 18:11:18 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static char	*replace_exit_status(char *token_value, int exst, size_t i)
 	return (free(result), free(token_value), tmp);
 }
 
-static char	*get_env_key(const char *token_value, size_t i, size_t *j)
+char	*get_env_key(const char *token_value, size_t i, size_t *j)
 {
 	*j = i + 1;
 	while (token_value[*j] && !is_space_tab(token_value[*j])

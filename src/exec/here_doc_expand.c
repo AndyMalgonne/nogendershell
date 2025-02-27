@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:15:50 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 17:36:58 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 18:08:59 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,6 @@ static char	*replace_exit_status(const char *value, int exst, size_t i)
 		return (NULL);
 	tmp = ft_strjoin(result, &value[i + 2]);
 	return (free(result), tmp);
-}
-
-static char	*get_env_key(const char *value, size_t i, size_t *j)
-{
-	*j = i + 1;
-	while (value[*j] && !is_space_tab(value[*j])
-		&& !is_dollar_end_condition(value[*j]))
-		(*j)++;
-	return (ft_substr(value, i + 1, *j - (i + 1)));
 }
 
 static char	*replace_env_value(const char *value, t_env *env, size_t i)

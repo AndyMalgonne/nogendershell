@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 13:32:35 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:37:04 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,12 @@
 
 static int	process_token(char **rl, char **value)
 {
-	char	quote_char;
-	char	*start;
-
 	while (**rl && !is_space_tab(**rl) && !is_operator(**rl))
 	{
 		if (is_quotes(**rl))
 		{
-			quote_char = **rl;
-			(*rl)++;
-			start = *rl;
-			while (**rl && **rl != quote_char)
-				(*rl)++;
-			*value = ft_strnjoin(*value, start, *rl - start);
-			if (!*value)
+			if (!handle_quotes(rl, value))
 				return (0);
-			if (**rl == quote_char)
-				(*rl)++;
 		}
 		else
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/21 08:05:02 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:37:34 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void		free_token_list(t_token **head);
 void		print_token_list(t_token *head);
 const char	*tttostr(t_token_type type);
 bool		is_word(t_token_type type);
+int			handle_quotes(char **rl, char **value);
 
 //tokenize.c
 int			tokenize(char *input, t_token **head);

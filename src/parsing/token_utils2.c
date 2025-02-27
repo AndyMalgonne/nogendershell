@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:37:32 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/11 20:14:02 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:37:11 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,22 @@ void	print_token_list(t_token *head)
 bool	is_word(t_token_type type)
 {
 	return (type == WORD || type == STRING_SQ || type == STRING_DQ);
+}
+
+int	handle_quotes(char **rl, char **value)
+{
+	char	quote_char;
+	char	*start;
+
+	quote_char = **rl;
+	(*rl)++;
+	start = *rl;
+	while (**rl && **rl != quote_char)
+		(*rl)++;
+	*value = ft_strnjoin(*value, start, *rl - start);
+	if (!*value)
+		return (0);
+	if (**rl == quote_char)
+		(*rl)++;
+	return (1);
 }

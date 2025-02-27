@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:37:32 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 13:37:11 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:39:47 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ bool	is_word(t_token_type type)
 
 int	handle_quotes(char **rl, char **value)
 {
-	char	quote_char;
-	char	*start;
+	char		quote_char;
+	const char	*start;
 
 	quote_char = **rl;
 	(*rl)++;

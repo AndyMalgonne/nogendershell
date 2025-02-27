@@ -6,28 +6,56 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:22 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/24 00:54:40 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 13:28:04 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "minishell.h"
+
+static int	process_token(char **rl, char **value)
+{
+	while (**rl && !is_space_tab(**rl) && !is_operator(**rl))
+	{
+		if (is_quotes(**rl))
+		{
+			char quote_char = **rl;
+			(*rl)++;
+			char *start = *rl;
+			while (**rl && **rl != quote_char)
+				(*rl)++;
+			*value = ft_strnjoin(*value, start, *rl - start);
+			if (!*value)
+				return (0);
+			if (**rl == quote_char)
+				(*rl)++;
+		}
+		else
+		{
+			*value = ft_strnjoin(*value, *rl, 1);
+			if (!*value)
+				return (0);
+			(*rl)++;
+		}
+	}
+	return (1);
+}
 
 static int	tokenize_else(char **rl, t_token **head)
 {
 	t_token		*n_token;
-	char		*start;
+	char		*value;
 
-	start = *rl;
-	while (**rl && !is_space_tab(**rl) && !is_operator(**rl))
-		(*rl)++;
-	start = ft_strndup(start, *rl - start);
-	if (!start)
+	value = ft_strdup("");
+	if (!value)
 		return (0);
-	n_token = new_token(WORD, start);
+	if (!process_token(rl, &value))
+		return (free(value), 0);
+	n_token = new_token(WORD, value);
 	if (!n_token)
-		return (free(start), 0);
+		return (free(value), 0);
 	append_token(head, n_token);
-	return (free(start), 1);
+	return (free(value), 1);
 }
 
 static int	string_tokenizing(char **rl, t_token **head)

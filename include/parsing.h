@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/21 08:05:02 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:54:05 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PARSING_H
 
 # include <stdbool.h>
+# include <stddef.h>
 
 # include "data_struct.h"
 
@@ -37,6 +38,14 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
+typedef struct s_quote_status
+{
+	size_t	double_quote;
+	size_t	single_quote;
+	bool	inside_double_quote;
+	bool	inside_single_quote;
+}	t_quote_status;
+
 //token_utils.c
 t_token		*new_token(t_token_type type, const char *value);
 void		append_token(t_token **head, t_token *new_token);
@@ -47,6 +56,7 @@ void		free_token_list(t_token **head);
 void		print_token_list(t_token *head);
 const char	*tttostr(t_token_type type);
 bool		is_word(t_token_type type);
+int			handle_quotes(char **rl, char **value);
 
 //tokenize.c
 int			tokenize(char *input, t_token **head);

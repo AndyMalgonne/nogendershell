@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_iofile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 19:34:28 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/13 14:44:05 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 10:35:57 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ const char	*iottostr(t_iotype type)
 	static const char	*token_type_str[] = {
 		"INFILE",
 		"HEREDOC",
+		"HEREDOC_NO_EXPAND",
 		"OUTFILE_TRUNC",
 		"OUTFILE_APPEND",
 	};

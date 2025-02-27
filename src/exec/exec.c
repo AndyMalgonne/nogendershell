@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 10:04:19 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/26 17:18:30 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exec_cmd(const t_tree *cmd, t_var *var)
 		(perror("Malloc failed"), free_all(var->head, var), exit(1));
 	full_cmd = find_file(cmd->cmd[0], var);
 	if (!full_cmd)
-		(ft_fsplit(env_array), free_all(var->head, var), exit(127));
+		(ft_fsplit(env_array), free_all(var->head, var), exit(var->code));
 	if (execve(full_cmd, cmd->cmd, env_array) == -1)
 		(perror("execve failed"), free(full_cmd), ft_fsplit(env_array),
 			free_all(var->head, var), exit(1));

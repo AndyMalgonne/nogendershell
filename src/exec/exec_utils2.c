@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:09:54 by amalgonn          #+#    #+#             */
-/*   Updated: 2025/02/26 09:27:28 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/26 19:03:18 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	handle_heredoc(t_tree *cmd, t_fds *fds, t_var *var)
 {
-	if (process_heredoc(cmd, fds) < 0)
+	if (process_heredoc(cmd, fds, var) < 0)
 	{
 		close_fds(fds);
 		return (error(var, "heredoc failed", 1));

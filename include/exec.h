@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
 /*   Updated: 2025/02/27 10:35:01 by amalgonn         ###   ########.fr       */
@@ -59,8 +59,10 @@ char	*r_name(unsigned char r_bytes[], const char alpha[],
 			int alpha_size, int size);
 int		get_random_bytes(unsigned char random_bytes[], int size);
 void	increment_random_bytes(unsigned char random_bytes[], int alphanum_size);
-int		get_here_doc(char *del);
-int		process_heredoc(t_tree *cmd, t_fds *fds);
+int		process_heredoc(t_tree *cmd, t_fds *fds, t_var *var);
+
+// Here_doc expand functions
+int		expand_heredoc_value(char **value, t_var *var);
 
 // Utils functions
 int		wait_children(int pid, int old_code);

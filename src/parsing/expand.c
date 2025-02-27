@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 15:09:47 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 16:27:41 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 		return (ft_strdup(token_value));
 	j = i + 1;
 	while (token_value[j] && !is_space_tab(token_value[j])
-		&& token_value[j] != '$' && token_value[j] != '"')
+		&& !is_dollar_end_condition(token_value[j]))
 		j++;
 	key = ft_substr(token_value, i + 1, j - (i + 1));
 	if (!key)

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:09:35 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 14:55:38 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 10:40:45 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*find_heredoc_file(void)
+static char	*find_heredoc_file(void)
 {
 	char			*file;
 	const char		alphanum[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -38,7 +38,7 @@ char	*find_heredoc_file(void)
 	return (file);
 }
 
-int	write_to_heredoc(int fd, const char *del)
+static int	write_to_heredoc(int fd, const char *del, t_var *var, bool expand)
 {
 	char	*gnl;
 
@@ -48,6 +48,11 @@ int	write_to_heredoc(int fd, const char *del)
 	{
 		if (ft_strncmp(gnl, del, ft_strlen(del) + 1) == 0)
 			break ;
+		if (expand && !expand_heredoc_value(&gnl, var))
+		{
+			free(gnl);
+			return (-1);
+		}
 		ft_putstr_fd(gnl, fd);
 		free(gnl);
 		ft_printf("here_doc > ");
@@ -59,7 +64,7 @@ int	write_to_heredoc(int fd, const char *del)
 	return (0);
 }
 
-int	get_here_doc(char *del)
+static int	get_here_doc(char *del, t_var *var, bool expand)
 {
 	char	*file;
 	int		fd[2];
@@ -75,24 +80,24 @@ int	get_here_doc(char *del)
 	(unlink(file), free(file));
 	if (fd[0] < 0 || fd[1] < 0)
 		return (free(del), mclose(&fd[0]), mclose(&fd[1]), -1);
-	if (write_to_heredoc(fd[0], del) < 0)
+	if (write_to_heredoc(fd[0], del, var, expand) < 0)
 		return (free(del), mclose(&fd[0]), mclose(&fd[1]), -1);
 	return (free(del), mclose(&fd[0]), fd[1]);
 }
 
-int	process_heredoc(t_tree *cmd, t_fds *fds)
+int	process_heredoc(t_tree *cmd, t_fds *fds, t_var *var)
 {
 	t_iofile	*io;
 
 	io = cmd->io;
 	while (io)
 	{
-		if (io->type == HEREDOC)
+		if (io->type == HEREDOC || io->type == HEREDOC_NO_EXPAND)
 		{
 			set_signals(&handle_child_sigint, SIG_IGN);
 			if (fds->heredocfd > 0)
 				mclose(&(fds->heredocfd));
-			fds->heredocfd = get_here_doc(io->value);
+			fds->heredocfd = get_here_doc(io->value, var, io->type == HEREDOC);
 			if (fds->heredocfd < 0)
 				return (mclose(&fds->heredocfd), -1);
 		}

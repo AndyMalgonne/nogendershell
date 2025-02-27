@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_tree.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 19:11:39 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/13 14:43:58 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 10:35:08 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ static int	handle_io_token(t_tree *new, t_token **tokens)
 		type = OUTFILE_TRUNC;
 	if (type == HEREDOC || type == OUTFILE_APPEND)
 		*tokens = (*tokens)->next;
+	if (type == HEREDOC
+		&& ((*tokens)->next->type == STRING_SQ
+			|| (*tokens)->next->type == STRING_DQ))
+		type = HEREDOC_NO_EXPAND;
 	new_io = new_iofile(type, (*tokens)->next->value);
 	if (!new_io)
 		return (0);

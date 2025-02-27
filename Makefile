@@ -65,6 +65,7 @@ define SRC 	:=
 	$(addprefix $(EXEC_DIR)/, \
 		builtin.c \
 		exec.c \
+		here_doc_expand.c \
 		here_doc.c \
 		here_doc_utils.c \
 		path.c \

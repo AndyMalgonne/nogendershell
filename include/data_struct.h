@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:17:26 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/24 08:38:04 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:25:14 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ typedef enum e_iotype
 {
 	INFILE,
 	HEREDOC,
+	HEREDOC_NO_EXPAND,
 	OUTFILE_TRUNC,
 	OUTFILE_APPEND,
 }					t_iotype;

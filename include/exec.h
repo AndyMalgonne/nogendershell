@@ -6,7 +6,7 @@
 /*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:46:06 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/27 10:38:04 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/27 10:35:01 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ int		bi_cd(char **cmd, t_var *var);
 
 // Builtin exec functions
 int		handle_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *env);
-void	launch_builtin(t_fds *fds, const int pip[2], t_tree *cmd, t_var *env);
+void	launch_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *env);
 
 // Exec functions
 int		minishell_exec(t_tree *cmd, t_var *var);
 void	exec_cmd(const t_tree *cmd, t_var *var);
 void	children_process(t_fds *fds, int pip[2], t_tree *cmd, t_var *var);
+void	parent_process(t_fds *fds, int pip[2], const t_tree *cmd);
 
 // Redir functions
 void	redir(t_fds *fds, int pip[2], const t_tree *cmd, t_var *var);

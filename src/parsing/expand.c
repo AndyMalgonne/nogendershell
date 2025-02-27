@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/21 08:19:09 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:09:47 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 	char		*tmp;
 	char		*key;
 
+	if (token_value[i + 1] == '\0' || is_space_tab(token_value[i + 1]) \
+	|| token_value[i + 1] == '$' || token_value[i + 1] == '"')
+		return (ft_strdup(token_value));
 	j = i + 1;
 	while (token_value[j] && !is_space_tab(token_value[j])
 		&& token_value[j] != '$' && token_value[j] != '"')
@@ -75,7 +78,10 @@ static int	expand_token_value(t_token *token, const t_var *var)
 				token->value = replace_env_value(token->value, var->env, i);
 			if (!token->value)
 				return (0);
-			i = 0;
+			if (token->value[i] == '$')
+				i++;
+			else
+				i = 0;
 		}
 		else
 			i++;

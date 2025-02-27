@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:49:21 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 13:54:05 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 18:10:19 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,9 @@ int			is_quotes(char c);
 
 //expand.c
 int			expand(t_token *tokens, const t_var *var);
+char		*get_env_key(const char *token_value, size_t i, size_t *j);
+
+//expand_utils.c
+int			is_dollar_end_condition(char c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 20:15:50 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/26 20:46:38 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 18:08:59 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,10 @@ static char	*replace_env_value(const char *value, t_env *env, size_t i)
 	char		*tmp;
 	char		*key;
 
-	j = i + 1;
-	while (value[j] && !is_space_tab(value[j]) && value[j] != '$' \
-	&& value[j] != '"' && value[j] != '\n' && value[j] != '\'')
-		j++;
-	key = ft_substr(value, i + 1, j - (i + 1));
+	if (value[i + 1] == '\0' || is_space_tab(value[i + 1]) \
+	|| value[i + 1] == '$' || value[i + 1] == '"')
+		return (ft_strdup(value));
+	key = get_env_key(value, i, &j);
 	if (!key)
 		return (NULL);
 	env_value = get_env_value(env, key);

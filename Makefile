@@ -75,6 +75,7 @@ define SRC 	:=
 	)
 	$(addprefix $(PARSING_DIR)/, \
 		checks.c \
+		expand_utils.c \
 		expand.c \
 		is_checks.c \
 		parse_input.c \

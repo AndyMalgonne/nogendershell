@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/21 08:19:09 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:11:18 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ static char	*replace_exit_status(char *token_value, int exst, size_t i)
 	return (free(result), free(token_value), tmp);
 }
 
+char	*get_env_key(const char *token_value, size_t i, size_t *j)
+{
+	*j = i + 1;
+	while (token_value[*j] && !is_space_tab(token_value[*j])
+		&& !is_dollar_end_condition(token_value[*j]))
+		(*j)++;
+	return (ft_substr(token_value, i + 1, *j - (i + 1)));
+}
+
 static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 {
 	size_t		j;
@@ -39,11 +48,10 @@ static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 	char		*tmp;
 	char		*key;
 
-	j = i + 1;
-	while (token_value[j] && !is_space_tab(token_value[j])
-		&& token_value[j] != '$' && token_value[j] != '"')
-		j++;
-	key = ft_substr(token_value, i + 1, j - (i + 1));
+	if (token_value[i + 1] == '\0' || is_space_tab(token_value[i + 1]) \
+	|| token_value[i + 1] == '$' || token_value[i + 1] == '"')
+		return (ft_strdup(token_value));
+	key = get_env_key(token_value, i, &j);
 	if (!key)
 		return (NULL);
 	env_value = get_env_value(env, key);
@@ -75,7 +83,10 @@ static int	expand_token_value(t_token *token, const t_var *var)
 				token->value = replace_env_value(token->value, var->env, i);
 			if (!token->value)
 				return (0);
-			i = 0;
+			if (token->value[i] == '$')
+				i++;
+			else
+				i = 0;
 		}
 		else
 			i++;

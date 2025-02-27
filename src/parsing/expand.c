@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 16:27:41 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 17:29:29 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ static char	*replace_exit_status(char *token_value, int exst, size_t i)
 	return (free(result), free(token_value), tmp);
 }
 
+static char	*get_env_key(const char *token_value, size_t i, size_t *j)
+{
+	*j = i + 1;
+	while (token_value[*j] && !is_space_tab(token_value[*j])
+		&& !is_dollar_end_condition(token_value[*j]))
+		(*j)++;
+	return (ft_substr(token_value, i + 1, *j - (i + 1)));
+}
+
 static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 {
 	size_t		j;
@@ -42,11 +51,7 @@ static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 	if (token_value[i + 1] == '\0' || is_space_tab(token_value[i + 1]) \
 	|| token_value[i + 1] == '$' || token_value[i + 1] == '"')
 		return (ft_strdup(token_value));
-	j = i + 1;
-	while (token_value[j] && !is_space_tab(token_value[j])
-		&& !is_dollar_end_condition(token_value[j]))
-		j++;
-	key = ft_substr(token_value, i + 1, j - (i + 1));
+	key = get_env_key(token_value, i, &j);
 	if (!key)
 		return (NULL);
 	env_value = get_env_value(env, key);

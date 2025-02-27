@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/27 19:09:32 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:07:37 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,24 +71,24 @@ static int	is_directory(const char *path)
 	return (S_ISDIR(path_stat.st_mode));
 }
 
-static char *check_cmd_path(char *cmd, t_var *var)
+static char	*check_cmd_path(char *cmd, t_var *var)
 {
-    if (is_directory(cmd))
-    {
-        ft_dprintf(2, "%s: Is a directory\n", cmd);
-        return (set_and_return_code(var, 126), free(cmd), NULL);
-    }
-    if (access(cmd, F_OK) != 0)
-    {
-        ft_dprintf(2, "%s: No such file or directory\n", cmd);
-        return (set_and_return_code(var, 127), free(cmd), NULL);
-    }
-    if (access(cmd, X_OK) != 0)
-    {
-        ft_dprintf(2, "%s: Permission denied\n", cmd);
-        return (set_and_return_code(var, 126), free(cmd), NULL);
-    }
-    return (cmd);
+	if (is_directory(cmd))
+	{
+		ft_dprintf(2, "%s: Is a directory\n", cmd);
+		return (set_and_return_code(var, 126), free(cmd), NULL);
+	}
+	if (access(cmd, F_OK) != 0)
+	{
+		ft_dprintf(2, "%s: No such file or directory\n", cmd);
+		return (set_and_return_code(var, 127), free(cmd), NULL);
+	}
+	if (access(cmd, X_OK) != 0)
+	{
+		ft_dprintf(2, "%s: Permission denied\n", cmd);
+		return (set_and_return_code(var, 126), free(cmd), NULL);
+	}
+	return (cmd);
 }
 
 char	*find_file(char *cmd, t_var *var)

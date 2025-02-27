@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:02:33 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 15:08:28 by abasdere         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:23:04 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	main(int ac, char **av __attribute__((unused)), char **envp)
 	tree = NULL;
 	if (ac != 1)
 		return (ft_putstr_fd("Usage: ./minishell\n", 2), 1);
-	if (isatty(0) != 1)
-		return (ft_putstr_fd("U mad bro?\n", 2), 1);
 	if (!create_env(&var.env, envp))
 		return (1);
 	main_loop(&var, &input, &tree);

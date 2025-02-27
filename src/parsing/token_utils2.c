@@ -6,7 +6,7 @@
 /*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:37:32 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 13:39:47 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/27 16:02:45 by gmoulin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,18 @@ int	handle_quotes(char **rl, char **value)
 	char		quote_char;
 	const char	*start;
 
-	quote_char = **rl;
-	(*rl)++;
-	start = *rl;
-	while (**rl && **rl != quote_char)
+	while (**rl && is_quotes(**rl))
+	{
+		quote_char = **rl;
 		(*rl)++;
-	*value = ft_strnjoin(*value, start, *rl - start);
-	if (!*value)
-		return (0);
-	if (**rl == quote_char)
-		(*rl)++;
+		start = *rl;
+		while (**rl && **rl != quote_char)
+			(*rl)++;
+		*value = ft_strnjoin(*value, start, *rl - start);
+		if (!*value)
+			return (0);
+		if (**rl == quote_char)
+			(*rl)++;
+	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 08:38:56 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 17:18:30 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/27 22:03:23 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ void	parent_process(t_fds *fds, int pip[2], const t_tree *cmd)
 	}
 	else
 		(mclose(&pip[0]), mclose(&pip[1]), mclose(&fds->heredocfd));
+	(mclose(&fds->infd), fds->infd = 0);
+	(mclose(&fds->outfd), fds->outfd = 1);
 }
 
 int	minishell_exec(t_tree *cmd, t_var *var)

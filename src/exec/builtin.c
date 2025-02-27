@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 09:59:16 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/27 20:34:36 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/27 21:10:59 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	handle_builtin(t_fds *fds, int pip[2], t_tree *cmd, t_var *env)
 	{
 		fds->pid = 0;
 		launch_builtin(fds, pip, cmd, env);
+		(mclose(&fds->infd), mclose(&fds->outfd));
 		return (1);
 	}
 	return (0);

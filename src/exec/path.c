@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 22:32:42 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:07:37 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,13 @@ static char	*check_cmd_path(char *cmd, t_var *var)
 {
 	if (is_directory(cmd))
 	{
-		ft_dprintf(2, "%s: is a directory\n", cmd);
+		ft_dprintf(2, "%s: Is a directory\n", cmd);
 		return (set_and_return_code(var, 126), free(cmd), NULL);
+	}
+	if (access(cmd, F_OK) != 0)
+	{
+		ft_dprintf(2, "%s: No such file or directory\n", cmd);
+		return (set_and_return_code(var, 127), free(cmd), NULL);
 	}
 	if (access(cmd, X_OK) != 0)
 	{

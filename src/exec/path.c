@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 10:58:20 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/26 22:32:42 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/27 13:53:26 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ static char	*check_cmd_path(char *cmd, t_var *var)
 	}
 	if (access(cmd, X_OK) != 0)
 	{
-		ft_dprintf(2, "%s: Permission denied\n", cmd);
-		return (set_and_return_code(var, 126), free(cmd), NULL);
+		ft_dprintf(2, "%s: No such file or directory\n", cmd);
+		return (set_and_return_code(var, 127), free(cmd), NULL);
 	}
 	return (cmd);
 }

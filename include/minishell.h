@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 13:33:38 by andymalgonn       #+#    #+#             */
-/*   Updated: 2025/02/27 20:01:28 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/28 08:13:56 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@
 
 # define PROMPT "> "
 # define SPACES " \t"
-# define ERR_MALLOC "nogendershell: malloc error"
-# define ERR_SYNTAX "nogendershell: syntax error"
+# define ERR_MALLOC "minishell: malloc error"
+# define ERR_SYNTAX "minishell: syntax error"
 
 extern int	g_exit_flag;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: abasdere <abasdere@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:02:37 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 18:11:18 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/28 12:05:20 by abasdere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static char	*replace_env_value(char *token_value, t_env *env, size_t i)
 
 	if (token_value[i + 1] == '\0' || is_space_tab(token_value[i + 1]) \
 	|| token_value[i + 1] == '$' || token_value[i + 1] == '"')
-		return (ft_strdup(token_value));
+		return (token_value);
 	key = get_env_key(token_value, i, &j);
 	if (!key)
 		return (NULL);

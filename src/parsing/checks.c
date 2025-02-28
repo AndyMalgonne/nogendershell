@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gmoulin <gmoulin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 15:00:00 by gmoulin           #+#    #+#             */
-/*   Updated: 2025/02/27 13:54:49 by gmoulin          ###   ########.fr       */
+/*   Updated: 2025/02/28 08:13:56 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_open_quotes(const char *rl)
 	}
 	if (status.double_quote % 2 != 0 || status.single_quote % 2 != 0)
 	{
-		ft_putstr_fd("nogendershell: syntax error: open quotes.\n", 2);
+		ft_putstr_fd("minishell: syntax error: open quotes.\n", 2);
 		return (0);
 	}
 	return (1);

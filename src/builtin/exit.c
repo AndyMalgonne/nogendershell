@@ -6,7 +6,7 @@
 /*   By: amalgonn <amalgonn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 08:01:30 by abasdere          #+#    #+#             */
-/*   Updated: 2025/02/27 20:01:49 by amalgonn         ###   ########.fr       */
+/*   Updated: 2025/02/28 08:13:56 by amalgonn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	check_num_arg(const char *arg)
 		if (!ft_isdigit(arg[i++]))
 		{
 			ft_dprintf(STDERR_FILENO,
-				"nogendershell: exit: %s numeric argument required", arg);
+				"minishell: exit: %s numeric argument required", arg);
 			return (false);
 		}
 	}
@@ -39,7 +39,7 @@ int	bi_exit(const t_tree *node, t_var *var, t_fds *fds)
 		if (!check_num_arg(node->cmd[1]))
 			(free_all(var->head, var), close_fds(fds), exit(2));
 		if (node->cmd[2])
-			return (ft_putendl_fd("nogendershell: exit: too many arguments",
+			return (ft_putendl_fd("minishell: exit: too many arguments",
 					STDERR_FILENO), set_and_return_code(var, 1));
 		var->code = atoi(node->cmd[1]);
 	}
